@@ -67,13 +67,10 @@
 
 (define-key cider-repl-mode-map (kbd "<up>") 'cider-repl-previous-input)
 (define-key cider-repl-mode-map (kbd "<down>") 'cider-repl-next-input)
-(define-key prelude-mode-map (kbd "<S-return>") nil)
 (define-key cider-repl-mode-map (kbd "<S-return>") 'newline)
 (define-key cider-repl-mode-map (kbd "<S-k>") 'kill-this-buffer)
 (define-key clojure-mode-map (kbd "s-e") 'reload-and-eval-in-repl)
-(define-key prelude-mode-map (kbd "s-j") nil)
 (define-key clojure-mode-map (kbd "s-j") 'cider-jack-in)
-(define-key prelude-mode-map (kbd "s-r") nil)
 (define-key clojure-mode-map (kbd "s-r") 'cider-repl-repeat-command)
 
 

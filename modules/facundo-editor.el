@@ -77,8 +77,7 @@
 ;; and on windows switch
 (defun prelude-auto-save-command ()
   "Save the current buffer if `prelude-auto-save' is not nil."
-  (when (and prelude-auto-save
-             buffer-file-name
+  (when (and buffer-file-name
              (buffer-modified-p (current-buffer))
              (file-writable-p buffer-file-name))
     (save-buffer)))
@@ -190,8 +189,7 @@ The body of the advice is in BODY."
 indent yanked text (with prefix arg don't indent)."
   (if (and (not (ad-get-arg 0))
            (not (member major-mode prelude-indent-sensitive-modes))
-           (or (derived-mode-p 'prog-mode)
-               (member major-mode prelude-yank-indent-modes)))
+           (derived-mode-p 'prog-mode))
       (let ((transient-mark-mode nil))
         (yank-advised-indent-function (region-beginning) (region-end)))))
 

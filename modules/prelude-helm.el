@@ -60,8 +60,6 @@
 (define-key helm-command-map (kbd "C-c w") 'helm-wikipedia-suggest)
 (define-key helm-command-map (kbd "SPC")   'helm-all-mark-rings)
 
-(push "Press <C-c p h> to navigate a project in Helm." prelude-tips)
-
 (provide 'prelude-helm)
 
 ;;; prelude-helm.el ends here

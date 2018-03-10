@@ -47,6 +47,7 @@
 (prelude-require-packages '(company))
 
 (require 'company)
+(require 'company-simple-complete)
 
 (setq company-idle-delay 0.5)
 (setq company-tooltip-limit 10)

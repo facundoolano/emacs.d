@@ -47,7 +47,7 @@
 
 ;; ;; CUSTOM STUFF
 
-;; (cua-mode)
+(cua-mode)
 ;; TODO check if this is still needed after removing prelude defaults
 (setq mac-option-key-is-meta nil)
 (setq mac-command-modifier 'super)

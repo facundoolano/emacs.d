@@ -111,19 +111,17 @@
      ((not frame)
       (progn (nameframe-make-frame name) (select-frame-set-input-focus (nameframe-get-frame name)))))))
 
-(define-key prelude-mode-map (kbd "s-p") nil)
-(define-key prelude-mode-map (kbd "C-c p") 'projectile-command-map)
+(global-set-key (kbd "C-c p") 'projectile-command-map)
 
 (global-set-key (kbd "s-p") 'helm-projectile-find-file)
 (global-set-key (kbd "s-P") 'projectile-find-file-other-window)
 (global-set-key (kbd "s-F") 'helm-projectile-ag)
 (global-set-key (kbd "s-w") 'kill-project-frame)
-(define-key prelude-mode-map (kbd "s-o") 'projectile-switch-project)
+(global-set-key (kbd "s-o") 'projectile-switch-project)
 
 (global-set-key (kbd "C-<tab>") 'next-project-buffer)
 (global-set-key (kbd "C-S-<tab>") 'previous-project-buffer)
 
-(define-key prelude-mode-map (kbd "s-k") nil)
 (global-set-key (kbd "s-k") 'kill-this-and-next)
 (global-set-key (kbd "s-K") 'kill-other-project-buffers)
 

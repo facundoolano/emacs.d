@@ -6,9 +6,14 @@
 ;; This file simply sets up the default load path and requires
 ;; various modules.
 
+;; Always load newest byte code
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
 (package-initialize)
 
-;; Always load newest byte code
 (setq load-prefer-newer t)
 
 ;; TODO review if we need all of this
@@ -22,8 +27,7 @@
   "This directory houses packages that are not yet available in ELPA (or MELPA).")
 (defvar prelude-savefile-dir (expand-file-name "savefile" prelude-dir)
   "This folder stores all the automatically generated save/history-files.")
-(defvar prelude-modules-file (expand-file-name "facundo-modules.el" prelude-dir)
-  "This files contains a list of modules that will be loaded by Prelude.")
+
 
 (unless (file-exists-p prelude-savefile-dir)
   (make-directory prelude-savefile-dir))
@@ -59,12 +63,19 @@
 (when (eq system-type 'darwin)
   (require 'facundo-osx))
 
-(message "Loading Prelude's modules...")
+;; Non core modules.
+;; TODO migrate prelude modules
+(require 'prelude-ido)
+(require 'prelude-helm)
+(require 'prelude-helm-everywhere)
 
-;; the modules
-(if (file-exists-p prelude-modules-file)
-    (load prelude-modules-file)
-  (message "Missing modules file %s" prelude-modules-file)
-  (message "You can get started by copying the bundled example file"))
+(require 'facundo-core) ;; TODO should be distributed to other files
+(require 'facundo-indent)
+(require 'facundo-parens)
+(require 'facundo-projectile)
+(require 'facundo-neotree)
+
+;; send custom generated stuff to a separate file
+(setq custom-file "~/.emacs.d/custom.el")
 
 ;;; init.el ends here

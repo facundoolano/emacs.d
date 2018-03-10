@@ -98,10 +98,13 @@
 (global-set-key (kbd "s-r") 'crux-recentf-ido-find-file)
 (global-set-key (kbd "s-j") 'crux-top-join-line)
 (global-set-key (kbd "s-k") 'crux-kill-whole-line)
-(global-set-key (kbd "s-m m") 'magit-status)
-(global-set-key (kbd "s-m l") 'magit-log)
-(global-set-key (kbd "s-m f") 'magit-log-buffer-file)
-(global-set-key (kbd "s-m b") 'magit-blame)
+
+;; these are not working for some reason, prefix not allowed
+;; (global-set-key (kbd "s-m m") 'magit-status)
+;; (global-set-key (kbd "s-m l") 'magit-log)
+;; (global-set-key (kbd "s-m f") 'magit-log-buffer-file)
+;; (global-set-key (kbd "s-m b") 'magit-blame)
+
 (global-set-key (kbd "s-o") 'crux-smart-open-line-above)
 
 

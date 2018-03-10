@@ -24,7 +24,7 @@
 
 (prelude-require-packages '(spaceline monokai-theme hl-todo
                                       js2-highlight-vars toggle-quotes
-                                      elixir-mode centered-window-mode
+                                      elixir-mode centered-window
                                       cql-mode flycheck-pycheckers
                                       github-browse-file))
 
@@ -197,8 +197,8 @@
 (global-set-key (kbd "s-b") 'go-back)
 (global-set-key (kbd "s-d") 'delete-line-or-region)
 (global-set-key (kbd "M-s-f") 'my-replace-string)
-(define-key prelude-mode-map (kbd "C-o") 'crux-smart-open-line)
-(define-key prelude-mode-map (kbd "M-o") 'crux-smart-open-line-above)
+(global-set-key (kbd "C-o") 'crux-smart-open-line)
+(global-set-key (kbd "M-o") 'crux-smart-open-line-above)
 (global-set-key (kbd "s-a") 'select-current-line)
 (global-set-key (kbd "s-A") 'mark-whole-buffer)
 (global-set-key (kbd "s-n") 'new-empty-buffer)
