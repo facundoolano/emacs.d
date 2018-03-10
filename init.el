@@ -74,6 +74,21 @@
 (require 'facundo-parens)
 (require 'facundo-projectile)
 (require 'facundo-neotree)
+(require 'prelude-org)
+
+;;; Programming languages support
+;; (require 'facundo-clojure)
+;; (require 'facundo-lisp)
+;; (require 'facundo-emacs-lisp)
+;; (require 'facundo-erlang)
+;; (require 'facundo-elixir)
+;; (require 'facundo-js)
+;; (require 'facundo-python)
+
+(require 'prelude-web)
+(require 'prelude-xml)
+(require 'prelude-yaml)
+
 
 ;; send custom generated stuff to a separate file
 (setq custom-file "~/.emacs.d/custom.el")
