@@ -43,16 +43,25 @@
                                          try-complete-lisp-symbol-partially
                                          try-complete-lisp-symbol))
 
+;;; TAKEN FROM prelude-company.el
+(prelude-require-packages '(company))
 
+(require 'company)
+
+(setq company-idle-delay 0.5)
+(setq company-tooltip-limit 10)
+(setq company-minimum-prefix-length 2)
+;; invert the navigation direction if the the completion popup-isearch-match
+;; is displayed on top (happens near the bottom of windows)
+(setq company-tooltip-flip-when-above t)
+
+(global-company-mode 1)
 
 ;;; CUSTOM STUFF
 
-(require 'company)
 (require 'company-dabbrev)
-(require 'js2-mode)
 
 (defvar my-indentation-offset 2 "My indentation offset.")
-(setq js2-basic-offset my-indentation-offset)
 
 ;; make tab cycle wrap list
 (setq company-selection-wrap-around 1)
@@ -107,13 +116,10 @@
           (call-interactively 'backward-delete-char))))))
 
 (define-key prog-mode-map (kbd "<tab>") 'my-indent)
-(define-key js2-mode-map (kbd "<tab>") 'my-indent)
 ;; not using this one anymore since its defined in the company-simple-complete:
 ;; (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
 (define-key company-active-map (kbd "<return>") 'company-select-next)
 (define-key prog-mode-map (kbd "<backtab>") 'my-unindent)
-(define-key js2-mode-map (kbd "<backtab>") 'my-unindent)
-(define-key js2-mode-map [(backspace)] 'backspace-whitespace-to-tab-stop)
 
 (provide 'facundo-indent)
 ;;; facundo-indent.el ends here

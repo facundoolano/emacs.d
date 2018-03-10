@@ -26,6 +26,8 @@
 (require 'js2-mode)
 (prelude-require-packages '(add-node-modules-path mocha))
 
+(setq js2-basic-offset my-indentation-offset)
+
 (setq mocha-reporter "spec")
 (setq mocha-options "--no-colors --recursive")
 
@@ -59,6 +61,11 @@
 (define-key js2-mode-map (kbd "RET") 'js2-line-break) ; auto closes comment blocks on enter
 (define-key js2-mode-map (kbd "s-f") 'eslint-fix)
 (define-key js2-mode-map (kbd "M-h") 'js2-highlight-vars-mode)
+
+(require 'facundo-indent)
+(define-key js2-mode-map (kbd "<tab>") 'my-indent)
+(define-key js2-mode-map (kbd "<backtab>") 'my-unindent)
+(define-key js2-mode-map [(backspace)] 'backspace-whitespace-to-tab-stop)
 
 (provide 'facundo-js)
 ;;; facundo-js.el ends here

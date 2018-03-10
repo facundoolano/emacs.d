@@ -29,7 +29,6 @@
                                       github-browse-file))
 
 ;;; Sublime like color theme
-(disable-theme 'zenburn)
 ;; (load-theme 'sanityinc-tomorrow-day)
 (load-theme 'monokai t)
 (setq-default line-spacing 5)
