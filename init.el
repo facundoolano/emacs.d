@@ -93,9 +93,8 @@
 (require 'prelude-xml)
 (require 'prelude-yaml)
 
-;;; remember window size
+;;; remember window layout
 (desktop-save-mode 1)
-(desktop-read)
 
 ;; send custom generated stuff to a separate file
 (setq custom-file "~/.emacs.d/custom.el")
