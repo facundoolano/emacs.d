@@ -58,8 +58,7 @@
 
 ;; require some packages that don't belong in any specific module
 ;; TODO maybe merge prelude packages here
-(prelude-require-packages '(toggle-quotes cql-mode elmacro
-                                          github-browse-file))
+(prelude-require-packages '(toggle-quotes cql-mode elmacro))
 
 (require 'facundo-ui)
 (require 'facundo-editor)
@@ -74,9 +73,9 @@
 (require 'prelude-helm)
 (require 'prelude-helm-everywhere)
 
-(require 'facundo-core) ;; TODO should be distributed to other files
 (require 'facundo-indent)
 (require 'facundo-parens)
+(require 'facundo-git)
 (require 'facundo-projectile)
 (require 'facundo-neotree)
 (require 'facundo-org)

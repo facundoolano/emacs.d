@@ -59,9 +59,6 @@
 ;; replace buffer-menu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
-
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 ;;; TAKEN FROM prelude-mode.el
@@ -99,14 +96,7 @@
 (global-set-key (kbd "s-j") 'crux-top-join-line)
 (global-set-key (kbd "s-k") 'crux-kill-whole-line)
 
-;; these are not working for some reason, prefix not allowed
-;; (global-set-key (kbd "s-m m") 'magit-status)
-;; (global-set-key (kbd "s-m l") 'magit-log)
-;; (global-set-key (kbd "s-m f") 'magit-log-buffer-file)
-;; (global-set-key (kbd "s-m b") 'magit-blame)
-
 (global-set-key (kbd "s-o") 'crux-smart-open-line-above)
-
 
 ;;; CUSTOM STUFF
 

@@ -41,7 +41,7 @@
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
 (package-initialize)
 
-;; TODO move this defaults to another place?
+;; TODO move these defaults to specific modules or init.el
 (defvar prelude-packages
   '(anzu
     beacon
@@ -53,12 +53,8 @@
     epl
     expand-region
     flycheck
-    git-timemachine
-    gitconfig-mode
-    gitignore-mode
     imenu-anywhere
     projectile
-    magit
     move-text
     smartparens
     undo-tree
