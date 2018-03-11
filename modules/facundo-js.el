@@ -23,11 +23,28 @@
 ;;
 
 ;;; Code:
+(prelude-require-packages '(js2-mode json-mode add-node-modules-path mocha js2-highlight-vars))
+
+(require 'facundo-programming)
 (require 'js2-mode)
-(prelude-require-packages '(add-node-modules-path mocha js2-highlight-vars))
+(require 'mocha)
 
-(setq js2-basic-offset my-indentation-offset)
+;; taken from prelude
+(add-to-list 'auto-mode-alist '("\\.js\\'"    . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.pac\\'"   . js2-mode))
+(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
+(eval-after-load 'js2-mode
+  '(progn
+     (defun prelude-js-mode-defaults ()
+       ;; electric-layout-mode doesn't play nice with smartparens
+       (setq-local electric-layout-rules '((?\; . after)))
+       (setq mode-name "JS2")
+       (js2-imenu-extras-mode +1))
+
+     (add-hook 'js2-mode-hook 'prelude-js-mode-defaults)))
+
+;; custom stuff
 (setq mocha-reporter "spec")
 (setq mocha-options "--no-colors --recursive")
 
@@ -63,6 +80,8 @@
 (define-key js2-mode-map (kbd "M-h") 'js2-highlight-vars-mode)
 
 (require 'facundo-indent)
+
+(setq js2-basic-offset my-indentation-offset)
 (define-key js2-mode-map (kbd "<tab>") 'my-indent)
 (define-key js2-mode-map (kbd "<backtab>") 'my-unindent)
 (define-key js2-mode-map [(backspace)] 'backspace-whitespace-to-tab-stop)

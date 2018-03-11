@@ -24,9 +24,11 @@
 
 ;;; Code:
 
-(prelude-require-packages '(projectile neotree))
+(prelude-require-package 'neotree)
+
 (require 'neotree)
 (require 'projectile)
+
 (setq neo-theme 'ascii)
 
 ; yanked from spacemacs

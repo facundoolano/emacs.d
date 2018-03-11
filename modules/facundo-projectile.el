@@ -24,7 +24,8 @@
 
 ;;; Code:
 
-(prelude-require-packages '(helm projectile nameframe-projectile))
+(prelude-require-packages '(projectile nameframe-projectile))
+
 (require 'projectile)
 (require 'helm)
 

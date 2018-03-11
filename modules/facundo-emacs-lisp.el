@@ -57,7 +57,7 @@ Start `ielm' if it's not already running."
 ;; ielm is an interactive Emacs Lisp shell
 (defun prelude-ielm-mode-defaults ()
   "Sensible defaults for `ielm'."
-  (run-hooks 'prelude-interactive-lisp-coding-hook)
+  (run-hooks 'prelude-interactive-lisp-coding-defaults)
   (eldoc-mode +1))
 
 (add-hook 'ielm-mode-hook 'prelude-ielm-mode-defaults)

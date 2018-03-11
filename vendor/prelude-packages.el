@@ -54,7 +54,6 @@
     expand-region
     flycheck
     imenu-anywhere
-    projectile
     move-text
     smartparens
     undo-tree

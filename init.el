@@ -82,9 +82,9 @@
 
 ;;; Programming languages support
 (require 'facundo-emacs-lisp)
-;; (require 'facundo-clojure)
-;; (require 'facundo-erlang)
-;; (require 'facundo-js)
+(require 'facundo-clojure)
+(require 'facundo-erlang)
+(require 'facundo-js)
 (require 'facundo-python)
 
 (require 'prelude-elixir)

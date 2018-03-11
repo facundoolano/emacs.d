@@ -1,45 +1,53 @@
-;;; facundo-erlang.el --- erlang configuration       -*- lexical-binding: t; -*-
-
-;; Copyright (C) 2017  Facundo Olano
-
-;; Author: Facundo Olano
-;; () languages
-
-;; This program is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or
-;; (at your option) any later version.
-
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
-
-;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+;;; facundo-erlang.el --- Emacs Prelude: Erlang programming support.
+;;
 ;;; Commentary:
 
-;;
+;; Erlang is a concurrent functional language.
 
 ;;; Code:
 
-(provide 'facundo-erlang)
+;;; TAKEN FROM prelude-erlang.el
 
-(require 'prelude-erlang)
+(require 'facundo-programming)
+(prelude-require-packages '(erlang))
 
-(require 'erlang-start)
+(defcustom wrangler-path nil
+  "The location of wrangler elisp directory."
+  :group 'prelude-erlang
+  :type 'string
+  :safe 'stringp)
+
+(require 'projectile)
+
+(when (require 'erlang-start nil t)
+
+  (eval-after-load 'erlang-mode
+    '(progn
+       (flymake-mode)))
+
+  (when (not (null wrangler-path))
+    (add-to-list 'load-path wrangler-path)
+    (require 'wrangler)))
+
+(add-hook 'erlang-mode-hook (lambda ()
+                              (setq erlang-compile-function 'projectile-compile-project)))
+
+;;; CUSTOM STUFF
 
 ;; default to erlang mode in .config files
 (add-to-list 'auto-mode-alist '("\\.config\\’" . erlang-mode))
 
 (setq erlang-root-dir "/usr/local/lib/erlang")
 (setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
+
+;; never managed to get the man working
 (setq erlang-man-root-dir "/usr/local/lib/erlang/man")
 (setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.9.1/emacs" load-path))
+
 (setq erlang-indent-level 2)
 (setq flycheck-erlang-include-path (list "../include/" "../../include/"))
 
+;; add a smart pair for binaries
 (sp-local-pair 'erlang-mode "<<\"" "\">>")
 
 (defun my-erlang-mode-hook ()
@@ -52,5 +60,7 @@
 ;; Some Erlang customization
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
 (add-hook 'erlang-shell-mode-hook 'my-erlang-shell-mode-hook)
+
+(provide 'facundo-erlang)
 
 ;;; facundo-erlang.el ends here
