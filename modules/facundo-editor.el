@@ -6,6 +6,8 @@
 
 ;;; Code:
 
+;;; TAKEN FROM prelude-editor.el
+
 ;; Death to the tabs!  However, tabs historically indent to the next
 ;; 8-character offset; specifying anything else will cause *mass*
 ;; confusion, as it will change the appearance of every existing file.
@@ -212,6 +214,91 @@ indent yanked text (with prefix arg don't indent)."
 ;; easy-kill
 (global-set-key [remap kill-ring-save] 'easy-kill)
 (global-set-key [remap mark-sexp] 'easy-mark)
+
+;;; CUSTOM STUFF
+
+(defun delete-line-or-region ()
+  "Deletes (without copying) the current line or the lines encompassed by the current region."
+  (interactive)
+  (let (beg end)
+    (if (region-active-p)
+        (progn
+          (setq beg (region-beginning) end (region-end))
+          (save-excursion
+            (setq beg (progn (goto-char beg) (line-beginning-position))
+                  end (progn (goto-char end) (line-end-position)))))
+      (setq beg (line-beginning-position) end (line-end-position)))
+    (delete-region beg end)
+    (delete-char 1)))
+
+(defun my-replace-string ()
+  "Move to beggining of buffer before replacing string."
+  (interactive)
+  (save-excursion
+    (beginning-of-buffer)
+    (call-interactively 'replace-string)))
+
+(defun select-current-line ()
+  "Select the current line."
+  (interactive)
+  (end-of-line) ; move to end of line
+  (set-mark (line-beginning-position)))
+
+(defun new-empty-buffer ()
+  "Open a new empty buffer."
+  (interactive)
+  (let ((buf (generate-new-buffer "untitled")))
+    (switch-to-buffer buf)
+    (funcall (and initial-major-mode))))
+
+(defun new-empty-buffer-split ()
+  "Open a new empty buffer."
+  (interactive)
+  (split-window-horizontally)
+  (other-window 1)
+  (let ((buf (generate-new-buffer "untitled")))
+    (switch-to-buffer buf)
+    (funcall (and initial-major-mode))))
+
+(defadvice isearch-search (after isearch-no-fail activate)
+  "Advice search to be wrapped by default."
+  (unless isearch-success
+    (ad-disable-advice 'isearch-search 'after 'isearch-no-fail)
+    (ad-activate 'isearch-search)
+    (isearch-repeat (if isearch-forward 'forward))
+    (ad-enable-advice 'isearch-search 'after 'isearch-no-fail)
+    (ad-activate 'isearch-search)))
+
+(setq mouse-wheel-scroll-amount '(0.05))
+(setq mouse-wheel-progressive-speed nil)
+
+(defun go-back ()
+  "Return to the previous position."
+  (interactive)
+  (universal-argument)
+  (cua-set-mark
+   `(4)))
+
+(defun mark-and-search ()
+  "Easy mark symbol current symbol and search for it in the current buffer."
+  (interactive)
+  (easy-mark 1)
+  (cua-copy-region nil)
+  (isearch-forward nil 1)
+  (isearch-yank-kill))
+
+(defun mark-and-grep ()
+  "Easy mark symbol current symbol and search for it in the project files."
+  (interactive)
+  (easy-mark 1)
+  (cua-copy-region nil)
+  (helm-projectile-ag))
+
+;; don't want flyspell messing with commenting
+(define-key flyspell-mode-map (kbd "C-;") nil)
+
+;;; disable line wrapping
+(set-default 'truncate-lines t)
 
 (provide 'facundo-editor)
 

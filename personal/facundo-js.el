@@ -24,7 +24,7 @@
 
 ;;; Code:
 (require 'js2-mode)
-(prelude-require-packages '(add-node-modules-path mocha))
+(prelude-require-packages '(add-node-modules-path mocha js2-highlight-vars))
 
 (setq js2-basic-offset my-indentation-offset)
 

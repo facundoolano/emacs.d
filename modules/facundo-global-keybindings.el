@@ -113,7 +113,27 @@
 (global-set-key (kbd "s-=") 'text-scale-increase)
 (global-set-key (kbd "s--") 'text-scale-decrease)
 
+(global-set-key (kbd "s-Z") 'undo-tree-redo)
+(global-set-key (kbd "s-b") 'go-back)
+(global-set-key (kbd "s-d") 'delete-line-or-region)
+(global-set-key (kbd "M-s-f") 'my-replace-string)
+(global-set-key (kbd "C-o") 'crux-smart-open-line)
+(global-set-key (kbd "M-o") 'crux-smart-open-line-above)
+(global-set-key (kbd "s-a") 'select-current-line)
+(global-set-key (kbd "s-A") 'mark-whole-buffer)
+(global-set-key (kbd "s-n") 'new-empty-buffer)
+(global-set-key (kbd "s-N") 'new-empty-buffer-split)
 
+(global-set-key (kbd "s-V") 'cua-paste-pop) ; paste cycling through kill ring
+(global-set-key (kbd "C-S-s") 'mark-and-search)
+(global-set-key (kbd "C-M-s") 'mark-and-grep)
+
+(require 'toggle-quotes)
+(global-set-key (kbd "C-'") 'toggle-quotes)
+
+(load "cc-mode") ; needed for hungry-delete commands
+(global-set-key (kbd "s-D") 'c-hungry-delete-forward) ; delete all following whitespaces
+(global-set-key [(super backspace)] 'c-hungry-delete-backwards) ; delete all preceeding whitespaces
 
 (provide 'facundo-global-keybindings)
 

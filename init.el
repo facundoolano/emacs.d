@@ -55,6 +55,11 @@
 
 ;; the core stuff
 (require 'prelude-packages)
+;; require some packages that don't belong in any specific module
+(prelude-require-packages '(toggle-quotes
+                            cql-mode flycheck-pycheckers
+                            github-browse-file))
+
 (require 'facundo-ui)
 (require 'facundo-editor)
 (require 'facundo-global-keybindings)
@@ -81,14 +86,18 @@
 ;; (require 'facundo-lisp)
 ;; (require 'facundo-emacs-lisp)
 ;; (require 'facundo-erlang)
-;; (require 'facundo-elixir)
 ;; (require 'facundo-js)
 ;; (require 'facundo-python)
 
+(require 'prelude-elixir)
+(require 'prelude-c)
 (require 'prelude-web)
 (require 'prelude-xml)
 (require 'prelude-yaml)
 
+;;; remember window size
+(desktop-save-mode 1)
+(desktop-read)
 
 ;; send custom generated stuff to a separate file
 (setq custom-file "~/.emacs.d/custom.el")

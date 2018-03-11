@@ -7,6 +7,8 @@
 
 ;;; Code:
 
+;;; TAKEN FROM prelude-ui.el
+
 ;; the toolbar is just a waste of valuable screen estate
 ;; in a tty tool-bar-mode does not properly auto-load, and is
 ;; already disabled anyway
@@ -51,6 +53,44 @@
 ;; show available keybindings after you start typing
 (require 'which-key)
 (which-key-mode +1)
+
+;;; CUSTOM STUFF
+
+(prelude-require-packages '(spaceline monokai-theme hl-todo))
+
+;;; Sublime like color theme
+;; (load-theme 'sanityinc-tomorrow-day)
+(load-theme 'monokai t)
+(setq-default line-spacing 5)
+
+(setq powerline-default-separator 'utf-8)
+(setq powerline-utf-8-separator-left        32
+      powerline-utf-8-separator-right       32)
+
+(require 'spaceline-config)
+(spaceline-emacs-theme)
+(spaceline-helm-mode)
+(spaceline-toggle-projectile-root-on)
+(spaceline-toggle-buffer-size-off)
+(spaceline-toggle-buffer-encoding-abbrev-off)
+(spaceline-toggle-minor-modes-off)
+
+;;; show line numbers, but not on neotree
+;; (setq linum-format 'dynamic)
+(setq linum-format "%3d ")
+(add-hook 'prog-mode-hook 'linum-mode)
+
+(fringe-mode '(10 . 0))
+
+;;; disable scrollbar
+(scroll-bar-mode -1)
+
+;; highlights todo and fixme
+(require 'hl-todo)
+(global-hl-todo-mode t)
+(setq hl-todo-activate-in-modes '(prog-mode emacs-lisp-mode))
+
+
 
 (provide 'facundo-ui)
 ;;; prelude-ui.el ends here

@@ -43,10 +43,6 @@ This functions should be added to the hooks of major modes for programming."
    nil '(("\\<\\(\\(FIX\\(ME\\)?\\|TODO\\|OPTIMIZE\\|HACK\\|REFACTOR\\):\\)"
           1 font-lock-warning-face t))))
 
-;; show the name of the current function definition in the modeline
-(require 'which-func)
-(which-function-mode 1)
-
 ;; in Emacs 24 programming major modes generally derive from a common
 ;; mode named prog-mode; for others, we'll arrange for our mode
 ;; defaults function to run prelude-prog-mode-hook directly.  To
@@ -67,11 +63,9 @@ This functions should be added to the hooks of major modes for programming."
 
 (defun prelude-prog-mode-defaults ()
   "Default coding hook, useful with any programming language."
-  (when (and (executable-find ispell-program-name)
-             prelude-flyspell)
+  (when (executable-find ispell-program-name)
     (flyspell-prog-mode))
-  (when prelude-guru
-    (guru-mode +1))
+  
   (smartparens-mode +1)
   (prelude-enable-whitespace)
   (prelude-local-comment-auto-fill)
