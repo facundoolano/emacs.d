@@ -32,7 +32,7 @@
 
 ;;; Code:
 
-(require 'prelude-programming)
+(require 'facundo-programming)
 
 (defun prelude-c-mode-common-defaults ()
   (setq c-default-style "k&r"

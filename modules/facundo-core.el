@@ -22,31 +22,11 @@
 
 ;;; Code:
 
-
-;; TODO add to facundo org
-(setq org-startup-folded nil)
+;; FIXME this file should go away
 
 ;; TODO facundo git?
 (setq magit-no-confirm-default '(magit-branch-and-checkout))
 
-;; TODO put in programming mode
-(defun comment-or-uncomment-region-or-line ()
-  "Comments or uncomments the region or the current line if there's no active region."
-  (interactive)
-  (let (beg end)
-    (if (region-active-p)
-        (setq beg (region-beginning) end (region-end))
-      (setq beg (line-beginning-position) end (line-end-position)))
-    (comment-or-uncomment-region beg end)))
-
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
-(global-set-key (kbd "C-M-f") 'forward-sexp)
-(global-set-key (kbd "C-M-b") 'backward-sexp)
-(global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
-(global-set-key (kbd "M-s") 'sp-splice-sexp)
-
-;; TODO lisp mode? elistp mode?
-(define-key emacs-lisp-mode-map (kbd "s-e") 'eval-region)
 
 (provide 'facundo-core)
 ;;; facundo-core.el ends here

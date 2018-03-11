@@ -55,10 +55,11 @@
 
 ;; the core stuff
 (require 'prelude-packages)
+
 ;; require some packages that don't belong in any specific module
-(prelude-require-packages '(toggle-quotes
-                            cql-mode flycheck-pycheckers
-                            github-browse-file))
+;; TODO maybe merge prelude packages here
+(prelude-require-packages '(toggle-quotes cql-mode elmacro
+                                          github-browse-file))
 
 (require 'facundo-ui)
 (require 'facundo-editor)
@@ -69,7 +70,6 @@
   (require 'facundo-osx))
 
 ;; Non core modules.
-;; TODO migrate prelude modules
 (require 'prelude-ido)
 (require 'prelude-helm)
 (require 'prelude-helm-everywhere)
@@ -79,15 +79,14 @@
 (require 'facundo-parens)
 (require 'facundo-projectile)
 (require 'facundo-neotree)
-(require 'prelude-org)
+(require 'facundo-org)
 
 ;;; Programming languages support
+(require 'facundo-emacs-lisp)
 ;; (require 'facundo-clojure)
-;; (require 'facundo-lisp)
-;; (require 'facundo-emacs-lisp)
 ;; (require 'facundo-erlang)
 ;; (require 'facundo-js)
-;; (require 'facundo-python)
+(require 'facundo-python)
 
 (require 'prelude-elixir)
 (require 'prelude-c)

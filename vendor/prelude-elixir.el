@@ -31,7 +31,7 @@
 
 ;;; Code:
 
-(require 'prelude-programming)
+(require 'facundo-programming)
 
 (prelude-require-packages '(elixir-mode alchemist))
 
