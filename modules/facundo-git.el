@@ -15,4 +15,12 @@
 
 (setq magit-no-confirm-default '(magit-branch-and-checkout))
 
+(require 'github-browse-file)
+
+(defun github-save-url ()
+  "Add the github url for the current line or region to the kill ring. "
+  (interactive)
+  (let ((github-browse-file-visit-url nil))
+    (github-browse-file)))
+
 (provide 'facundo-git)
