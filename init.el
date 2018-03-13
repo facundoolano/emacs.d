@@ -69,9 +69,7 @@
   (require 'facundo-osx))
 
 ;; Non core modules.
-(require 'prelude-ido)
-(require 'prelude-helm)
-(require 'prelude-helm-everywhere)
+(require 'facundo-ivy)
 
 (require 'facundo-indent)
 (require 'facundo-parens)

@@ -43,8 +43,7 @@
 
 ;; TODO move these defaults to specific modules or init.el
 (defvar prelude-packages
-  '(anzu
-    beacon
+  '(beacon
     browse-kill-ring
     crux
     discover-my-major

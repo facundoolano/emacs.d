@@ -139,15 +139,6 @@ The body of the advice is in BODY."
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-defun 'disabled nil)
 
-;; projectile is a project management mode
-(require 'projectile)
-(setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
-(projectile-global-mode t)
-
-;; anzu-mode enhances isearch & query-replace by showing total matches and current match position
-(require 'anzu)
-(global-anzu-mode)
-
 ;; clean up obsolete buffers automatically
 (require 'midnight)
 
@@ -292,7 +283,7 @@ indent yanked text (with prefix arg don't indent)."
   (interactive)
   (easy-mark 1)
   (cua-copy-region nil)
-  (helm-projectile-ag))
+  (counsel-projectile-ag))
 
 ;; don't want flyspell messing with commenting
 (define-key flyspell-mode-map (kbd "C-;") nil)

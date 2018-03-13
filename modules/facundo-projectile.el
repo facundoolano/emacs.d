@@ -24,10 +24,15 @@
 
 ;;; Code:
 
-(prelude-require-packages '(projectile nameframe-projectile))
+(prelude-require-packages '(projectile nameframe-projectile counsel-projectile))
 
 (require 'projectile)
-(require 'helm)
+;; (require 'counsel-projectile)
+
+(setq projectile-completion-system 'ivy)
+
+(setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
+(projectile-mode t)
 
 (setq projectile-globally-ignored-directories (append '("node_modules" "coverage") projectile-globally-ignored-directories))
 (setq shell-file-name "/bin/sh")
@@ -83,7 +88,7 @@
         (switch-to-buffer next)
       (progn
         (projectile-switch-project-by-name pname) ;; FIXME this is not working
-        (projectile-find-file)))))
+        (counsel-projectile-find-file)))))
 
 (defun kill-other-project-buffers ()
   "Kill all user buffers from this project, except the current one."
@@ -91,33 +96,47 @@
   (let ((project-buffers (-filter 'user-buffer-q (projectile-project-buffers-non-visible))))
     (mapcar 'kill-buffer project-buffers)))
 
+;; Fix discover projects not working
+;; https://github.com/bbatsov/projectile/issues/1165
+(defun projectile-discover-projects-in-directory (directory)
+  "Discover any projects in DIRECTORY and add them to the projectile cache.
+This function is not recursive and only adds projects with roots
+at the top level of DIRECTORY."
+  (interactive
+   (list (read-directory-name "Starting directory: ")))
+  (let ((subdirs (directory-files directory t)))
+    (mapcar
+     (lambda (dir)
+       (when (and (file-directory-p dir)
+                  (not (member (file-name-nondirectory dir) '(".." "."))))
+         (let ((default-directory dir)
+               (projectile-cached-project-root dir))
+           (when (projectile-project-p)
+             (projectile-add-known-project (projectile-project-root))))))
+     subdirs)))
 
 ;;; open project in new frame
 (nameframe-projectile-mode t)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-;;; copy pasted a modified version of the name frame function so it works in emacs for mac
-;;; FIXME ask why this is needed maybe open a PR or fork
-(defun nameframe-projectile--before-switch-project-hook ()
-  "Hook to create/switch to a project's frame."
-  (let* ((project-to-switch nameframe-projectile--project-to-switch)  ;; set by advise
-         (name (file-name-nondirectory (directory-file-name project-to-switch)))
-         (curr-frame (selected-frame))
-         (frame-alist (nameframe-frame-alist))
-         (frame (nameframe-get-frame name frame-alist)))
-    (cond
-     ;; project frame already exists
-     ((and frame (not (equal frame curr-frame)))
-      (select-frame-set-input-focus frame))
-     ((not frame)
-      (progn (nameframe-make-frame name) (select-frame-set-input-focus (nameframe-get-frame name)))))))
+(defun counsel-projectile-find-file-other-window ()
+  "Open a file in the current project in a separate window."
+  (interactive)
+  (ivy-read (projectile-prepend-project-name "Find file: ")
+            (projectile-current-project-files)
+            :matcher counsel-projectile-find-file-matcher
+            :require-match t
+            :sort t
+            :action #'counsel-projectile-find-file-action-other-window
+            :caller 'counsel-projectile-find-file))
 
 (global-set-key (kbd "C-c p") 'projectile-command-map)
 
-(global-set-key (kbd "s-p") 'helm-projectile-find-file)
-(global-set-key (kbd "s-P") 'projectile-find-file-other-window)
-(global-set-key (kbd "s-F") 'helm-projectile-ag)
+(global-set-key (kbd "s-p") 'counsel-projectile-find-file)
+(global-set-key (kbd "s-P") 'counsel-projectile-find-file-other-window)
+(global-set-key (kbd "s-F") 'counsel-projectile-ag)
 (global-set-key (kbd "s-w") 'kill-project-frame)
+;; FIXME counsel-projectile not working here
 (global-set-key (kbd "s-o") 'projectile-switch-project)
 
 (global-set-key (kbd "C-<tab>") 'next-project-buffer)

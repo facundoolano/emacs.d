@@ -69,7 +69,6 @@
 
 (require 'spaceline-config)
 (spaceline-emacs-theme)
-(spaceline-helm-mode)
 (spaceline-toggle-projectile-root-on)
 (spaceline-toggle-buffer-size-off)
 (spaceline-toggle-buffer-encoding-abbrev-off)
