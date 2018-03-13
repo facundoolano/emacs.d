@@ -9,6 +9,7 @@
 (prelude-require-packages '(ivy counsel swiper))
 
 (require 'ivy)
+(require 'counsel)
 
 (ivy-mode 1)
 
@@ -36,6 +37,20 @@
 
 ;; don't include ./ and ../ in file selection
 (setq ivy-extra-directories nil)
+
+(defun counsel-describe-function-or-variable ()
+  "Display help about the currently selected ivy result.
+Assumes the symbol is a function and tries with a variable describe-function fails."
+  (interactive)
+  (let ((inhibit-message t)
+        (current-symbol (intern (ivy-state-current ivy-last))))
+    (condition-case nil
+        (describe-function current-symbol)
+      ('error
+       (describe-variable current-symbol)))))
+
+(define-key counsel-describe-map (kbd "TAB") 'counsel-describe-function-or-variable)
+
 
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
