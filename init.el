@@ -81,6 +81,7 @@
 (require 'facundo-projectile)
 (require 'facundo-neotree)
 (require 'facundo-org)
+(require 'facundo-dictionary)
 
 ;;; Programming languages support
 (require 'facundo-emacs-lisp)
