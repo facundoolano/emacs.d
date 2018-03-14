@@ -6,10 +6,15 @@
 
 ;;; Code:
 
-(prelude-require-packages '(ivy counsel swiper))
+
+(prelude-require-packages '(ivy counsel swiper smex))
 
 (require 'ivy)
 (require 'counsel)
+
+;; smex is used to sort commands in counsel-M-x by recency
+(require 'smex)
+(setq smex-save-file (expand-file-name "smex-items" prelude-savefile-dir))
 
 (ivy-mode 1)
 

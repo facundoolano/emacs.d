@@ -53,6 +53,10 @@
 ;; warn when opening files bigger than 100MB
 (setq large-file-warning-threshold 100000000)
 
+;;; remember window layout
+(setq desktop-save t)
+(desktop-save-mode 1)
+
 ;; the core stuff
 (require 'prelude-packages)
 
@@ -90,9 +94,6 @@
 (require 'prelude-web)
 (require 'prelude-xml)
 (require 'prelude-yaml)
-
-;;; remember window layout
-(desktop-save-mode 1)
 
 ;; send custom generated stuff to a separate file
 (setq custom-file "~/.emacs.d/custom.el")
