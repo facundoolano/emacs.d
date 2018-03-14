@@ -270,21 +270,6 @@ indent yanked text (with prefix arg don't indent)."
   (cua-set-mark
    `(4)))
 
-(defun mark-and-search ()
-  "Easy mark symbol current symbol and search for it in the current buffer."
-  (interactive)
-  (easy-mark 1)
-  (cua-copy-region nil)
-  (isearch-forward nil 1)
-  (isearch-yank-kill))
-
-(defun mark-and-grep ()
-  "Easy mark symbol current symbol and search for it in the project files."
-  (interactive)
-  (easy-mark 1)
-  (cua-copy-region nil)
-  (counsel-projectile-ag))
-
 ;; don't want flyspell messing with commenting
 (define-key flyspell-mode-map (kbd "C-;") nil)
 

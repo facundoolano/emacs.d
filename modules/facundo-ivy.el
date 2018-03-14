@@ -37,6 +37,25 @@
 ;; don't include ./ and ../ in file selection
 (setq ivy-extra-directories nil)
 
+;; prepopulate counsel-projectile-ag with current selection
+;; this is required for mark-and-grep to properly work
+(setq counsel-projectile-ag-initial-input '(projectile-symbol-or-selection-at-point))
+
+;; this could maybe be migrated to use swiper instead of isearch
+(defun mark-and-search ()
+  "Easy mark symbol current symbol and search for it in the current buffer."
+  (interactive)
+  (easy-mark 1)
+  (cua-copy-region nil)
+  (isearch-forward nil 1)
+  (isearch-yank-kill))
+
+(defun mark-and-grep ()
+  "Easy mark symbol current symbol and search for it in the project files."
+  (interactive)
+  (easy-mark 1)
+  (counsel-projectile-ag))
+
 (defun counsel-describe-function-or-variable ()
   "Display help about the currently selected ivy result.
 Assumes the symbol is a function and tries with a variable describe-function fails."
@@ -50,7 +69,6 @@ Assumes the symbol is a function and tries with a variable describe-function fai
 
 (define-key counsel-describe-map (kbd "TAB") 'counsel-describe-function-or-variable)
 
-
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
@@ -60,6 +78,9 @@ Assumes the symbol is a function and tries with a variable describe-function fai
 (global-set-key (kbd "C-h v") 'counsel-describe-variable)
 (global-set-key (kbd "s-r") 'counsel-recentf)
 (global-set-key (kbd "C-c f") 'counsel-recentf)
+
+(global-set-key (kbd "C-S-s") 'mark-and-search)
+(global-set-key (kbd "C-M-s") 'mark-and-grep)
 
 (provide 'facundo-ivy)
 

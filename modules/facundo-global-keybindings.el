@@ -109,8 +109,6 @@
 (global-set-key (kbd "s-N") 'new-empty-buffer-split)
 
 (global-set-key (kbd "s-V") 'cua-paste-pop) ; paste cycling through kill ring
-(global-set-key (kbd "C-S-s") 'mark-and-search)
-(global-set-key (kbd "C-M-s") 'mark-and-grep)
 
 (require 'toggle-quotes)
 (global-set-key (kbd "C-'") 'toggle-quotes)
