@@ -6,7 +6,6 @@
 
 ;;; Code:
 
-
 (prelude-require-packages '(ivy counsel swiper smex))
 
 (require 'ivy)
@@ -17,11 +16,6 @@
 (setq smex-save-file (expand-file-name "smex-items" prelude-savefile-dir))
 
 (ivy-mode 1)
-
-;; ;;; CUSTOM STUFF
-;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
-;; (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-;; (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
 ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.
 (setq ivy-use-virtual-buffers t)
@@ -54,7 +48,7 @@ Assumes the symbol is a function and tries with a variable describe-function fai
       ('error
        (describe-variable current-symbol)))))
 
-(define-key counsel-describe-map (kbd "TAB") 'pcounsel-describe-function-or-variable)
+(define-key counsel-describe-map (kbd "TAB") 'counsel-describe-function-or-variable)
 
 
 (global-set-key (kbd "M-x") 'counsel-M-x)
