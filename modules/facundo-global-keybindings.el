@@ -25,9 +25,6 @@
 ;; Start a regular shell if you prefer that.
 (global-set-key (kbd "C-x M-m") 'shell)
 
-;; If you want to be able to M-x without meta
-(global-set-key (kbd "C-x C-m") 'smex)
-
 ;; A quick major mode help with discover-my-major
 (define-key 'help-command (kbd "C-m") 'discover-my-major)
 
@@ -74,7 +71,6 @@
 (global-set-key [(meta up)]  'move-text-up)
 (global-set-key [(meta down)]  'move-text-down)
 (global-set-key (kbd "C-c n") 'crux-cleanup-buffer-or-repgion)
-(global-set-key (kbd "C-c f")  'crux-recentf-ido-find-file)
 (global-set-key (kbd "C-M-z") 'crux-indent-defun)
 (global-set-key (kbd "C-c u") 'crux-view-url)
 (global-set-key (kbd "C-c e") 'crux-eval-and-replace)
@@ -91,8 +87,6 @@
 (global-set-key (kbd "C-c i") 'imenu-anywhere) ;; not sure what this does
 ;; extra prefix for projectile
 (global-set-key (kbd "s-p") 'projectile-command-map)
-;; make some use of the Super key
-(global-set-key (kbd "s-r") 'crux-recentf-ido-find-file)
 (global-set-key (kbd "s-j") 'crux-top-join-line)
 (global-set-key (kbd "s-k") 'crux-kill-whole-line)
 

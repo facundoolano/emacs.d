@@ -49,7 +49,7 @@ Assumes the symbol is a function and tries with a variable describe-function fai
       ('error
        (describe-variable current-symbol)))))
 
-(define-key counsel-describe-map (kbd "TAB") 'counsel-describe-function-or-variable)
+(define-key counsel-describe-map (kbd "TAB") 'pcounsel-describe-function-or-variable)
 
 
 (global-set-key (kbd "M-x") 'counsel-M-x)
@@ -59,6 +59,8 @@ Assumes the symbol is a function and tries with a variable describe-function fai
 (global-set-key (kbd "C-s") 'swiper)
 (global-set-key (kbd "C-h f") 'counsel-describe-function)
 (global-set-key (kbd "C-h v") 'counsel-describe-variable)
+(global-set-key (kbd "s-r") 'counsel-recentf)
+(global-set-key (kbd "C-c f") 'counsel-recentf)
 
 (provide 'facundo-ivy)
 
