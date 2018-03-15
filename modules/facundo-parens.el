@@ -34,8 +34,6 @@
 ;; disable annoying blink-matching-paren
 (setq blink-matching-paren nil)
 
-
-
 ;;; CUSTOM STUFF
 
 (prelude-require-package 'parinfer)
@@ -58,27 +56,6 @@
 ;; Redefine defaults to avoid unwanted extensions
 (setq parinfer-extensions '(defaults pretty-parens))
 (add-hook 'parinfer-mode-enable-hook #'parinfer--switch-to-paren-mode)
-
-;; TODO check if this can be refactored by removing prelude defaults
-(defun disable-smartparens ()
-  "Try real hard to disable smartparens everywhere, and still won't work."
-  (turn-off-smartparens-mode)
-  ;; (smartparens-global-mode -1)
-  ;; (smartparens-global-strict-mode -1)
-  (smartparens-strict-mode -1)
-  (smartparens-mode -1))
-
-(add-hook 'prelude-prog-mode-hook 'disable-smartparens)
-(add-hook 'prelude-emacs-lisp-mode-hook 'disable-smartparens)
-(add-hook 'emacs-lisp-mode-hook 'disable-smartparens)
-(add-hook 'prelude-lisp-coding-hook 'disable-smartparens)
-(add-hook 'js2-mode-hook #'smartparens-mode)
-(add-hook 'clojure-mode-hook #'parinfer-mode)
-(add-hook 'clojure-mode-hook #'electric-pair-mode)
-(add-hook 'cider-repl-mode-hook #'parinfer-mode)
-(add-hook 'cider-repl-mode-hook #'electric-pair-mode)
-(add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
-(add-hook 'emacs-lisp-mode-hook #'electric-pair-mode)
 
 (global-set-key (kbd "s-(") 'parinfer-toggle-mode)
 

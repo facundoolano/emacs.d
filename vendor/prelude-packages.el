@@ -51,10 +51,8 @@
     easy-kill
     epl
     expand-region
-    flycheck
     imenu-anywhere
     move-text
-    smartparens
     undo-tree
     which-key
     zop-to-char)

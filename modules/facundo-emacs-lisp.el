@@ -12,7 +12,7 @@
 (require 'facundo-lisp)
 (require 'crux)
 
-(prelude-require-packages '(elisp-slime-nav rainbow-mode))
+(prelude-require-packages '(elisp-slime-nav))
 
 (defun prelude-recompile-elc-on-save ()
   "Recompile your elc when saving an elisp file."
@@ -43,10 +43,9 @@ Start `ielm' if it's not already running."
 
 (defun prelude-emacs-lisp-mode-defaults ()
   "Sensible defaults for `emacs-lisp-mode'."
-  (run-hooks 'prelude-lisp-coding-defaults)
+  (prelude-lisp-coding-defaults)
   (eldoc-mode +1)
   (prelude-recompile-elc-on-save)
-  (rainbow-mode +1)
   (prelude-conditional-emacs-lisp-checker))
 
 (add-hook 'emacs-lisp-mode-hook 'prelude-emacs-lisp-mode-defaults)
@@ -56,7 +55,7 @@ Start `ielm' if it's not already running."
 ;; ielm is an interactive Emacs Lisp shell
 (defun prelude-ielm-mode-defaults ()
   "Sensible defaults for `ielm'."
-  (run-hooks 'prelude-interactive-lisp-coding-defaults)
+  (prelude-interactive-lisp-coding-defaults)
   (eldoc-mode +1))
 
 (add-hook 'ielm-mode-hook 'prelude-ielm-mode-defaults)

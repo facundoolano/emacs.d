@@ -16,7 +16,7 @@
   '(progn
      (defun prelude-clojure-mode-defaults ()
        (subword-mode +1)
-       (run-hooks 'prelude-lisp-coding-defaults))
+       (prelude-lisp-coding-defaults))
 
      (add-hook 'clojure-mode-hook 'prelude-lisp-coding-defaults)))
 
@@ -28,7 +28,7 @@
 
      (defun prelude-cider-repl-mode-defaults ()
        (subword-mode +1)
-       (run-hooks 'prelude-interactive-lisp-coding-defaults))
+       (prelude-interactive-lisp-coding-defaults))
 
      (add-hook 'cider-repl-mode-hook 'prelude-cider-repl-mode-defaults)))
 

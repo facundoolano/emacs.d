@@ -16,12 +16,20 @@
 (define-key lisp-mode-shared-map (kbd "M-(") (prelude-wrap-with "("))
 (define-key lisp-mode-shared-map (kbd "M-\"") (prelude-wrap-with "\""))
 
+
 ;; a great lisp coding hook
 (defun prelude-lisp-coding-defaults ()
+  ;; I prefer parinfer + electric pairs over sp for lisp
+  (smartparens-mode -1)
+  (parinfer-mode)
+  (electric-pair-mode)
   (rainbow-delimiters-mode +1))
 
 ;; interactive modes don't need whitespace checks
 (defun prelude-interactive-lisp-coding-defaults ()
+  (smartparens-mode -1)
+  (parinfer-mode)
+  (electric-pair-mode)
   (rainbow-delimiters-mode +1)
   (whitespace-mode -1))
 

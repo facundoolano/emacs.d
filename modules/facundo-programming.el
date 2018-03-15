@@ -8,7 +8,9 @@
 
 ;;; Code:
 
+(prelude-require-packages '(smartparens flycheck))
 (require 'smartparens)
+(require 'flycheck)
 
 ;;; TAKEN FROM prelude-programming.el
 
@@ -34,7 +36,6 @@
   "Default coding hook, useful with any programming language."
   (when (executable-find ispell-program-name)
     (flyspell-prog-mode))
-
   (smartparens-mode +1)
   (prelude-enable-whitespace)
   (prelude-local-comment-auto-fill))
