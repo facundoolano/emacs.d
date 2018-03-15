@@ -47,7 +47,6 @@ Start `ielm' if it's not already running."
   (eldoc-mode +1)
   (prelude-recompile-elc-on-save)
   (rainbow-mode +1)
-  (setq mode-name "EL")
   (prelude-conditional-emacs-lisp-checker))
 
 (add-hook 'emacs-lisp-mode-hook 'prelude-emacs-lisp-mode-defaults)

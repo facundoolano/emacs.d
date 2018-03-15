@@ -56,23 +56,13 @@
 
 ;;; CUSTOM STUFF
 
-(prelude-require-packages '(spaceline monokai-theme hl-todo))
+(prelude-require-packages '(monokai-theme hl-todo github-modern-theme))
 
 ;;; Sublime like color theme
-;; (load-theme 'sanityinc-tomorrow-day)
 (load-theme 'monokai t)
-(setq-default line-spacing 5)
-
-(setq powerline-default-separator 'utf-8)
-(setq powerline-utf-8-separator-left        32
-      powerline-utf-8-separator-right       32)
-
-(require 'spaceline-config)
-(spaceline-emacs-theme)
-(spaceline-toggle-projectile-root-on)
-(spaceline-toggle-buffer-size-off)
-(spaceline-toggle-buffer-encoding-abbrev-off)
-(spaceline-toggle-minor-modes-off)
+;; (load-theme 'github-modern t)
+;; (load-theme 'smart-mode-line-light t)
+(setq-default line-spacing 8)
 
 ;;; show line numbers, but not on neotree
 ;; (setq linum-format 'dynamic)
@@ -88,8 +78,6 @@
 (require 'hl-todo)
 (global-hl-todo-mode t)
 (setq hl-todo-activate-in-modes '(prog-mode emacs-lisp-mode))
-
-
 
 (provide 'facundo-ui)
 ;;; prelude-ui.el ends here
