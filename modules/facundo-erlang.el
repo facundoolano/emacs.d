@@ -21,10 +21,6 @@
 
 (when (require 'erlang-start nil t)
 
-  (eval-after-load 'erlang-mode
-    '(progn
-       (flymake-mode)))
-
   (when (not (null wrangler-path))
     (add-to-list 'load-path wrangler-path)
     (require 'wrangler)))
@@ -45,7 +41,10 @@
 (setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.9.1/emacs" load-path))
 
 (setq erlang-indent-level 2)
-(setq flycheck-erlang-include-path (list "../include/" "../../include/"))
+(setq flycheck-erlang-include-path (list "../" "../include/" "../../include/"))
+
+;; rebar3 checker trips with rebar2 projects
+(setq-default flycheck-disabled-checkers '(erlang-rebar3))
 
 ;; add a smart pair for binaries
 (sp-local-pair 'erlang-mode "<<\"" "\">>")
