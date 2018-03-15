@@ -27,7 +27,7 @@
 
 (defun sml/get-directory ()
   "Decide if we want directory shown. If so, return it."
-  (abbreviate-file-name
+  (file-relative-name
    (cond
     ;; In email attachments, buffer-file-name is non-nil, but
     ;; file-name-directory returns nil
@@ -41,7 +41,8 @@
     ;; retrieved from the base buffer.
     ((buffer-base-buffer)
      (with-current-buffer (buffer-base-buffer) (sml/get-directory)))
-    (t ""))))
+    (t ""))
+   (projectile-project-root)))
 
 (defvar mode-line-directory
   '(:propertize
@@ -63,7 +64,7 @@
                ;; TODO show directory with same face as the filename?
                mode-line-directory
                mode-line-buffer-identification
-               "  "
+               "   "
                mode-line-my-vc
                "   "
                mode-line-major-mode
