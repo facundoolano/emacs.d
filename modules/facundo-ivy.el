@@ -37,9 +37,10 @@
 ;; don't include ./ and ../ in file selection
 (setq ivy-extra-directories nil)
 
-;; prepopulate counsel-projectile-ag with current selection
+;; prepopulate counsel-projectile-ag with current region
 ;; this is required for mark-and-grep to properly work
-(setq counsel-projectile-ag-initial-input '(projectile-symbol-or-selection-at-point))
+(setq counsel-projectile-ag-initial-input '(when (use-region-p)
+                                             (buffer-substring-no-properties (region-beginning) (region-end))))
 
 (setq swiper-stay-on-quit t)
 
