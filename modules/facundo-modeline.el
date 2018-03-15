@@ -16,8 +16,7 @@
 (defvar mode-line-my-vc
   '(:propertize
     (:eval (when vc-mode
-             (-custom-modeline-github-vc)))
-    face mode-line-directory)
+             (-custom-modeline-github-vc))))
   "Formats the git branch.")
 
 (defvar mode-line-major-mode
