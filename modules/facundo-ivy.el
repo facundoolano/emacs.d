@@ -41,6 +41,8 @@
 ;; this is required for mark-and-grep to properly work
 (setq counsel-projectile-ag-initial-input '(projectile-symbol-or-selection-at-point))
 
+(setq swiper-stay-on-quit t)
+
 ;; this could maybe be migrated to use swiper instead of isearch
 (defun mark-and-search ()
   "Easy mark symbol current symbol and search for it in the current buffer."
