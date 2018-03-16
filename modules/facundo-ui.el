@@ -59,7 +59,8 @@
 (prelude-require-packages '(monokai-theme hl-todo github-modern-theme))
 
 ;;; Sublime like color theme
-(load-theme 'monokai t)
+;; (load-theme 'monokai t)
+(load-theme 'leuven t)
 ;; (load-theme 'github-modern t)
 ;; (load-theme 'smart-mode-line-light t)
 (setq-default line-spacing 8)

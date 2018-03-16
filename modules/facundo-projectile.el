@@ -24,15 +24,17 @@
 
 ;;; Code:
 
-(prelude-require-packages '(projectile nameframe-projectile counsel-projectile))
+(prelude-require-packages '(projectile nameframe-projectile))
 
 (require 'projectile)
-;; (require 'counsel-projectile)
 
 (setq projectile-completion-system 'ivy)
 
 (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
 (projectile-mode t)
+
+;; don't fail when not in projectile mode
+(setq projectile-require-project-root nil)
 
 (setq projectile-globally-ignored-directories (append '("node_modules" "coverage") projectile-globally-ignored-directories))
 (setq shell-file-name "/bin/sh")

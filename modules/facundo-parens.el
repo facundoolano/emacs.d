@@ -20,6 +20,11 @@
 
 (show-smartparens-global-mode +1)
 
+;; don't want sp to mess with these global bindings
+(define-key smartparens-mode-map (kbd "<M-up>") nil)
+(define-key smartparens-mode-map (kbd "<M-down>") nil)
+
+
 (defun prelude-wrap-with (s)
   "Create a wrapper function for smartparens using S."
   `(lambda (&optional arg)
