@@ -31,6 +31,9 @@
 
 (setq org-startup-folded nil)
 
+;; allow to resize images
+(setq org-image-actual-width nil)
+
 ;; syntax highlight code snippets
 (setq org-src-fontify-natively t)
 
