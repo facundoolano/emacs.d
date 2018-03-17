@@ -57,6 +57,12 @@
 (setq desktop-save t)
 (desktop-save-mode 1)
 
+(defun safe-require (module)
+  "Load the given MODULE, catch and log any error, move on."
+  (message (concat "loading " (symbol-name module)))
+  (with-demoted-errors "THERE WAS AN ERROR: %s"
+    (require module)))
+
 ;; the core stuff
 (require 'prelude-packages)
 
@@ -73,29 +79,29 @@
   (require 'facundo-osx))
 
 ;; Non core modules.
-(require 'facundo-ivy)
+(safe-require 'facundo-ivy)
 
-(require 'facundo-indent)
-(require 'facundo-parens)
-(require 'facundo-git)
-(require 'facundo-projectile)
-(require 'facundo-neotree)
-(require 'facundo-org)
-(require 'facundo-dictionary)
-(require 'facundo-modeline)
+(safe-require 'facundo-indent)
+(safe-require 'facundo-parens)
+(safe-require 'facundo-git)
+(safe-require 'facundo-projectile)
+(safe-require 'facundo-neotree)
+(safe-require 'facundo-org)
+(safe-require 'facundo-dictionary)
+(safe-require 'facundo-modeline)
 
 ;;; Programming languages support
-(require 'facundo-emacs-lisp)
-(require 'facundo-clojure)
-(require 'facundo-erlang)
-(require 'facundo-js)
-(require 'facundo-python)
+(safe-require 'facundo-emacs-lisp)
+(safe-require 'facundo-clojure)
+(safe-require 'facundo-erlang)
+(safe-require 'facundo-js)
+(safe-require 'facundo-python)
 
-(require 'prelude-elixir)
-(require 'prelude-c)
-(require 'prelude-web)
-(require 'prelude-xml)
-(require 'prelude-yaml)
+(safe-require 'prelude-elixir)
+(safe-require 'prelude-c)
+(safe-require 'prelude-web)
+(safe-require 'prelude-xml)
+(safe-require 'prelude-yaml)
 
 ;; send custom generated stuff to a separate file
 (setq custom-file "~/.emacs.d/custom.el")
