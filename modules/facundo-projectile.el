@@ -24,9 +24,10 @@
 
 ;;; Code:
 
-(prelude-require-packages '(projectile nameframe-projectile))
+(prelude-require-packages '(projectile nameframe-projectile counsel-projectile))
 
 (require 'projectile)
+(require 'counsel-projectile)
 
 (setq projectile-completion-system 'ivy)
 
