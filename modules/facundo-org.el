@@ -37,23 +37,26 @@
 ;; syntax highlight code snippets
 (setq org-src-fontify-natively t)
 
+;; hiding these specifically because I want bold table headings in org-present
+(setq org-hide-emphasis-markers t)
+
 ;; setup presentation mode
 (eval-after-load "org-present"
   '(progn
      (add-hook 'org-present-mode-hook
                (lambda ()
-                 (toggle-frame-fullscreen)
                  (org-present-big)
+                 (toggle-frame-fullscreen)
                  (org-display-inline-images)
-                 ;; (org-present-hide-cursor)
+                 (whitespace-mode -1)
                  (flyspell-mode -1)
                  (org-present-read-only)))
      (add-hook 'org-present-mode-quit-hook
                (lambda ()
-                 (toggle-frame-fullscreen)
                  (org-present-small)
+                 (toggle-frame-fullscreen)
                  (org-remove-inline-images)
-                 ;; (org-present-show-cursor)
+                 (whitespace-mode +1)
                  (flyspell-mode +1)
                  (org-present-read-write)))))
 
