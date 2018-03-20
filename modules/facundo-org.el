@@ -40,6 +40,9 @@
 ;; hiding these specifically because I want bold table headings in org-present
 (setq org-hide-emphasis-markers t)
 
+;; don't show line overflow in present mode
+(setq whitespace-global-modes '(not org-present-mode))
+
 ;; setup presentation mode
 (eval-after-load "org-present"
   '(progn
@@ -48,7 +51,6 @@
                  (org-present-big)
                  (toggle-frame-fullscreen)
                  (org-display-inline-images)
-                 (whitespace-mode -1)
                  (flyspell-mode -1)
                  (org-present-read-only)))
      (add-hook 'org-present-mode-quit-hook
@@ -56,7 +58,6 @@
                  (org-present-small)
                  (toggle-frame-fullscreen)
                  (org-remove-inline-images)
-                 (whitespace-mode +1)
                  (flyspell-mode +1)
                  (org-present-read-write)))))
 
