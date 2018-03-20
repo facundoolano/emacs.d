@@ -34,8 +34,8 @@
 ;; wrap around search
 (setq ivy-wrap t)
 
-;; don't include ./ and ../ in file selection
-(setq ivy-extra-directories nil)
+;; include ./ otherwise selecting the completed directory is weird
+(setq ivy-extra-directories '("./"))
 
 ;; prepopulate counsel-projectile-ag with current region
 ;; this is required for mark-and-grep to properly work
