@@ -41,21 +41,7 @@
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
 (package-initialize)
 
-;; TODO move these defaults to specific modules or init.el
-(defvar prelude-packages
-  '(beacon
-    browse-kill-ring
-    crux
-    discover-my-major
-    diff-hl
-    easy-kill
-    epl
-    expand-region
-    imenu-anywhere
-    move-text
-    undo-tree
-    which-key
-    zop-to-char)
+(defvar prelude-packages '()
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()

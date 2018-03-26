@@ -68,7 +68,23 @@
 
 ;; require some packages that don't belong in any specific module
 ;; TODO maybe merge prelude packages here
-(prelude-require-packages '(toggle-quotes cql-mode elmacro))
+(prelude-require-packages '(toggle-quotes
+                            cql-mode
+                            elmacro
+                            persistent-scratch
+                            beacon
+                            browse-kill-ring
+                            crux
+                            discover-my-major
+                            diff-hl
+                            easy-kill
+                            epl
+                            expand-region
+                            imenu-anywhere
+                            move-text
+                            undo-tree
+                            which-key
+                            zop-to-char))
 
 (require 'facundo-ui)
 (require 'facundo-editor)
