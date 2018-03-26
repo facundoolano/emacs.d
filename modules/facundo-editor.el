@@ -71,6 +71,10 @@
 
 (recentf-mode +1)
 
+;; keep scratch across sessions
+(setq persistent-scratch-save-file (expand-file-name "persistent-scratch" prelude-savefile-dir))
+(persistent-scratch-setup-default)
+
 ;; use shift + arrow keys to switch between visible buffers
 (require 'windmove)
 (windmove-default-keybindings)
