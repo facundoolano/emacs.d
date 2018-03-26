@@ -52,6 +52,7 @@
                  (toggle-frame-fullscreen)
                  (org-display-inline-images)
                  (flyspell-mode -1)
+                 (whitespace-mode -1)
                  (org-present-read-only)))
      (add-hook 'org-present-mode-quit-hook
                (lambda ()
@@ -59,6 +60,7 @@
                  (toggle-frame-fullscreen)
                  (org-remove-inline-images)
                  (flyspell-mode +1)
+                 (whitespace-mode +1)
                  (org-present-read-write)))))
 
 (define-key org-mode-map (kbd "<f5>") 'org-present)
