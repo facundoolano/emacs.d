@@ -1,0 +1,46 @@
+* emacs things to fix
+
+** Read
+ http://endlessparentheses.com/debugging-emacs-lisp-part-1-earn-your-independence.html
+
+** important stuff
+*** TODO add .beam files to neotree hidden
+*** TODO dont kill scratch
+*** DONE move this to an org file in github
+    CLOSED: [2018-03-26 Mon 23:06]
+*** TODO open scratch in split buffer
+*** TODO ml improve buffer position style, show it first
+*** TODO tabs in makefile (disable my-indent and use indent-for-tab-command in that mode)
+*** TODO kill buffer when not in project works weird
+*** TODO try to set default text scale
+*** TODO allow to kill non project buffer
+*** TODO Swiper dies on big files, consider going back to isearch, maybe anzu
+
+** nice to have
+*** TODO keep selection when pasting. copying too https://emacs.stackexchange.com/questions/19989/how-to-copy-text-without-losing-selection
+*** TODO autocomplete select with return?
+*** TODO also send open buffer to another split
+*** TODO disable easy mark for python (default mark sexp would work)
+*** TODO disable autofill in html, yaml
+*** TODO using select buffer too much, make shorter binding
+*** TODO C-tab works like crap
+*** TODO default scrolls C-v, M-v, etc advance half a page at a time instead of full page
+*** TODO  go to line incremental (no return needed)
+
+** JavaScript
+*** TODO double line on {} and enter
+*** TODO treat ` as delimiter in js2
+*** TODO convert json to js and viceversa
+
+** Erlang
+*** TODO erlang paredit like commands for terms (kill, move parens, etc)
+*** TODO my unindent sucks in erlang and python
+*** TODO erlang man
+*** TODO erlang smart completion in files (distel?)
+
+** Clojure
+*** TODO new buffer split dont split more than once
+*** TODO parinfer refresh on delete/comment, not just insert
+*** TODO cider start repl without jacking this in (or jacking with basic stuff loaded)
+*** TODO consider implementing the user ns pattern for dev
+*** TODO cider find var
