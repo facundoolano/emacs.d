@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(prelude-require-packages '(ivy counsel swiper smex))
+(prelude-require-packages '(ivy counsel smex anzu))
 
 (require 'ivy)
 (require 'counsel)
@@ -16,6 +16,7 @@
 (setq smex-save-file (expand-file-name "smex-items" prelude-savefile-dir))
 
 (ivy-mode 1)
+(global-anzu-mode +1)
 
 ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.
 (setq ivy-use-virtual-buffers t)
@@ -41,8 +42,6 @@
 ;; this is required for mark-and-grep to properly work
 (setq counsel-projectile-ag-initial-input '(when (use-region-p)
                                              (buffer-substring-no-properties (region-beginning) (region-end))))
-
-(setq swiper-stay-on-quit t)
 
 ;; this could maybe be migrated to use swiper instead of isearch
 (defun mark-and-search ()
@@ -76,7 +75,7 @@ Assumes the symbol is a function and tries with a variable describe-function fai
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
-(global-set-key (kbd "C-s") 'swiper)
+;; (global-set-key (kbd "C-s") 'swiper)
 (global-set-key (kbd "C-h f") 'counsel-describe-function)
 (global-set-key (kbd "C-h v") 'counsel-describe-variable)
 (global-set-key (kbd "s-r") 'counsel-recentf)
