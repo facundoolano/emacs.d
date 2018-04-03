@@ -4,7 +4,10 @@
  http://endlessparentheses.com/debugging-emacs-lisp-part-1-earn-your-independence.html
 
 ** important stuff
+*** DONE key binding to translate word at point
+    CLOSED: [2018-04-03 Tue 11:40]
 *** TODO add .beam files to neotree hidden
+*** TODO org insert heading after current keybinding (maybe default for M-RET)
 *** TODO dont kill scratch
 *** DONE move this to an org file in github
     CLOSED: [2018-03-26 Mon 23:06]
@@ -17,6 +20,7 @@
 *** TODO Swiper dies on big files, consider going back to isearch, maybe anzu
 
 ** nice to have
+*** TODO org hide done? / move to bottom
 *** TODO keep selection when pasting. copying too https://emacs.stackexchange.com/questions/19989/how-to-copy-text-without-losing-selection
 *** TODO autocomplete select with return?
 *** TODO also send open buffer to another split
