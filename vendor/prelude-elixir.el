@@ -35,6 +35,13 @@
 
 (prelude-require-packages '(elixir-mode alchemist))
 
+(exec-path-from-shell-copy-env "_KERL_ACTIVE_DIR")
+(exec-path-from-shell-copy-env "_KERL_PATH_REMOVABLE")
+
+;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
+(add-hook 'elixir-mode-hook
+          (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+
 (provide 'prelude-elixir)
 
 ;;; prelude-elixir.el ends here

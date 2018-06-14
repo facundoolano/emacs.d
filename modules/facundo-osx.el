@@ -33,6 +33,7 @@
 
 (require 'exec-path-from-shell)
 (exec-path-from-shell-initialize)
+(exec-path-from-shell-copy-env "PATH")
 
 ;; proced-mode doesn't work on OS X so we use vkill instead
 (autoload 'vkill "vkill" nil t)
