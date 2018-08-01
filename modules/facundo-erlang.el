@@ -31,6 +31,7 @@
 ;;; CUSTOM STUFF
 
 ;; default to erlang mode in .config files
+(add-to-list 'prelude-indent-sensitive-modes 'erlang-mode)
 (add-to-list 'auto-mode-alist '("\\.config\\’" . erlang-mode))
 
 (setq erlang-root-dir "/usr/local/lib/erlang")
