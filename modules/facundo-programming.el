@@ -58,7 +58,23 @@
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
 
+(defun insert-todo ()
+  "Add a TODO comment in the line above."
+  (interactive)
+  (crux-smart-open-line-above)
+  (insert "TODO ")
+  (comment-or-uncomment-region-or-line))
+
+(defun insert-fixme ()
+  "Add a FIXME comment in the line above."
+  (interactive)
+  (crux-smart-open-line-above)
+  (insert "FIXME ")
+  (comment-or-uncomment-region-or-line))
+
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
+(global-set-key (kbd "s-;") 'insert-todo)
+(global-set-key (kbd "s-:") 'insert-fixme)
 
 ;; sexp commands tend to work well in non lisp langs too, so binding them globally
 (global-set-key (kbd "C-M-f") 'forward-sexp)
