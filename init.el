@@ -82,6 +82,7 @@
                             expand-region
                             imenu-anywhere
                             move-text
+                            multiple-cursors
                             undo-tree
                             which-key
                             zop-to-char))

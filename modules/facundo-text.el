@@ -1,5 +1,7 @@
 ;;; facundo-text.el --- text edition configuration
 
+(require 'livedown)
+
 (prelude-require-package 'centered-window)
 (require 'centered-window-mode)
 (global-set-key (kbd "<f9>") 'centered-window-mode)
