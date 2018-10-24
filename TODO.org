@@ -4,6 +4,7 @@
  http://endlessparentheses.com/debugging-emacs-lisp-part-1-earn-your-independence.html
 
 ** important stuff
+*** TODO text mode should be the default
 *** TODO make visual line mode and autofill properly work in org mode and markdown mode
 *** DONE key binding to translate word at point
     CLOSED: [2018-04-03 Tue 11:40]

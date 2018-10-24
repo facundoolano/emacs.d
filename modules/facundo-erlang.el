@@ -41,14 +41,15 @@
 (setq erlang-man-root-dir "/usr/local/lib/erlang/man")
 (setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.9.1/emacs" load-path))
 
-(setq erlang-indent-level 2)
-(setq flycheck-erlang-include-path (list "../" "../include/" "../../include/"))
+(setq erlang-indent-level 4)
+;; (setq flycheck-erlang-include-path (list "../" "../include/" "../../include/"))
 
 ;; rebar3 checker trips with rebar2 projects
 (setq-default flycheck-disabled-checkers '(erlang-rebar3))
 
 ;; add a smart pair for binaries
 (sp-local-pair 'erlang-mode "<<\"" "\">>")
+(sp-local-pair 'erlang-mode "#{" "}")
 
 (defun my-erlang-mode-hook ()
   (local-set-key (kbd "s-j") 'erlang-shell))

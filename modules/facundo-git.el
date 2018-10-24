@@ -4,8 +4,11 @@
                             gitignore-mode
                             github-browse-file))
 
+(require 'magit)
+
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+(define-key magit-hunk-section-map (kbd "S-<return>") 'magit-diff-visit-file-other-window)
 
 ;; these are not working for some reason, prefix not allowed
 ;; (global-set-key (kbd "s-m m") 'magit-status)
