@@ -82,6 +82,7 @@
                             expand-region
                             imenu-anywhere
                             move-text
+                            multiple-cursors
                             undo-tree
                             which-key
                             zop-to-char))
@@ -89,6 +90,7 @@
 (require 'facundo-ui)
 (require 'facundo-editor)
 (require 'facundo-global-keybindings)
+
 
 ;; OSX specific settings
 (when (eq system-type 'darwin)
@@ -112,6 +114,7 @@
 (safe-require 'facundo-erlang)
 (safe-require 'facundo-js)
 (safe-require 'facundo-python)
+(safe-require 'facundo-text)
 
 (safe-require 'prelude-elixir)
 (safe-require 'prelude-c)
