@@ -25,9 +25,9 @@
 ;; (the final optional t sets the *append* argument)
 
 ;; smart curly braces
-(sp-pair "{" nil :post-handlers
-         '(((lambda (&rest _ignored)
-              (crux-smart-open-line-above)) "RET")))
+;; (sp-pair "{ nil :post-handlers
+;;          '(((lambda (&rest _ignored)
+;;               (crux-smart-open-line-above)) "RET")))
 
 (defun prelude-local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
