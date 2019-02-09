@@ -112,6 +112,7 @@
 (safe-require 'facundo-emacs-lisp)
 (safe-require 'facundo-clojure)
 (safe-require 'facundo-erlang)
+(safe-require 'facundo-rust)
 (safe-require 'facundo-js)
 (safe-require 'facundo-python)
 (safe-require 'facundo-text)

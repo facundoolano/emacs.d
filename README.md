@@ -7,6 +7,7 @@ npm install -g mocha
 npm install -g eslint
 brew install candid82/brew/joker
 brew install aspell
+rustup component add rustfmt
 ```
 
 run from spotlight:
