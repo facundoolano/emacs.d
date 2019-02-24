@@ -14,7 +14,8 @@ brew install aspell
 rustup component add rustfmt
 rustup toolchain add nightly
 rustup component add rust-src
-cargo install racer
+cargo +nightly install racer
+rustup component add clippy --toolchain=nightly
 ```
 
 run from spotlight:

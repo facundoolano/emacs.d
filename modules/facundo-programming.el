@@ -41,6 +41,7 @@
   (prelude-local-comment-auto-fill))
 
 (add-hook 'prog-mode-hook 'prelude-prog-mode-defaults)
+(add-hook 'prog-mode-hook (lambda () (setq flycheck-check-syntax-automatically '(save idle-change new-line mode-enabled))))
 
 ;; enable on-the-fly syntax checking
 (if (fboundp 'global-flycheck-mode)
