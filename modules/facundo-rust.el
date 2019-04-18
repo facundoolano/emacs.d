@@ -1,7 +1,9 @@
 (require 'facundo-programming)
 (prelude-require-packages '(rust-mode racer))
 
-(setq rust-format-on-save nil)
+(require 'rust-mode)
+
+(setq rust-format-on-save t)
 
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'rust-mode-hook (lambda ()
@@ -21,5 +23,6 @@
   (other-window 1))
 
 (define-key rust-mode-map (kbd "M-?") 'racer-describe-and-switch)
+(define-key rust-mode-map (kbd "s-r") 'rust-run-clippy) ;; same as build but with lint warnings
 
 (provide 'facundo-rust)
