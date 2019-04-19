@@ -16,6 +16,8 @@ rustup toolchain add nightly
 rustup component add rust-src
 cargo +nightly install racer
 rustup component add clippy --toolchain=nightly
+
+# erplorer install instructions in https://github.com/marianoguerra/erlplorer#build
 ```
 
 run from spotlight:

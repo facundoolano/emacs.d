@@ -83,7 +83,8 @@
         (swiper--ensure-visible)))))
 
 (defun counsel-erlplorer ()
-  "Call the \"erlplorer\" shell command."
+  "Call the \"erlplorer\" shell command to grep erlang patterns.
+See http://marianoguerra.org/posts/erplorer-search-erlang-and-efene-code-by-pattern-matching-the-ast.html"
   (interactive)
   (ivy-read "Search Erlang pattern: " #'counsel-erlplorer-function
             :dynamic-collection t
