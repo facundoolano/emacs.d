@@ -7,7 +7,7 @@
 
 ;; TAKEN FROM prelude-python.el
 
-(prelude-require-package 'anaconda-mode)
+(prelude-require-packages '(anaconda-mode py-isort))
 
 (when (boundp 'company-backends)
   (prelude-require-package 'company-anaconda)
@@ -15,6 +15,7 @@
 
 (require 'electric)
 (require 'facundo-programming)
+(require 'py-isort)
 
 ;; Copy pasted from ruby-mode.el
 (defun prelude-python--encoding-comment-required-p ()
@@ -76,6 +77,9 @@
   (add-hook 'after-save-hook 'prelude-python-mode-set-encoding nil 'local))
 
 (add-hook 'python-mode-hook 'prelude-python-mode-defaults)
+
+(setq py-isort-options '("--lines=100"))
+(add-hook 'before-save-hook 'py-isort-before-save)
 
 ;;; CUSTOM STUFF
 

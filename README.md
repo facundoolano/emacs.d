@@ -11,6 +11,8 @@ brew install candid82/brew/joker
 
 brew install aspell
 
+pip3 install --user isort
+
 rustup component add rustfmt
 rustup toolchain add nightly
 rustup component add rust-src
