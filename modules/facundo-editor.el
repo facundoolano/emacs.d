@@ -20,6 +20,7 @@
 ;; meaning) of any files you load.
 (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
 (setq-default tab-width 8)            ;; but maintain correct appearance
+(setq-default initial-major-mode 'text-mode)
 
 ;; Newline at end of file
 (setq require-final-newline t)
@@ -242,7 +243,7 @@ indent yanked text (with prefix arg don't indent)."
 (defun new-empty-buffer ()
   "Open a new empty buffer."
   (interactive)
-  (let ((buf (generate-new-buffer "untitled")))
+  (let ((buf (generate-new-buffer "/untitled")))
     (switch-to-buffer buf)
     (funcall (and initial-major-mode))))
 
@@ -251,7 +252,7 @@ indent yanked text (with prefix arg don't indent)."
   (interactive)
   (split-window-horizontally)
   (other-window 1)
-  (let ((buf (generate-new-buffer "untitled")))
+  (let ((buf (generate-new-buffer "/untitled")))
     (switch-to-buffer buf)
     (funcall (and initial-major-mode))))
 
