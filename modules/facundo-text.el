@@ -13,10 +13,15 @@
         (emacs-lisp-docstring-fill-column t))
     (fill-paragraph nil region)))
 
+(defun text-hook ()
+  (whitespace-mode -1)
+  (visual-line-mode)
+  (visual-fill-column-mode))
+
 ;; wrap lines in text modes
-(add-hook 'text-mode-hook 'visual-fill-column-mode)
-(add-hook 'org-mode-hook 'visual-fill-column-mode)
-(add-hook 'markdown-mode-hook 'visual-fill-column-mode)
+(add-hook 'text-mode-hook 'text-hook)
+(add-hook 'org-mode-hook 'text-hook)
+(add-hook 'markdown-mode-hook 'text-hook)
 
 (provide 'facundo-text)
 
