@@ -9,24 +9,7 @@
 ;;; TAKEN FROM prelude-erlang.el
 
 (require 'facundo-programming)
-(prelude-require-packages '(erlang))
-
-(defcustom wrangler-path nil
-  "The location of wrangler elisp directory."
-  :group 'prelude-erlang
-  :type 'string
-  :safe 'stringp)
-
-(require 'projectile)
-
-(when (require 'erlang-start nil t)
-
-  (when (not (null wrangler-path))
-    (add-to-list 'load-path wrangler-path)
-    (require 'wrangler)))
-
-(add-hook 'erlang-mode-hook (lambda ()
-                              (setq erlang-compile-function 'projectile-compile-project)))
+(prelude-require-packages '(erlang ivy-erlang-complete company-erlang))
 
 ;;; CUSTOM STUFF
 
@@ -35,12 +18,13 @@
 (add-to-list 'auto-mode-alist '("\\.config\\’" . erlang-mode))
 (add-to-list 'sp-no-reindent-after-kill-modes 'erlang-mode)
 
-(setq erlang-root-dir "/usr/local/lib/erlang")
-(setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
+(setq erlang-root-dir "/Users/facundo/kerl/21.3")
+(setq exec-path (cons "/Users/facundo/kerl/21.3/bin" exec-path))
 
 ;; never managed to get the man working
 (setq erlang-man-root-dir "/usr/local/lib/erlang/man")
 (setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.9.1/emacs" load-path))
+
 
 (setq erlang-indent-level 4)
 ;; (setq flycheck-erlang-include-path (list "../" "../include/" "../../include/"))
@@ -52,16 +36,12 @@
 (sp-local-pair 'erlang-mode "<<\"" "\">>")
 (sp-local-pair 'erlang-mode "#{" "}")
 
-(defun my-erlang-mode-hook ()
-  (local-set-key (kbd "s-j") 'erlang-shell))
-
-(defun my-erlang-shell-mode-hook ()
-  (local-set-key (kbd "<up>") 'comint-previous-input)
-  (local-set-key (kbd "<down>") 'comint-next-input))
-
-;; Some Erlang customization
-(add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
-(add-hook 'erlang-shell-mode-hook 'my-erlang-shell-mode-hook)
+;; NOTE I had to replace sed with gsed in ivy-erlang-complete exported funcs for them to work on macos
+(setq ivy-erlang-complete-erlang-root "/Users/facundo/kerl/21.3")
+(add-hook 'erlang-mode-hook #'ivy-erlang-complete-init)
+;; automatic update completion data after save
+(add-hook 'after-save-hook #'ivy-erlang-complete-reparse)
+(add-hook 'erlang-mode-hook #'company-erlang-init)
 
 (defun counsel-erlplorer-function (string)
   (if (< (length string) 3)
