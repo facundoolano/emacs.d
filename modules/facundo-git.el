@@ -18,6 +18,8 @@
 
 (setq magit-no-confirm-default '(magit-branch-and-checkout))
 
+(add-to-list 'magit-section-initial-visibility-alist '(stashes . hide))
+
 (require 'github-browse-file)
 
 (defun github-save-url ()
