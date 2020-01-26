@@ -46,6 +46,15 @@
   (mapc 'kill-buffer (projectile-project-buffers))
   (delete-frame))
 
+(defun facundo-switch-project-action ()
+  (let ((readme (concat (projectile-project-root) "README.md")))
+    (if (file-exists-p readme)
+        (find-file readme)))
+  (projectile-vc)
+  (neotree-project-sync))
+
+(setq projectile-switch-project-action 'facundo-switch-project-action)
+
 ;;; navigate buffers
 (defun next-project-buffer ()
   "Switch to the next user buffer within the current project."

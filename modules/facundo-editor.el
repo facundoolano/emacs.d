@@ -20,7 +20,7 @@
 ;; meaning) of any files you load.
 (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
 (setq-default tab-width 8)            ;; but maintain correct appearance
-(setq-default initial-major-mode 'text-mode)
+(setq-default initial-major-mode 'fundamental-mode)
 
 ;; Newline at end of file
 (setq require-final-newline t)
@@ -274,6 +274,10 @@ indent yanked text (with prefix arg don't indent)."
   (universal-argument)
   (cua-set-mark
    `(4)))
+
+;; other window should always be vertical
+(setq split-width-threshold 50
+      split-height-threshold nil)
 
 ;; don't want flyspell messing with commenting
 (define-key flyspell-mode-map (kbd "C-;") nil)
