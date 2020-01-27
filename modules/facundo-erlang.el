@@ -27,10 +27,9 @@
 
 
 (setq erlang-indent-level 4)
-;; (setq flycheck-erlang-include-path (list "../" "../include/" "../../include/"))
 
 ;; rebar3 checker trips with rebar2 projects
-(setq-default flycheck-disabled-checkers '(erlang-rebar3))
+;; (setq-default flycheck-disabled-checkers '(erlang-rebar3))
 
 ;; add a smart pair for binaries
 (sp-local-pair 'erlang-mode "<<\"" "\">>")
