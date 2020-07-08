@@ -16,7 +16,8 @@
 (defun text-hook ()
   (whitespace-mode -1)
   (visual-line-mode)
-  (visual-fill-column-mode))
+  ;; (visual-fill-column-mode)
+  )
 
 ;; wrap lines in text modes
 (add-hook 'text-mode-hook 'text-hook)

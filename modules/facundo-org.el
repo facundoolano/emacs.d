@@ -40,6 +40,9 @@
 ;; hiding these specifically because I want bold table headings in org-present
 (setq org-hide-emphasis-markers t)
 
+;; insert headings after the content, not right before current one
+(setq org-insert-heading-respect-content t)
+
 ;; don't show line overflow in present mode
 (setq whitespace-global-modes '(not org-present-mode))
 
@@ -62,6 +65,9 @@
                  (flyspell-mode +1)
                  (whitespace-mode +1)
                  (org-present-read-write)))))
+
+(define-key org-mode-map (kbd "M-{") 'org-previous-visible-heading)
+(define-key org-mode-map (kbd "M-}") 'org-next-visible-heading)
 
 (define-key org-mode-map (kbd "<f5>") 'org-present)
 (define-key org-present-mode-keymap (kbd "q") 'org-present-quit)
