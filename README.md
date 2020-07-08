@@ -12,6 +12,7 @@ brew install candid82/brew/joker
 brew install aspell
 
 pip3 install --user isort
+pip3 install --user autopep8
 
 rustup component add rustfmt
 rustup toolchain add nightly

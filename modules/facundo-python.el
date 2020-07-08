@@ -7,7 +7,7 @@
 
 ;; TAKEN FROM prelude-python.el
 
-(prelude-require-packages '(anaconda-mode py-isort))
+(prelude-require-packages '(anaconda-mode py-isort py-autopep8))
 
 (when (boundp 'company-backends)
   (prelude-require-package 'company-anaconda)
@@ -16,6 +16,7 @@
 (require 'electric)
 (require 'facundo-programming)
 (require 'py-isort)
+(require 'py-autopep8)
 
 ;; Copy pasted from ruby-mode.el
 (defun prelude-python--encoding-comment-required-p ()
@@ -59,6 +60,8 @@
 (when (fboundp 'exec-path-from-shell-copy-env)
   (exec-path-from-shell-copy-env "PYTHONPATH"))
 
+;; TODO need to automatically run pythonic-activate when venv folder is present in the root of the project
+
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
@@ -78,6 +81,9 @@
 
 (add-hook 'python-mode-hook 'prelude-python-mode-defaults)
 
+(setq py-autopep8-options '("--max-line-length=200" "--select=E,F,W,C90 "))
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+
 (setq py-isort-options '("--lines=100"))
 (add-hook 'before-save-hook 'py-isort-before-save)
 
@@ -86,7 +92,7 @@
 (prelude-require-package 'flycheck-pycheckers)
 
 ; (add-hook 'flycheck-mode-hook 'flycheck-pycheckers-setup)
-(setq flycheck-pycheckers-checkers '(flake8))
+(setq flycheck-pycheckers-checkers '(flake8 pylint))
 
 (provide 'facundo-python)
 
