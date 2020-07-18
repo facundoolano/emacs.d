@@ -5,8 +5,6 @@
 ;; Some basic configuration for python.el (the latest and greatest
 ;; Python mode Emacs has to offer).
 
-;; TAKEN FROM prelude-python.el
-
 (prelude-require-packages '(anaconda-mode py-isort py-autopep8))
 
 (when (boundp 'company-backends)
@@ -60,8 +58,6 @@
 (when (fboundp 'exec-path-from-shell-copy-env)
   (exec-path-from-shell-copy-env "PYTHONPATH"))
 
-;; TODO need to automatically run pythonic-activate when venv folder is present in the root of the project
-
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
@@ -87,12 +83,24 @@
 (setq py-isort-options '("--lines=100"))
 (add-hook 'before-save-hook 'py-isort-before-save)
 
-;;; CUSTOM STUFF
+(setq python-shell-interpreter "/usr/bin/python")
+
+(defun facundo-pythonic-activate ()
+  "If there's a venv directory in the project root, activate it"
+  (let ((venv (concat (projectile-project-root) "venv")))
+    (if (file-directory-p venv)
+        (pythonic-activate venv))))
+
+;; TODO new python package module
+
+(add-hook 'python-mode-hook 'facundo-pythonic-activate)
 
 (prelude-require-package 'flycheck-pycheckers)
 
 ; (add-hook 'flycheck-mode-hook 'flycheck-pycheckers-setup)
 (setq flycheck-pycheckers-checkers '(flake8 pylint))
+
+(define-key python-mode-map (kbd "<backtab>") 'my-unindent)
 
 (provide 'facundo-python)
 
