@@ -22,6 +22,9 @@
 (setq-default tab-width 8)            ;; but maintain correct appearance
 (setq-default initial-major-mode 'fundamental-mode)
 
+;; increase from default -12
+(setq default-frame-alist '((font . "Menlo-14")))
+
 ;; Newline at end of file
 (setq require-final-newline t)
 
@@ -276,8 +279,8 @@ indent yanked text (with prefix arg don't indent)."
    `(4)))
 
 ;; other window should always be vertical
-(setq split-width-threshold 50
-      split-height-threshold nil)
+;; (setq split-width-threshold 50
+;;       split-height-threshold nil)
 
 ;; don't want flyspell messing with commenting
 (define-key flyspell-mode-map (kbd "C-;") nil)
