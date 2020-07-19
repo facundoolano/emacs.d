@@ -3,7 +3,7 @@
 (require 'livedown)
 
 (prelude-require-packages '(centered-window visual-fill-column))
-(global-set-key (kbd "<f9>") 'centered-window-mode)
+(global-set-key (kbd "s-9") 'centered-window-mode)
 
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."

@@ -78,7 +78,7 @@
 ;(add-hook 'projectile-find-file-hook 'neotree-project-sync)
 ;(add-hook 'projectile-grep-finished-hook 'neotree-project-sync)
 
-(global-set-key [f8] 'neotree-project-toggle)
+(global-set-key (kbd "s-8") 'neotree-project-toggle)
 
 (defun my/neotree-hook (_unused)
   "Disable line line numbers in neotree."
