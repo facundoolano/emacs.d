@@ -13,6 +13,14 @@
                                 (interactive)
                                 (other-window -1))) ;; back one
 
+(global-set-key (kbd "C-x 4") (lambda ()
+                                (interactive)
+                                (switch-to-special-buffer "*scratch*")))
+
+(global-set-key (kbd "C-x 5") (lambda ()
+                                (interactive)
+                                (switch-to-special-buffer "*Messages*")))
+
 ;; Indentation help
 (global-set-key (kbd "C-^") 'crux-top-join-line)
 
@@ -107,6 +115,7 @@
 (global-set-key (kbd "s-A") 'mark-whole-buffer)
 (global-set-key (kbd "s-n") 'new-empty-buffer)
 (global-set-key (kbd "s-N") 'new-empty-buffer-split)
+(global-set-key (kbd "C-x 3") 'split-and-switch)
 
 (global-set-key (kbd "s-V") 'cua-paste-pop) ; paste cycling through kill ring
 

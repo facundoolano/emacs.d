@@ -79,6 +79,14 @@
 (setq persistent-scratch-save-file (expand-file-name "persistent-scratch" prelude-savefile-dir))
 (persistent-scratch-setup-default)
 
+(defun switch-to-special-buffer (buffer)
+  "Open BUFFER in other window and switch to it."
+  (interactive)
+  (when (= (length (window-list)) 1)
+    (split-window-horizontally))
+  (other-window 1)
+  (switch-to-buffer buffer))
+
 ;; use shift + arrow keys to switch between visible buffers
 (require 'windmove)
 (windmove-default-keybindings)
@@ -253,11 +261,18 @@ indent yanked text (with prefix arg don't indent)."
 (defun new-empty-buffer-split ()
   "Open a new empty buffer."
   (interactive)
-  (split-window-horizontally)
+  (when (= (length (window-list)) 1)
+    (split-window-horizontally))
   (other-window 1)
   (let ((buf (generate-new-buffer "/untitled")))
     (switch-to-buffer buf)
     (funcall (and initial-major-mode))))
+
+(defun split-and-switch ()
+  "Split window horizontally but also switch to it."
+  (interactive)
+  (split-window-right)
+  (other-window 1))
 
 (defadvice isearch-search (after isearch-no-fail activate)
   "Advice search to be wrapped by default."
