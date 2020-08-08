@@ -72,7 +72,8 @@
 (require 'crux)
 
 ;; TODO keep whats used, remove what's not or is overriden
-(global-set-key (kbd "C-a") 'crux-move-beginning-of-line)
+;; remap instead of just set so we preserve the override in visual line mode
+(global-set-key [remap move-beginning-of-line] 'crux-move-beginning-of-line)
 (global-set-key [(shift return)] 'crux-smart-open-line)
 (global-set-key (kbd "M-o") 'crux-smart-open-line)
 (global-set-key [(control shift return)] 'crux-smart-open-line-above)
