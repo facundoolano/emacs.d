@@ -2,8 +2,7 @@
 
 (require 'livedown)
 
-(prelude-require-packages '(centered-window visual-fill-column))
-(global-set-key (kbd "s-9") 'centered-window-mode)
+(prelude-require-packages '(centered-window visual-fill-column writeroom-mode))
 
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
@@ -15,14 +14,44 @@
 
 (defun text-hook ()
   (whitespace-mode -1)
-  (visual-line-mode)
-  ;; (visual-fill-column-mode)
-  )
+  (visual-line-mode))
 
 ;; wrap lines in text modes
 (add-hook 'text-mode-hook 'text-hook)
 (add-hook 'org-mode-hook 'text-hook)
 (add-hook 'markdown-mode-hook 'text-hook)
+
+(customize-set-variable 'writeroom-fullscreen-effect 'maximized)
+(customize-set-variable 'writeroom-extra-line-spacing 1.15)
+
+(customize-set-variable 'writeroom-width 85)
+
+(defun highlight-visual-line ()
+  "Range function to highlight the visual line instead of the physic one."
+  (save-excursion
+    (cons (progn (beginning-of-visual-line) (point))
+          (progn (end-of-visual-line) (point)))))
+
+(defun setup-writeroom ()
+  "Setup conveniences for text writing."
+
+  (visual-line-mode)
+
+  (setq hl-line-range-function 'highlight-visual-line)
+
+  ;; make scale commands work with this mode
+  (advice-add 'text-scale-increase :after
+              #'visual-fill-column-adjust)
+  (advice-add 'text-scale-decrease :after
+              #'visual-fill-column-adjust)
+
+  ;; removes weird whitespace highlighting
+  (whitespace-mode -1))
+
+(add-hook 'writeroom-mode-hook 'setup-writeroom)
+
+
+(global-set-key (kbd "<f9>") 'writeroom-mode)
 
 (provide 'facundo-text)
 
