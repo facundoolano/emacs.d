@@ -43,6 +43,9 @@
   (advice-add 'text-scale-decrease :after
               #'visual-fill-column-adjust)
 
+  ;; prefer bottom modeline
+  (customize-set-variable 'writeroom-mode-line-toggle-position 'mode-line-format)
+
   ;; removes weird whitespace highlighting
   (whitespace-mode -1))
 
