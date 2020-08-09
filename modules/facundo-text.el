@@ -35,8 +35,6 @@
 (defun setup-writeroom ()
   "Setup conveniences for text writing."
 
-  (visual-line-mode)
-
   (setq hl-line-range-function 'highlight-visual-line)
 
   ;; make scale commands work with this mode
