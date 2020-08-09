@@ -15,6 +15,7 @@
 (require 'facundo-programming)
 (require 'py-isort)
 (require 'py-autopep8)
+(require 'python-mode)
 
 ;; Copy pasted from ruby-mode.el
 (defun prelude-python--encoding-comment-required-p ()
