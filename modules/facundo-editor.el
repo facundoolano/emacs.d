@@ -136,6 +136,9 @@ The body of the advice is in BODY."
 (setq ispell-program-name "aspell" ; use aspell instead of ispell
       ispell-extra-args '("--sug-mode=ultra"))
 
+;; NOTE: to switch aspell to spanish language:
+;; M-x ispell-change-dictionary es
+
 (defun prelude-enable-flyspell ()
   "Enable command `flyspell-mode' if `prelude-flyspell' is not nil."
   (when (executable-find ispell-program-name)
