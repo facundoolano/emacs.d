@@ -105,6 +105,7 @@
 (safe-require 'facundo-projectile)
 (safe-require 'facundo-neotree)
 (safe-require 'facundo-org)
+(safe-require 'facundo-blog)
 (safe-require 'facundo-dictionary)
 (safe-require 'facundo-modeline)
 
