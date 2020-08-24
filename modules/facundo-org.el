@@ -8,7 +8,7 @@
 
 ;;; Code:
 
-(prelude-require-package 'org)
+(prelude-require-packages '(org ox-gfm))
 
 (require 'org)
 (require 'org-present)
@@ -45,6 +45,9 @@
 
 ;; don't show line overflow in present mode
 (setq whitespace-global-modes '(not org-present-mode))
+
+;; by default don't include a toc when exporting e.g. to markdown
+(setq org-export-with-toc nil)
 
 ;; setup presentation mode
 (eval-after-load "org-present"
