@@ -72,13 +72,13 @@
 
 (fringe-mode '(10 . 0))
 
-;;; disable scrollbar
-(scroll-bar-mode -1)
-
 ;; highlights todo and fixme
 (require 'hl-todo)
 (global-hl-todo-mode t)
 (setq hl-todo-activate-in-modes '(prog-mode emacs-lisp-mode))
+
+;;; disable scrollbar
+(scroll-bar-mode -1)
 
 (provide 'facundo-ui)
 ;;; prelude-ui.el ends here
