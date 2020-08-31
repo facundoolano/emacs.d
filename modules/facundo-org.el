@@ -71,6 +71,23 @@
 
 (define-key org-mode-map (kbd "M-{") 'org-previous-visible-heading)
 (define-key org-mode-map (kbd "M-}") 'org-next-visible-heading)
+(define-key org-mode-map (kbd "M-p") 'org-metaup)
+(define-key org-mode-map (kbd "M-n") 'org-metadown)
+(define-key org-mode-map (kbd "M-<up>") 'move-text-up)
+(define-key org-mode-map (kbd "M-<down>") 'move-text-down)
+
+;; pasting this here as a cheatsheet
+;; https://orgmode.org/manual/Structure-Templates.html
+;; a	‘#+BEGIN_EXPORT ascii’ … ‘#+END_EXPORT’
+;; c	‘#+BEGIN_CENTER’ … ‘#+END_CENTER’
+;; C	‘#+BEGIN_COMMENT’ … ‘#+END_COMMENT’
+;; e	‘#+BEGIN_EXAMPLE’ … ‘#+END_EXAMPLE’
+;; E	‘#+BEGIN_EXPORT’ … ‘#+END_EXPORT’
+;; h	‘#+BEGIN_EXPORT html’ … ‘#+END_EXPORT’
+;; l	‘#+BEGIN_EXPORT latex’ … ‘#+END_EXPORT’
+;; q	‘#+BEGIN_QUOTE’ … ‘#+END_QUOTE’
+;; s	‘#+BEGIN_SRC’ … ‘#+END_SRC’
+;; v	‘#+BEGIN_VERSE’ … ‘#+END_VERSE’
 
 (define-key org-mode-map (kbd "<f5>") 'org-present)
 (define-key org-present-mode-keymap (kbd "q") 'org-present-quit)
