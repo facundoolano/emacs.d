@@ -10,8 +10,11 @@
 
 ;;; Code:
 
+(prelude-require-packages '(htmlize))
+
 (require 'org)
 (require 'cl)
+
 
 (setq org-publish-project-alist
       '(("blog"
@@ -44,13 +47,25 @@
                        (format-time-string "%Y-%m-%d") "-" slug
                        ".org"))
     (insert "#+OPTIONS: toc:nil num:nil\n")
+    (insert "#+LANGUAGE: es\n")
     (insert "#+BEGIN_EXPORT html\n")
     (insert "---\n")
     (insert "layout: post\n")
     (insert "title: \"") (insert title) (insert "\"\n")
     (insert "date: ") (insert (format-time-string "%Y-%m-%d %H:%M:%S")) (insert "\n")
+    (insert "tags: []\n")
     (insert "---\n")
     (insert "#+END_EXPORT\n\n")))
+
+;; this is easier than overriding the translation
+(customize-set-value 'org-html-footnotes-section
+                     "<div id=\"footnotes\">
+<!--h2 class=\"footnotes\">%s: </h2-->
+<h3 class=\"footnotes\">Notas: </h3>
+<div id=\"text-footnotes\">
+%s
+</div>
+</div>")
 
 (provide 'facundo-blog)
 ;;; facundo-blog.el ends here

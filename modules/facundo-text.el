@@ -2,7 +2,7 @@
 
 (require 'livedown)
 
-(prelude-require-packages '(centered-window visual-fill-column writeroom-mode))
+(prelude-require-packages '(centered-window visual-fill-column writeroom-mode reverse-im))
 
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
@@ -51,8 +51,21 @@
 
 (add-hook 'writeroom-mode-hook 'setup-writeroom)
 
+(defun toggle-dictionary ()
+  "Switch between english and spanish ispell dictionaries"
+  (interactive)
+  (if (string-equal ispell-current-dictionary "english")
+      (ispell-change-dictionary "es")
+    (ispell-change-dictionary "english"))
+  (flyspell-buffer))
 
 (global-set-key (kbd "<f9>") 'writeroom-mode)
+(global-set-key (kbd "s-<f9>") 'toggle-dictionary)
+
+;; some handy writing shortcuts
+;; FIXME I had to comment this binding out of undo-tree to make it work
+;; (global-set-key (kbd "M-_") (lambda () (interactive) (insert "---")))
+(global-set-key (kbd "M-?") (lambda () (interactive) (insert "¿")))
 
 (provide 'facundo-text)
 
