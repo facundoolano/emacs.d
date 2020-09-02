@@ -38,6 +38,7 @@
               [["á" "a"] ["é" "e"] ["í" "i"] ["ó" "o"] ["ú" "u"] ["ñ" "n"] [" " "-"]]
               string))
 
+;; TODO consider forcing the spanish input source
 (defun org-blog-new-post (title)
   "Create a new org-file for a blog post as expected by Jekyll with TITLE."
   (interactive "MPost title: ")
@@ -56,6 +57,25 @@
     (insert "tags: []\n")
     (insert "---\n")
     (insert "#+END_EXPORT\n\n")))
+
+(defun org-blog-reset-date (date)
+  "Reset the org and html post filenames, and the jekyll date to the given DATE\
+for the blog post in the current buffer."
+  (interactive (list (read-from-minibuffer "Input string: " (format-time-string "%Y-%m-%d"))))
+  (if (not (s-contains? "org/_posts/" (pwd)))
+      (message "Not visiting a blog buffer")
+    (let* ((filename (buffer-name))
+           (html-filename (concat "../../_posts/"
+                                  (replace-regexp-in-string ".org" ".html" filename)))
+           (new-name (concat date (substring filename 10))))
+      (rename-file filename new-name t)
+      (set-visited-file-name new-name t t)
+      (delete-file html-filename)
+      (save-excursion
+        (goto-char (point-min))
+        (re-search-forward "^date: .*$" nil t)
+        (replace-match (concat "date: " date))))))
+
 
 ;; this is easier than overriding the translation
 (customize-set-value 'org-html-footnotes-section
