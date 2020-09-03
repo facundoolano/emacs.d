@@ -58,13 +58,14 @@
     (insert "---\n")
     (insert "#+END_EXPORT\n\n")))
 
-(defun org-blog-reset-date (date)
-  "Reset the org and html post filenames, and the jekyll date to the given DATE\
-for the blog post in the current buffer."
-  (interactive (list (read-from-minibuffer "Input string: " (format-time-string "%Y-%m-%d"))))
+(defun org-blog-reset-date ()
+  "Prompt for a new blog post date and set it in the filename and the Jekyll \
+header."
+  (interactive)
   (if (not (s-contains? "org/_posts/" (pwd)))
-      (message "Not visiting a blog buffer")
-    (let* ((filename (buffer-name))
+      (error "Not visiting a blog buffer")
+    (let* ((date (read-from-minibuffer "Post date: " (format-time-string "%Y-%m-%d")))
+           (filename (buffer-name))
            (html-filename (concat "../../_posts/"
                                   (replace-regexp-in-string ".org" ".html" filename)))
            (new-name (concat date (substring filename 10))))
@@ -76,6 +77,11 @@ for the blog post in the current buffer."
         (re-search-forward "^date: .*$" nil t)
         (replace-match (concat "date: " date))))))
 
+(defun org-blog-publish ()
+  "Run org-publish on the blog project, without resetting the point in buffer."
+  (interactive)
+  (save-excursion
+    (org-publish "blog")))
 
 ;; this is easier than overriding the translation
 (customize-set-value 'org-html-footnotes-section
