@@ -67,7 +67,7 @@ header."
     (let* ((date (read-from-minibuffer "Post date: " (format-time-string "%Y-%m-%d")))
            (filename (buffer-name))
            (html-filename (concat "../../_posts/"
-                                  (replace-regexp-in-string ".org" ".html" filename)))
+                                  (replace-regexp-in-string ".org$" ".html" filename)))
            (new-name (concat date (substring filename 10))))
       (rename-file filename new-name t)
       (set-visited-file-name new-name t t)
