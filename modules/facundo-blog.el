@@ -35,10 +35,13 @@
   (seq-reduce '(lambda (str chars)
                  (replace-regexp-in-string
                   (aref chars 0) (aref chars 1) (downcase str)))
-              [["á" "a"] ["é" "e"] ["í" "i"] ["ó" "o"] ["ú" "u"] ["ñ" "n"] [" " "-"]]
+              [["á" "a"] ["é" "e"] ["í" "i"] ["ó" "o"] ["ú" "u"] ["ñ" "n"]
+               [" " "-"] ["[^a-z0-9-]" ""]]
               string))
 
-;; TODO consider forcing the spanish input source
+;; TODO consider forcing the spanish input method
+;; (set-input-method "spanish-prefix")
+;;  also default ispell dictionary?
 (defun org-blog-new-post (title)
   "Create a new org-file for a blog post as expected by Jekyll with TITLE."
   (interactive "MPost title: ")
