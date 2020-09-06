@@ -4,12 +4,26 @@
 (require 'google-translate-smooth-ui)
 
 (setq google-translate-translation-directions-alist
-      '(("en" . "es") ("es" . "en") ))
+      '(("en" . "es") ("es" . "en")))
 
 (setq google-translate-default-source-language "en")
 (setq google-translate-default-target-language "es")
 
-(global-set-key (kbd "s-t") 'google-translate-at-point)
-(global-set-key (kbd "s-T") 'google-translate-at-point-reverse)
+(defun google-translate ()
+  "Translate word at point if one is selected, otherwise query translate."
+  (interactive)
+  (condition-case nil
+      (google-translate-at-point)
+    (error (google-translate-query-translate))))
+
+(defun google-reverse-translate ()
+  "Translate word at point if one is selected, otherwise query translate."
+  (interactive)
+  (condition-case nil
+      (google-translate-at-point-reverse)
+    (error (google-translate-query-translate-reverse))))
+
+(global-set-key (kbd "s-t") 'google-translate)
+(global-set-key (kbd "s-T") 'google-reverse-translate)
 
 (provide 'facundo-dictionary)
