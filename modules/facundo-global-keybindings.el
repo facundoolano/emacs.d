@@ -118,6 +118,10 @@
 (global-set-key (kbd "s-N") 'new-empty-buffer-split)
 (global-set-key (kbd "C-x 3") 'split-and-switch)
 
+;; TODO borrowing from steve yegge, add the kill region bindings too
+(global-set-key (kbd "C-w") 'backward-kill-word)
+
+
 (global-set-key (kbd "s-V") 'cua-paste-pop) ; paste cycling through kill ring
 
 (require 'toggle-quotes)
