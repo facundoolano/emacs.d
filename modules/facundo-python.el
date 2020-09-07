@@ -5,7 +5,7 @@
 ;; Some basic configuration for python.el (the latest and greatest
 ;; Python mode Emacs has to offer).
 
-(prelude-require-packages '(anaconda-mode py-isort py-autopep8))
+(prelude-require-packages '(anaconda-mode py-isort py-autopep8 python-mode))
 
 (when (boundp 'company-backends)
   (prelude-require-package 'company-anaconda)
