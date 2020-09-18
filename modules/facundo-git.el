@@ -1,7 +1,9 @@
 (prelude-require-packages '(magit
+                            forge
                             git-timemachine
                             gitconfig-mode
                             gitignore-mode
+                            github-review
                             github-browse-file))
 
 (require 'magit)
