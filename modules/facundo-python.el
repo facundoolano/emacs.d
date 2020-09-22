@@ -81,7 +81,7 @@
 (setq py-autopep8-options '("--max-line-length=200" "--select=E,F,W,C90 "))
 (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 
-(setq py-isort-options '("--lines=100"))
+(setq py-isort-options '("-l=100"))
 (add-hook 'before-save-hook 'py-isort-before-save)
 
 (setq python-shell-interpreter "/usr/bin/python")
