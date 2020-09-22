@@ -18,7 +18,7 @@
 ;; (global-set-key (kbd "s-m f") 'magit-log-buffer-file)
 ;; (global-set-key (kbd "s-m b") 'magit-blame)
 
-(setq magit-no-confirm-default '(magit-branch-and-checkout))
+(add-to-list 'magit-dwim-selection '(magit-branch-and-checkout nil t))
 
 (add-to-list 'magit-section-initial-visibility-alist '(stashes . hide))
 
