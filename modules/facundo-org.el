@@ -8,7 +8,7 @@
 
 ;;; Code:
 
-(prelude-require-packages '(org ox-gfm))
+(prelude-require-packages '(org ox-gfm org-journal))
 
 (require 'org)
 (require 'org-present)
@@ -49,6 +49,8 @@
 ;; by default don't include a toc when exporting e.g. to markdown
 (setq org-export-with-toc nil)
 
+(setq org-export-with-sub-superscripts nil)
+
 ;; setup presentation mode
 (eval-after-load "org-present"
   '(progn
@@ -68,6 +70,9 @@
                  (flyspell-mode +1)
                  (whitespace-mode +1)
                  (org-present-read-write)))))
+
+(setq org-journal-carryover-items "TODO=\"TODO\"|TODO=\"STARTED\"")
+(setq org-journal-file-header "#+TODO: TODO STARTED | DONE CANCELED\n")
 
 (define-key org-mode-map (kbd "M-{") 'org-previous-visible-heading)
 (define-key org-mode-map (kbd "M-}") 'org-next-visible-heading)
