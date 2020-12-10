@@ -72,7 +72,15 @@
                  (org-present-read-write)))))
 
 (setq org-journal-carryover-items "TODO=\"TODO\"|TODO=\"STARTED\"")
-(setq org-journal-file-header "#+TODO: TODO STARTED | DONE CANCELED\n")
+(setq org-journal-file-header "#+TODO: TODO STARTED | DONE CANCELED\n\n")
+
+(defun org-journal-open-or-create-current ()
+  "Switch to the current journal file buffer without creating a new entry."
+  (interactive)
+  (setq current-prefix-arg '(4)) ; C-u to prevent entry creation
+  (call-interactively 'org-journal-new-entry))
+
+(global-set-key (kbd "C-x j") 'org-journal-open-or-create-current)
 
 (define-key org-mode-map (kbd "M-{") 'org-previous-visible-heading)
 (define-key org-mode-map (kbd "M-}") 'org-next-visible-heading)
