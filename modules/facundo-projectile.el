@@ -43,8 +43,11 @@
 (defun kill-project-frame ()
   "Delete current frame and kill all project buffers."
   (interactive)
-  (mapc 'kill-buffer (projectile-project-buffers))
-  (delete-frame))
+  (if (> (length (frame-list)) 1)
+      (progn
+        (mapc 'kill-buffer (projectile-project-buffers))
+        (delete-frame))
+    (message "Attempted to kill the solely visible frame.")))
 
 (defun facundo-switch-project-action ()
   ;; (let ((readme (concat (projectile-project-root) "README.md")))
