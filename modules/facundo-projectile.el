@@ -47,10 +47,11 @@
   (delete-frame))
 
 (defun facundo-switch-project-action ()
-  (let ((readme (concat (projectile-project-root) "README.md")))
-    (if (file-exists-p readme)
-        (find-file readme)))
-  (projectile-vc)
+  ;; (let ((readme (concat (projectile-project-root) "README.md")))
+  ;;   (if (file-exists-p readme)
+  ;;       (find-file readme)))
+  (magit-status)
+  (delete-other-windows)
   (neotree-project-sync))
 
 (setq projectile-switch-project-action 'facundo-switch-project-action)

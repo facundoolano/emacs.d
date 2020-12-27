@@ -51,6 +51,7 @@
   (let ((project-dir (projectile-project-root))
         (file-name (buffer-file-name))
         (cw (selected-window)))
+    (neotree-hide-if-other-project)
     (neotree-show)
     (if project-dir
         (if (neo-global--window-exists-p)
@@ -65,6 +66,7 @@
   (interactive)
   (let ((project-dir (projectile-project-root))
         (file-name (buffer-file-name)))
+    (neotree-hide-if-other-project)
     (neotree-toggle)
     (if project-dir
         (if (neo-global--window-exists-p)
@@ -73,10 +75,13 @@
               (neotree-find file-name)))
       (message "Could not find git project root."))))
 
+(defun neotree-hide-if-other-project ()
+  "If the neotree window is open but in a different project from the one visible, close it."
+  (if (and (neo-global--window-exists-p)
+           (not (eq (window-frame neo-global--window) (selected-frame))))
+      (neotree-hide)))
+
 (setq neo-confirm-change-root "Off")
-;; sync neotree when finding file with projectile
-;(add-hook 'projectile-find-file-hook 'neotree-project-sync)
-;(add-hook 'projectile-grep-finished-hook 'neotree-project-sync)
 
 (global-set-key (kbd "<f8>") 'neotree-project-toggle)
 
