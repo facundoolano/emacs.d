@@ -82,7 +82,9 @@
 
 (defun my/neotree-hook (_unused)
   "Disable line line numbers in neotree."
-  (linum-mode -1))
+  (linum-mode -1)
+  (toggle-scroll-bar -1))
+
 (add-hook 'neo-after-create-hook 'my/neotree-hook)
 
 (provide 'facundo-neotree)
