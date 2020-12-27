@@ -5,7 +5,7 @@
 ;; Some basic configuration for python.el (the latest and greatest
 ;; Python mode Emacs has to offer).
 
-(prelude-require-packages '(anaconda-mode py-isort py-autopep8 python-mode))
+(prelude-require-packages '(anaconda-mode py-isort py-autopep8))
 
 (when (boundp 'company-backends)
   (prelude-require-package 'company-anaconda)
@@ -15,7 +15,7 @@
 (require 'facundo-programming)
 (require 'py-isort)
 (require 'py-autopep8)
-(require 'python-mode)
+(require 'python)
 
 ;; Copy pasted from ruby-mode.el
 (defun prelude-python--encoding-comment-required-p ()
@@ -64,6 +64,7 @@
   (subword-mode +1)
   (anaconda-mode 1)
   (eldoc-mode 1)
+  (setq-local my-indentation-offset python-indent-offset)
   (setq-local electric-layout-rules
               '((?: . (lambda ()
                         (and (zerop (first (syntax-ppss)))
@@ -102,6 +103,9 @@
 (setq flycheck-pycheckers-checkers '(flake8 pylint))
 
 (define-key python-mode-map (kbd "<backtab>") 'my-unindent)
+
+;;  more reasonable behavior when indenting yanked blocks
+(setq indent-region-function nil)
 
 (provide 'facundo-python)
 

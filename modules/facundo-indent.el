@@ -62,7 +62,7 @@
 
 (require 'company-dabbrev)
 
-(defvar my-indentation-offset 2 "My indentation offset.")
+(setq my-indentation-offset 2)
 
 ;; make tab cycle wrap list
 (setq company-selection-wrap-around 1)
