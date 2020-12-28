@@ -72,7 +72,6 @@
                             browse-kill-ring
                             crux
                             discover-my-major
-                            diff-hl
                             easy-kill
                             epl
                             expand-region

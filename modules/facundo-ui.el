@@ -12,6 +12,8 @@
 ;; the toolbar is just a waste of valuable screen estate
 ;; in a tty tool-bar-mode does not properly auto-load, and is
 ;; already disabled anyway
+(prelude-require-package 'diff-hl)
+
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 
@@ -58,26 +60,42 @@
 (prelude-require-packages '(monokai-theme hl-todo github-modern-theme))
 
 ;;; Sublime like color theme
-;; (load-theme 'monokai t)
 (load-theme 'leuven t)
-;; (load-theme 'github-modern t)
-;; (load-theme 'smart-mode-line-light t)
 (setq-default line-spacing 8)
 
+;; setup side margins
+(setq-default left-margin-width 1)
+(setq-default right-margin-width 0)
+
+(defun set-extra-margin ()
+  "Add an extra bit of margin for text editing buffers."
+  (setq left-margin-width 2)
+  (set-window-buffer nil (current-buffer))
+  )
+
+(add-hook 'text-mode-hook 'set-extra-margin)
+(add-hook 'prog-mode-hook 'set-extra-margin)
+
 ;;; show line numbers, but not on neotree
-;; (setq linum-format 'dynamic)
-(setq linum-format "%3d ")
-;; (add-hook 'prog-mode-hook 'linum-mode)
-(global-set-key (kbd "<f7>") 'linum-mode)
+(global-set-key (kbd "<f7>") 'display-line-numbers-mode)
+(set-face-attribute 'line-number nil
+                    :background (face-background 'default)
+                    :foreground "gray")
 
-(set-face-background 'vertical-border "white")
-(set-face-foreground 'vertical-border (face-background 'vertical-border))
+;; diff-hl
+;; NOTE diff-hl overrides the width var when toggling
+;; I vendored the relevant file and removed that override
+(customize-set-variable 'diff-hl-margin-symbols-alist
+                        '((insert . " ")
+                          (delete . " ")
+                          (change . " ")
+                          (unknown . " ")
+                          (ignored . " ")))
 
-;; set the fringe to work as a small margin of the same color as the bg
-(fringe-mode '(10 . 0))
-(set-face-attribute 'fringe nil
-                    :foreground (face-foreground 'default)
-                    :background (face-background 'default))
+(global-diff-hl-mode +1)
+
+(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
 ;; highlights todo and fixme
 (require 'hl-todo)

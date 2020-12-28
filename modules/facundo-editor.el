@@ -216,11 +216,6 @@ indent yanked text (with prefix arg don't indent)."
 ;; sensible undo
 (global-undo-tree-mode)
 
-;; diff-hl
-(global-diff-hl-mode +1)
-(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
-(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-
 ;; easy-kill
 (global-set-key [remap kill-ring-save] 'easy-kill)
 (global-set-key [remap mark-sexp] 'easy-mark)
