@@ -301,6 +301,7 @@ indent yanked text (with prefix arg don't indent)."
 
 ;;; disable line wrapping
 (set-default 'truncate-lines t)
+(set-display-table-slot standard-display-table 0 ?\ )
 
 (provide 'facundo-editor)
 
