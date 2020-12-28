@@ -23,7 +23,8 @@
 (setq-default initial-major-mode 'fundamental-mode)
 
 ;; increase from default -12
-(setq default-frame-alist '((font . "Menlo-14")))
+(add-to-list 'default-frame-alist '(font . "Menlo-14"))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Newline at end of file
 (setq require-final-newline t)

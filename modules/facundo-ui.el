@@ -76,11 +76,22 @@
 (add-hook 'text-mode-hook 'set-extra-margin)
 (add-hook 'prog-mode-hook 'set-extra-margin)
 
+(set-face-background 'vertical-border "light gray")
+(set-face-foreground 'vertical-border (face-background 'vertical-border))
+(scroll-bar-mode -1)
+(fringe-mode '(0 . 0))
+
+;; hide the icon in the title bar
+(setq ns-use-proxy-icon nil)
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . nil))
+
+
 ;;; show line numbers, but not on neotree
 (global-set-key (kbd "<f7>") 'display-line-numbers-mode)
 (set-face-attribute 'line-number nil
                     :background (face-background 'default)
                     :foreground "gray")
+
 
 ;; diff-hl
 ;; NOTE diff-hl overrides the width var when toggling

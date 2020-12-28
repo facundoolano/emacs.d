@@ -81,8 +81,8 @@
                             undo-tree
                             which-key))
 
-(require 'facundo-ui)
 (require 'facundo-editor)
+(require 'facundo-ui)
 (require 'facundo-global-keybindings)
 
 

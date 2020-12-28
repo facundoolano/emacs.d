@@ -133,7 +133,6 @@ at the top level of DIRECTORY."
 
 ;;; open project in new frame
 (nameframe-projectile-mode t)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (defun counsel-projectile-find-file-other-window ()
   "Open a file in the current project in a separate window."
