@@ -73,7 +73,7 @@
   (set-window-buffer nil (current-buffer))
   )
 
-(add-hook 'text-mode-hook 'set-extra-margin)
+;; (add-hook 'text-mode-hook 'set-extra-margin)
 (add-hook 'prog-mode-hook 'set-extra-margin)
 
 (set-face-background 'vertical-border "light gray")

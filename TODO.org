@@ -16,6 +16,8 @@
 **** TODO copy it to clipboard in addition to opening it
 *** TODO https://github.com/thiderman/makefile-executor.el
 *** TODO neotree hidden exceptions
+*** TODO make project name in title bar more robust
+*** TODO review modeline colors
 *** DONE neotree doesn't work in multiple frames
     CLOSED: [2020-12-27 Sun 12:53]
 *** DONE key binding to translate word at point
@@ -33,6 +35,7 @@
 *** DONE try to set default text scale
     CLOSED: [2020-09-01 Tue 15:13]
 *** TODO allow to kill non project buffer
+
 ** Python
 *** TODO mark thing doesn't work
 *** TODO uknown symbols not marked as errors
