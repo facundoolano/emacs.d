@@ -31,12 +31,16 @@
 
 (setq neo-theme 'ascii)
 
-;; TODO I could benefit from more quite face colors in the neotree buffer
+(custom-set-faces
+ '(neo-banner-face ((t (:foreground "gray"))))
+ '(neo-root-dir-face ((t (:foreground "gray"))))
+ '(neo-dir-link-face ((t (:foreground "DodgerBlue3"))))
+ ;; '(neo-file-link-face ((t (:foreground "gray40"))))
+ )
 
 ; yanked from spacemacs
 (setq neo-window-width 28
       neo-create-file-auto-open t
-      neo-banner-message "Press ? for neotree help"
       neo-show-updir-line nil
       neo-mode-line-type 'neotree
       neo-smart-open t
