@@ -69,7 +69,6 @@
 (prelude-require-packages '(toggle-quotes
                             elmacro
                             persistent-scratch
-                            beacon
                             browse-kill-ring
                             crux
                             discover-my-major

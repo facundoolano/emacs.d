@@ -39,16 +39,15 @@
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; FIXME update this to also show project name if any
+;; and then drop projectile-nameframe
+
 ;; more useful frame title, that show either a file or a
 ;; buffer name (if the buffer isn't visiting a file)
 ;; (setq frame-title-format
 ;;       '("" invocation-name " Prelude - " (:eval (if (buffer-file-name)
 ;;                                             (abbreviate-file-name (buffer-file-name))
 ;;                                           "%b"))))
-
-;; show the cursor when moving after big movements in the window
-(require 'beacon)
-(beacon-mode +1)
 
 ;; show available keybindings after you start typing
 (require 'which-key)
@@ -68,9 +67,17 @@
 ;;; show line numbers, but not on neotree
 ;; (setq linum-format 'dynamic)
 (setq linum-format "%3d ")
-(add-hook 'prog-mode-hook 'linum-mode)
+;; (add-hook 'prog-mode-hook 'linum-mode)
+(global-set-key (kbd "<f7>") 'linum-mode)
 
+(set-face-background 'vertical-border "white")
+(set-face-foreground 'vertical-border (face-background 'vertical-border))
+
+;; set the fringe to work as a small margin of the same color as the bg
 (fringe-mode '(10 . 0))
+(set-face-attribute 'fringe nil
+                    :foreground (face-foreground 'default)
+                    :background (face-background 'default))
 
 ;; highlights todo and fixme
 (require 'hl-todo)
