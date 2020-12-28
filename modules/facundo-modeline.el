@@ -48,6 +48,11 @@
     (:eval (sml/get-directory)))
   "Shows the current major mode.")
 
+(defvar facundo/mode-line-position
+  '(:propertize
+    (:eval (format "[%%l/%d:%%c]" (line-number-at-pos (- (point-max) 1)))))
+  "Shows the line, column and position in the current buffer.")
+
 (require 'flycheck)
 
 (defvar mode-line-flycheck-status
@@ -55,27 +60,20 @@
     (:eval (flycheck-mode-line-status-text)))
   "Shows the current major mode.")
 
+
 (setq-default mode-line-format
               (list
                " "
                mode-line-modified
                "  "
-               ;; TODO show directory with same face as the filename?
                mode-line-directory
                mode-line-buffer-identification
                "   "
                mode-line-my-vc
                "   "
                mode-line-major-mode
-               " "
-               ;; make this prettier at some point
-               mode-line-flycheck-status
                "   "
-               ;; mode-line-modes
-
                ;; TODO right align
-               ;; TODO don't show Top/Bot
-               ;; TODO show 44:10 instead of (44,10)
-               mode-line-position))
+               facundo/mode-line-position))
 
 (provide 'facundo-modeline)

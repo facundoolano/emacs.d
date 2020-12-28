@@ -67,7 +67,6 @@
 ;; require some packages that don't belong in any specific module
 ;; TODO maybe merge prelude packages here
 (prelude-require-packages '(toggle-quotes
-                            cql-mode
                             elmacro
                             persistent-scratch
                             beacon
@@ -82,8 +81,7 @@
                             move-text
                             multiple-cursors
                             undo-tree
-                            which-key
-                            zop-to-char))
+                            which-key))
 
 (require 'facundo-ui)
 (require 'facundo-editor)
@@ -101,11 +99,11 @@
 (safe-require 'facundo-parens)
 (safe-require 'facundo-git)
 (safe-require 'facundo-projectile)
+(safe-require 'facundo-modeline)
 (safe-require 'facundo-neotree)
 (safe-require 'facundo-org)
 (safe-require 'facundo-blog)
 (safe-require 'facundo-dictionary)
-(safe-require 'facundo-modeline)
 
 ;;; Programming languages support
 (safe-require 'facundo-emacs-lisp)
