@@ -4,20 +4,29 @@
  http://endlessparentheses.com/debugging-emacs-lisp-part-1-earn-your-independence.html
 
 ** important stuff
+*** TODO C-x g for browse github
+    https://github.com/sshaw/git-link
+    https://github.com/rmuslimov/browse-at-remote
+**** DONE for this commit / this branch head if commit missing
+     CLOSED: [2020-12-28 Mon 20:45]
+**** TODO with prefix argument go to master/main instead
+**** DONE copy it to clipboard in addition to opening it
+     CLOSED: [2020-12-28 Mon 20:45]
+
+
 *** TODO indent/unindet is broken, at least in erlang and python, at least in blocks
 *** TODO strings open/close/add are broken
     specially in multiline edit mode
+*** TODO make project name in title bar more robust
 *** TODO paste + indent is broken (maybe differently in different languages)
-*** TODO tabs in makefile (disable my-indent and use indent-for-tab-command in that mode)
+*** TODO prefer vertical split for other buffer
+    https://emacs.stackexchange.com/a/40517/14798
 *** TODO add binding for multiline edit
-*** TODO C-x g for browse github
-**** TODO for this commit / this branch head if commit missing
-**** TODO with prefix argument go to master/main instead
-**** TODO copy it to clipboard in addition to opening it
+*** TODO tabs in makefile (disable my-indent and use indent-for-tab-command in that mode)
 *** TODO https://github.com/thiderman/makefile-executor.el
 *** TODO neotree hidden exceptions
-*** TODO make project name in title bar more robust
 *** TODO review modeline colors
+*** TODO keep selection when pasting. copying too https://emacs.stackexchange.com/questions/19989/how-to-copy-text-without-losing-selection
 *** DONE neotree doesn't work in multiple frames
     CLOSED: [2020-12-27 Sun 12:53]
 *** DONE key binding to translate word at point
@@ -31,7 +40,6 @@
     CLOSED: [2018-03-26 Mon 23:06]
 *** DONE open scratch in split buffer
     CLOSED: [2020-09-01 Tue 15:12]
-*** TODO kill buffer when not in project works weird
 *** DONE try to set default text scale
     CLOSED: [2020-09-01 Tue 15:13]
 *** TODO allow to kill non project buffer
@@ -50,11 +58,9 @@
 
 ** nice to have
 *** TODO swap words horizontally?
-*** TODO keep selection when pasting. copying too https://emacs.stackexchange.com/questions/19989/how-to-copy-text-without-losing-selection
 *** DONE also send open buffer to another split
     CLOSED: [2020-09-01 Tue 15:13]
 *** TODO disable easy mark for python (default mark sexp would work)
-*** TODO disable autofill in html, yaml
 *** TODO C-tab works like crap
 *** TODO go to line incremental (no return needed)
 
