@@ -4,7 +4,12 @@
  http://endlessparentheses.com/debugging-emacs-lisp-part-1-earn-your-independence.html
 
 ** important stuff
-*** TODO C-x g for browse github
+*** TODO make project name in title bar more robust
+*** TODO hide flycheck multiline warnings
+*** TODO prefer vertical split for other buffer
+    https://emacs.stackexchange.com/a/40517/14798
+*** DONE C-x g for browse github
+    CLOSED: [2020-12-28 Mon 22:09]
     https://github.com/sshaw/git-link
     https://github.com/rmuslimov/browse-at-remote
 **** DONE for this commit / this branch head if commit missing
@@ -14,13 +19,10 @@
      CLOSED: [2020-12-28 Mon 20:45]
 
 
-*** TODO indent/unindet is broken, at least in erlang and python, at least in blocks
 *** TODO strings open/close/add are broken
-    specially in multiline edit mode
-*** TODO make project name in title bar more robust
+    especially in multiline edit mode
+*** TODO indent/unindet is broken, at least in erlang and python, at least in blocks
 *** TODO paste + indent is broken (maybe differently in different languages)
-*** TODO prefer vertical split for other buffer
-    https://emacs.stackexchange.com/a/40517/14798
 *** TODO add binding for multiline edit
 *** TODO tabs in makefile (disable my-indent and use indent-for-tab-command in that mode)
 *** TODO https://github.com/thiderman/makefile-executor.el

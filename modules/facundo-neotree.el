@@ -32,14 +32,14 @@
 (setq neo-theme 'ascii)
 
 (custom-set-faces
- '(neo-banner-face ((t (:foreground "gray"))))
- '(neo-root-dir-face ((t (:foreground "gray"))))
- '(neo-dir-link-face ((t (:foreground "DodgerBlue3"))))
- ;; '(neo-file-link-face ((t (:foreground "gray40"))))
+ '(neo-banner-face ((t (:foreground "gray" :height 120))))
+ '(neo-root-dir-face ((t (:foreground "gray" :height 120))))
+ '(neo-dir-link-face ((t (:foreground "DodgerBlue3" :height 130))))
+ '(neo-file-link-face ((t (:height 120))))
  )
 
 ; yanked from spacemacs
-(setq neo-window-width 28
+(setq neo-window-width 26
       neo-create-file-auto-open t
       neo-show-updir-line nil
       neo-mode-line-type 'neotree
