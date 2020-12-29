@@ -104,6 +104,7 @@
                           (ignored . " ")))
 
 (global-diff-hl-mode +1)
+(diff-hl-margin-mode)
 
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)

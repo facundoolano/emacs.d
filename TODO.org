@@ -24,10 +24,16 @@
 *** TODO indent/unindet is broken, at least in erlang and python, at least in blocks
 *** TODO paste + indent is broken (maybe differently in different languages)
 *** TODO add binding for multiline edit
+*** TODO profile
+look for opportunities to improve performance
+*** TODO review main modules
+init, editor, ui
+there's stuff that probably is not necessary anymore
 *** TODO tabs in makefile (disable my-indent and use indent-for-tab-command in that mode)
 *** TODO https://github.com/thiderman/makefile-executor.el
 *** TODO neotree hidden exceptions
-*** TODO review modeline colors
+*** DONE review modeline colors
+    CLOSED: [2020-12-29 Tue 14:33]
 *** TODO keep selection when pasting. copying too https://emacs.stackexchange.com/questions/19989/how-to-copy-text-without-losing-selection
 *** DONE neotree doesn't work in multiple frames
     CLOSED: [2020-12-27 Sun 12:53]
