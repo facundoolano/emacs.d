@@ -4,10 +4,14 @@
  http://endlessparentheses.com/debugging-emacs-lisp-part-1-earn-your-independence.html
 
 ** important stuff
-*** TODO make project name in title bar more robust
 *** TODO hide flycheck multiline warnings
-*** TODO prefer vertical split for other buffer
+*** DONE prefer vertical split for other buffer
+    CLOSED: [2020-12-29 Tue 16:34]
     https://emacs.stackexchange.com/a/40517/14798
+*** TODO make project name in title bar more robust
+*** TODO review main modules
+init, editor, ui
+there's stuff that probably is not necessary anymore
 *** DONE C-x g for browse github
     CLOSED: [2020-12-28 Mon 22:09]
     https://github.com/sshaw/git-link
@@ -26,9 +30,6 @@
 *** TODO add binding for multiline edit
 *** TODO profile
 look for opportunities to improve performance
-*** TODO review main modules
-init, editor, ui
-there's stuff that probably is not necessary anymore
 *** TODO tabs in makefile (disable my-indent and use indent-for-tab-command in that mode)
 *** TODO https://github.com/thiderman/makefile-executor.el
 *** TODO neotree hidden exceptions
@@ -68,7 +69,6 @@ there's stuff that probably is not necessary anymore
 *** TODO swap words horizontally?
 *** DONE also send open buffer to another split
     CLOSED: [2020-09-01 Tue 15:13]
-*** TODO disable easy mark for python (default mark sexp would work)
 *** TODO C-tab works like crap
 *** TODO go to line incremental (no return needed)
 
