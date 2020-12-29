@@ -5,10 +5,13 @@
 
 ** important stuff
 *** TODO hide flycheck multiline warnings
+*** TODO variable/function help at echo area
+    ideally language agnostic
 *** DONE prefer vertical split for other buffer
     CLOSED: [2020-12-29 Tue 16:34]
     https://emacs.stackexchange.com/a/40517/14798
-*** TODO make project name in title bar more robust
+*** DONE make project name in title bar more robust
+    CLOSED: [2020-12-29 Tue 17:23]
 *** TODO review main modules
 init, editor, ui
 there's stuff that probably is not necessary anymore

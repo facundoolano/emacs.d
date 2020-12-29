@@ -24,7 +24,7 @@
 
 ;;; Code:
 
-(prelude-require-packages '(projectile nameframe-projectile counsel-projectile))
+(prelude-require-packages '(projectile counsel-projectile))
 
 (require 'projectile)
 (require 'counsel-projectile)
@@ -132,8 +132,6 @@ at the top level of DIRECTORY."
      subdirs)))
 
 ;;; open project in new frame
-(nameframe-projectile-mode t)
-
 (defun counsel-projectile-find-file-other-window ()
   "Open a file in the current project in a separate window."
   (interactive)

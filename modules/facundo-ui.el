@@ -41,15 +41,16 @@
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; FIXME update this to also show project name if any
-;; and then drop projectile-nameframe
-
 ;; more useful frame title, that show either a file or a
 ;; buffer name (if the buffer isn't visiting a file)
-;; (setq frame-title-format
-;;       '("" invocation-name " Prelude - " (:eval (if (buffer-file-name)
-;;                                             (abbreviate-file-name (buffer-file-name))
-;;                                           "%b"))))
+(setq frame-title-format
+      '("" (:eval
+            (let ((project-dir (projectile-project-root)))
+              (cond
+               ((string= (buffer-name) " *NeoTree*") nil)
+               ((and project-dir (not (string= project-dir "/"))) (abbreviate-file-name project-dir))
+               ((buffer-file-name) (abbreviate-file-name (buffer-file-name)))
+               (t "%b"))))))
 
 ;; show available keybindings after you start typing
 (require 'which-key)
