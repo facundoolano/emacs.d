@@ -14,7 +14,6 @@
 ;; You may delete these explanatory comments.
 (setq load-prefer-newer t)
 
-;; TODO review if we need all of this
 (defvar prelude-dir (file-name-directory load-file-name)
   "The root dir of the Emacs Prelude distribution.")
 

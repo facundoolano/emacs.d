@@ -184,28 +184,6 @@ The body of the advice is in BODY."
 (with-region-or-buffer indent-region)
 (with-region-or-buffer untabify)
 
-(defvar prelude-indent-sensitive-modes
-  '(conf-mode coffee-mode haml-mode python-mode slim-mode yaml-mode)
-  "Modes for which auto-indenting is suppressed.")
-
-(defvar prelude-yank-indent-threshold 1000
-  "Threshold (# chars) over which indentation does not automatically occur.")
-
-;; automatically indenting yanked text if in programming-modes
-(defun yank-advised-indent-function (beg end)
-  "Do indentation, as long as the region isn't too large."
-  (if (<= (- end beg) prelude-yank-indent-threshold)
-      (indent-region beg end nil)))
-
-(advise-commands "indent" (yank yank-pop) after
-  "If current mode is one of `prelude-yank-indent-modes',
-indent yanked text (with prefix arg don't indent)."
-  (if (and (not (ad-get-arg 0))
-           (not (member major-mode prelude-indent-sensitive-modes))
-           (derived-mode-p 'prog-mode))
-      (let ((transient-mark-mode nil))
-        (yank-advised-indent-function (region-beginning) (region-end)))))
-
 ;; abbrev config
 (add-hook 'text-mode-hook 'abbrev-mode)
 
@@ -338,10 +316,6 @@ i.e. windows tiled side-by-side."
   (universal-argument)
   (cua-set-mark
    `(4)))
-
-;; other window should always be vertical
-;; (setq split-width-threshold 50
-;;       split-height-threshold nil)
 
 ;; don't want flyspell messing with commenting
 (define-key flyspell-mode-map (kbd "C-;") nil)

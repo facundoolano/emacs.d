@@ -4,17 +4,25 @@
  http://endlessparentheses.com/debugging-emacs-lisp-part-1-earn-your-independence.html
 
 ** important stuff
+*** TODO review main modules
+there's stuff that probably is not necessary anymore
+**** DONE init.el
+     CLOSED: [2020-12-29 Tue 22:24]
+**** DONE facundo-editor.el
+     CLOSED: [2020-12-29 Tue 22:36]
+**** TODO facundo-ui.el
+**** TODO facundo-global-keybindings.el
+**** TODO prelude-packages.el
+**** TODO facundo-programming.el
+**** TODO facundo-projectile.el
 *** TODO hide flycheck multiline warnings
-*** TODO variable/function help at echo area
-    ideally language agnostic
 *** DONE prefer vertical split for other buffer
     CLOSED: [2020-12-29 Tue 16:34]
     https://emacs.stackexchange.com/a/40517/14798
 *** DONE make project name in title bar more robust
     CLOSED: [2020-12-29 Tue 17:23]
-*** TODO review main modules
-init, editor, ui
-there's stuff that probably is not necessary anymore
+*** TODO strings open/close/add are broken
+    especially in multiline edit mode
 *** DONE C-x g for browse github
     CLOSED: [2020-12-28 Mon 22:09]
     https://github.com/sshaw/git-link
@@ -26,8 +34,8 @@ there's stuff that probably is not necessary anymore
      CLOSED: [2020-12-28 Mon 20:45]
 
 
-*** TODO strings open/close/add are broken
-    especially in multiline edit mode
+*** TODO variable/function help at echo area
+    ideally language agnostic
 *** TODO indent/unindet is broken, at least in erlang and python, at least in blocks
 *** TODO paste + indent is broken (maybe differently in different languages)
 *** TODO add binding for multiline edit
