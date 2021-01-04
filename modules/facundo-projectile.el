@@ -50,11 +50,12 @@
     (message "Attempted to kill the solely visible frame.")))
 
 (defun facundo-switch-project-action ()
-  ;; (let ((readme (concat (projectile-project-root) "README.md")))
-  ;;   (if (file-exists-p readme)
-  ;;       (find-file readme)))
-  (magit-status)
-  (delete-other-windows)
+  "Show magit and the readme when opening a project."
+  (make-frame)
+  (let ((readme (concat (projectile-project-root) "README.md")))
+    (if (file-exists-p readme)
+        (find-file readme)))
+  (projectile-vc)
   (neotree-project-sync))
 
 (setq projectile-switch-project-action 'facundo-switch-project-action)
@@ -158,6 +159,11 @@ at the top level of DIRECTORY."
 (global-set-key (kbd "s-k") 'kill-this-and-next)
 (global-set-key (kbd "s-K") 'kill-other-project-buffers)
 
+(defun project-shell-command ()
+  ""
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (shell-command-to-string (read-from-minibuffer "Shell command: "))))
 
 (provide 'facundo-projectile)
 ;;; facundo-projectile.el ends here
