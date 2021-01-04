@@ -13,6 +13,8 @@
 ;; in a tty tool-bar-mode does not properly auto-load, and is
 ;; already disabled anyway
 (prelude-require-package 'diff-hl)
+(require 'diff-hl)
+(require 'diff-hl-margin)
 
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
