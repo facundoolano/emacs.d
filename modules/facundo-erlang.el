@@ -42,36 +42,6 @@
 (add-hook 'after-save-hook #'ivy-erlang-complete-reparse)
 (add-hook 'erlang-mode-hook #'company-erlang-init)
 
-(defun counsel-erlplorer-function (string)
-  (if (< (length string) 3)
-      (counsel-more-chars 3)
-    (counsel--async-command
-     (format "erlplorer search \"%s\" %ssrc/*.erl"
-             string
-             (projectile-project-root)))
-    nil))
-
-(defun counsel-erlplorer-action (string)
-  (when string
-    (let* ((location-parts (split-string (first (split-string string)) ":"))
-           (filename (first location-parts))
-           (line-number (string-to-number (second location-parts))))
-      (with-ivy-window
-        (find-file filename)
-        (forward-line (1- line-number))
-        (swiper--ensure-visible)))))
-
-(defun counsel-erlplorer ()
-  "Call the \"erlplorer\" shell command to grep erlang patterns.
-See http://marianoguerra.org/posts/erplorer-search-erlang-and-efene-code-by-pattern-matching-the-ast.html"
-  (interactive)
-  (ivy-read "Search Erlang pattern: " #'counsel-erlplorer-function
-            :dynamic-collection t
-            :history 'counsel-erlplorer-history
-            :action #'counsel-erlplorer-action
-            :unwind #'counsel-delete-process
-            :caller 'counsel-erlplorer))
-
 (provide 'facundo-erlang)
 
 ;;; facundo-erlang.el ends here
