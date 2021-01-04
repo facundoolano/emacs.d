@@ -1,5 +1,7 @@
 My emacs configuration. Previously based on prelude.
 
+![](emacs.png)
+
 ``` shell
 brew install emacs --with-cocoa --with-gnutls --with-dbus --with-librsvg --with-imagemagick@6 --with-mailutils --devel
 
