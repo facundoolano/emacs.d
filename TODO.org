@@ -12,16 +12,17 @@ there's stuff that probably is not necessary anymore
      CLOSED: [2020-12-29 Tue 22:36]
 **** DONE facundo-ui.el
      CLOSED: [2021-01-06 Wed 12:53]
-**** TODO facundo-global-keybindings.el
+**** DONE facundo-global-keybindings.el
+     CLOSED: [2021-01-06 Wed 16:23]
 **** TODO prelude-packages.el
 **** TODO facundo-programming.el
 **** TODO facundo-projectile.el
+*** TODO hide flycheck multiline warnings
 *** TODO review company and hippie expand backends
+*** TODO counsel-projectile-find-file-other window sometimes changes current window as well
 *** TODO review smartparens config
     check available options for each pair in the config
     at least improve the erlang ones
-*** TODO counsel-projectile-find-file-other window sometimes changes current window as well
-*** TODO hide flycheck multiline warnings
 *** DONE prefer vertical split for other buffer
     CLOSED: [2020-12-29 Tue 16:34]
     https://emacs.stackexchange.com/a/40517/14798

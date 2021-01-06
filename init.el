@@ -63,8 +63,6 @@
 ;; the core stuff
 (require 'prelude-packages)
 
-
-
 ;; require some packages that don't belong in any specific module
 ;; TODO maybe merge prelude packages here
 (prelude-require-packages '(elmacro
@@ -72,17 +70,17 @@
                             crux
                             discover-my-major
                             epl
-                            imenu-anywhere
                             undo-tree))
 
 (require 'facundo-editor)
 (require 'facundo-ui)
-(require 'facundo-global-keybindings)
-
 
 ;; OSX specific settings
 (when (eq system-type 'darwin)
   (require 'facundo-osx))
+
+(require 'facundo-global-keybindings)
+
 
 ;; Non core modules.
 (safe-require 'facundo-ivy)

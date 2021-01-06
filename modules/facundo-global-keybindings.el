@@ -27,6 +27,8 @@
 ;; Start eshell or switch to it if it's active.
 (global-set-key (kbd "C-x m") 'eshell)
 
+(global-set-key (kbd "C-h l") 'find-library)
+
 ;; Start a new eshell even if one is active.
 (global-set-key (kbd "C-x M") (lambda () (interactive) (eshell t)))
 
@@ -60,10 +62,8 @@
 
 ;;; TAKEN FROM prelude-mode.el
 
-(require 'imenu-anywhere)
 (require 'crux)
 
-;; TODO keep whats used, remove what's not or is overriden
 ;; remap instead of just set so we preserve the override in visual line mode
 (global-set-key [remap move-beginning-of-line] 'crux-move-beginning-of-line)
 (global-set-key [(shift return)] 'crux-smart-open-line)
@@ -71,27 +71,21 @@
 (global-set-key [(control shift return)] 'crux-smart-open-line-above)
 (global-set-key (kbd "M-p")  'move-text-up)
 (global-set-key (kbd "M-n")  'move-text-down)
-(global-set-key (kbd "C-c n") 'crux-cleanup-buffer-or-repgion)
-(global-set-key (kbd "C-M-z") 'crux-indent-defun)
-(global-set-key (kbd "C-c u") 'crux-view-url)
-(global-set-key (kbd "C-c e") 'crux-eval-and-replace)
-(global-set-key (kbd "C-c s") 'crux-swap-windows)
-(global-set-key (kbd "C-c D") 'crux-delete-file-and-buffer)
 (global-set-key (kbd "C-c d") 'crux-duplicate-current-line-or-region)
 (global-set-key (kbd "C-c M-d") 'crux-duplicate-and-comment-current-line-or-region)
+(global-set-key (kbd "C-M-z") 'crux-indent-defun)
+(global-set-key (kbd "C-c u") 'crux-view-url)
+(global-set-key (kbd "C-c s") 'crux-swap-windows)
+(global-set-key (kbd "C-c D") 'crux-delete-file-and-buffer)
 (global-set-key (kbd "C-c r") 'crux-rename-buffer-and-file)
 (global-set-key (kbd "C-c t") 'crux-visit-term-buffer)
 (global-set-key (kbd "C-c k") 'crux-kill-other-buffers)
-(global-set-key (kbd "C-c TAB") 'crux-indent-rigidly-and-copy-to-clipboard)
+(global-set-key (kbd "C-c TAB") 'crux-indent-rigidly-and-copy-to-clipboard) ;; FIXME this is prevented by cua prefix stuff
 (global-set-key (kbd "C-c I") 'crux-find-user-init-file)
 (global-set-key (kbd "C-c S") 'crux-find-shell-init-file)
-(global-set-key (kbd "C-c i") 'imenu-anywhere) ;; not sure what this does
+
 ;; extra prefix for projectile
 (global-set-key (kbd "s-p") 'projectile-command-map)
-(global-set-key (kbd "s-j") 'crux-top-join-line)
-(global-set-key (kbd "s-k") 'crux-kill-whole-line)
-
-(global-set-key (kbd "s-o") 'crux-smart-open-line-above)
 
 ;;; CUSTOM STUFF
 
@@ -110,9 +104,8 @@
 (global-set-key (kbd "s-N") 'new-empty-buffer-split)
 (global-set-key (kbd "C-x 3") 'split-and-switch)
 
-;; TODO borrowing from steve yegge, add the kill region bindings too
+;; TODO borrowing from steve yegge, add the killr egion bindings too
 (global-set-key (kbd "C-w") 'backward-kill-word)
-
 
 (global-set-key (kbd "s-V") 'cua-paste-pop) ; paste cycling through kill ring
 
