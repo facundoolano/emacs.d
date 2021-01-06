@@ -63,20 +63,16 @@
 ;; the core stuff
 (require 'prelude-packages)
 
+
+
 ;; require some packages that don't belong in any specific module
 ;; TODO maybe merge prelude packages here
-(prelude-require-packages '(toggle-quotes
-                            elmacro
+(prelude-require-packages '(elmacro
                             persistent-scratch
-                            browse-kill-ring
                             crux
                             discover-my-major
-                            easy-kill
                             epl
-                            expand-region
                             imenu-anywhere
-                            move-text
-                            multiple-cursors
                             undo-tree))
 
 (require 'facundo-editor)

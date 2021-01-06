@@ -16,6 +16,10 @@ there's stuff that probably is not necessary anymore
 **** TODO prelude-packages.el
 **** TODO facundo-programming.el
 **** TODO facundo-projectile.el
+*** TODO review company and hippie expand backends
+*** TODO review smartparens config
+    check available options for each pair in the config
+    at least improve the erlang ones
 *** TODO counsel-projectile-find-file-other window sometimes changes current window as well
 *** TODO hide flycheck multiline warnings
 *** DONE prefer vertical split for other buffer
@@ -23,7 +27,8 @@ there's stuff that probably is not necessary anymore
     https://emacs.stackexchange.com/a/40517/14798
 *** DONE make project name in title bar more robust
     CLOSED: [2020-12-29 Tue 17:23]
-*** TODO strings open/close/add are broken
+*** DONE strings open/close/add are broken
+    CLOSED: [2021-01-06 Wed 15:48]
     especially in multiline edit mode
 *** DONE C-x g for browse github
     CLOSED: [2020-12-28 Mon 22:09]

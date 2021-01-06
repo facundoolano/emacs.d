@@ -18,6 +18,8 @@
 (setq sp-hybrid-kill-entire-symbol nil)
 (sp-use-paredit-bindings)
 
+(setq sp-escape-quotes-after-insert nil)
+
 (show-smartparens-global-mode +1)
 
 ;; don't want sp to mess with these global bindings

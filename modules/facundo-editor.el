@@ -8,6 +8,13 @@
 
 ;;; TAKEN FROM prelude-editor.el
 
+(prelude-require-packages '(toggle-quotes
+                            browse-kill-ring
+                            easy-kill
+                            expand-region
+                            move-text
+                            multiple-cursors))
+
 ;; Death to the tabs!  However, tabs historically indent to the next
 ;; 8-character offset; specifying anything else will cause *mass*
 ;; confusion, as it will change the appearance of every existing file.
@@ -323,6 +330,11 @@ i.e. windows tiled side-by-side."
 ;;; disable line wrapping
 (set-default 'truncate-lines t)
 (set-display-table-slot standard-display-table 0 ?\ )
+
+(require 'multiple-cursors)
+
+(add-to-list 'mc/unsupported-minor-modes 'smartparens-mode)
+(add-to-list 'mc/unsupported-minor-modes 'electric-pair-mode)
 
 (provide 'facundo-editor)
 

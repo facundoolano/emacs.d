@@ -33,14 +33,6 @@
 ;; Start a regular shell if you prefer that.
 (global-set-key (kbd "C-x M-m") 'shell)
 
-;; A quick major mode help with discover-my-major
-(define-key 'help-command (kbd "C-m") 'discover-my-major)
-
-(define-key 'help-command (kbd "C-f") 'find-function)
-(define-key 'help-command (kbd "C-k") 'find-function-on-key)
-(define-key 'help-command (kbd "C-v") 'find-variable)
-(define-key 'help-command (kbd "C-l") 'find-library)
-
 (define-key 'help-command (kbd "C-i") 'info-display-manual)
 
 ;; replace zap-to-char functionality with the more powerful zop-to-char

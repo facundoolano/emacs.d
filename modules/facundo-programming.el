@@ -36,6 +36,7 @@
   "Default coding hook, useful with any programming language."
   (when (executable-find ispell-program-name)
     (flyspell-prog-mode))
+  (electric-pair-mode -1)
   (smartparens-mode +1)
   (prelude-enable-whitespace)
   (prelude-local-comment-auto-fill))
