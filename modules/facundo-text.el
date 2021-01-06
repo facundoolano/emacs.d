@@ -65,7 +65,8 @@
 ;; some handy writing shortcuts
 ;; FIXME I had to comment this binding out of undo-tree to make it work
 ;; (global-set-key (kbd "M-_") (lambda () (interactive) (insert "---")))
-(global-set-key (kbd "M-?") (lambda () (interactive) (insert "¿")))
+(define-key text-mode-map (kbd "M-?") (lambda () (interactive) (insert "¿")))
+
 
 (provide 'facundo-text)
 

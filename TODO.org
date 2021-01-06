@@ -18,11 +18,11 @@ there's stuff that probably is not necessary anymore
 **** TODO facundo-programming.el
 **** TODO facundo-projectile.el
 *** TODO hide flycheck multiline warnings
-*** TODO review company and hippie expand backends
 *** TODO counsel-projectile-find-file-other window sometimes changes current window as well
 *** TODO review smartparens config
     check available options for each pair in the config
     at least improve the erlang ones
+*** TODO review company and hippie expand backends
 *** DONE prefer vertical split for other buffer
     CLOSED: [2020-12-29 Tue 16:34]
     https://emacs.stackexchange.com/a/40517/14798
@@ -41,20 +41,20 @@ there's stuff that probably is not necessary anymore
 **** DONE copy it to clipboard in addition to opening it
      CLOSED: [2020-12-28 Mon 20:45]
 
-
-*** TODO variable/function help at echo area
-    ideally language agnostic
-*** TODO indent/unindet is broken, at least in erlang and python, at least in blocks
-*** TODO paste + indent is broken (maybe differently in different languages)
 *** TODO add binding for multiline edit
-*** TODO profile
-look for opportunities to improve performance
+*** TODO keep selection when pasting. copying too https://emacs.stackexchange.com/questions/19989/how-to-copy-text-without-losing-selection
 *** TODO tabs in makefile (disable my-indent and use indent-for-tab-command in that mode)
 *** TODO https://github.com/thiderman/makefile-executor.el
+*** TODO profile
+look for opportunities to improve performance
+*** TODO variable/function help at echo area
+    ideally language agnostic
+*** TODO dont kill scratch
 *** TODO neotree hidden exceptions
+*** TODO indent/unindet is broken, at least in erlang and python, at least in blocks
+*** TODO paste + indent is broken (maybe differently in different languages)
 *** DONE review modeline colors
     CLOSED: [2020-12-29 Tue 14:33]
-*** TODO keep selection when pasting. copying too https://emacs.stackexchange.com/questions/19989/how-to-copy-text-without-losing-selection
 *** DONE neotree doesn't work in multiple frames
     CLOSED: [2020-12-27 Sun 12:53]
 *** DONE key binding to translate word at point
@@ -63,15 +63,12 @@ look for opportunities to improve performance
     CLOSED: [2020-09-01 Tue 15:12]
 *** DONE org insert heading after current keybinding (maybe default for M-RET)
     CLOSED: [2020-09-01 Tue 15:12]
-*** TODO dont kill scratch
 *** DONE move this to an org file in github
     CLOSED: [2018-03-26 Mon 23:06]
 *** DONE open scratch in split buffer
     CLOSED: [2020-09-01 Tue 15:12]
 *** DONE try to set default text scale
     CLOSED: [2020-09-01 Tue 15:13]
-*** TODO allow to kill non project buffer
-
 ** Python
 *** TODO mark thing doesn't work
 *** TODO uknown symbols not marked as errors
