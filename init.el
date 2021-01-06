@@ -77,8 +77,7 @@
                             imenu-anywhere
                             move-text
                             multiple-cursors
-                            undo-tree
-                            which-key))
+                            undo-tree))
 
 (require 'facundo-editor)
 (require 'facundo-ui)

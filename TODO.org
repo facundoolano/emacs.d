@@ -10,11 +10,13 @@ there's stuff that probably is not necessary anymore
      CLOSED: [2020-12-29 Tue 22:24]
 **** DONE facundo-editor.el
      CLOSED: [2020-12-29 Tue 22:36]
-**** TODO facundo-ui.el
+**** DONE facundo-ui.el
+     CLOSED: [2021-01-06 Wed 12:53]
 **** TODO facundo-global-keybindings.el
 **** TODO prelude-packages.el
 **** TODO facundo-programming.el
 **** TODO facundo-projectile.el
+*** TODO counsel-projectile-find-file-other window sometimes changes current window as well
 *** TODO hide flycheck multiline warnings
 *** DONE prefer vertical split for other buffer
     CLOSED: [2020-12-29 Tue 16:34]

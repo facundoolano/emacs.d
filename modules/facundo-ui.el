@@ -7,15 +7,16 @@
 
 ;;; Code:
 
-;;; TAKEN FROM prelude-ui.el
+(prelude-require-packages '(diff-hl hl-todo which-key))
+
+(require 'diff-hl)
+(require 'diff-hl-margin)
+(require 'hl-todo)
+(require 'which-key)
 
 ;; the toolbar is just a waste of valuable screen estate
 ;; in a tty tool-bar-mode does not properly auto-load, and is
 ;; already disabled anyway
-(prelude-require-package 'diff-hl)
-(require 'diff-hl)
-(require 'diff-hl-margin)
-
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 
@@ -27,18 +28,10 @@
 ;; disable the annoying bell ring
 (setq ring-bell-function 'ignore)
 
-;; disable startup screen
-(setq inhibit-startup-screen t)
-
 ;; nice scrolling
 (setq scroll-margin 0
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
-
-;; mode line settings
-(line-number-mode t)
-(column-number-mode t)
-(size-indication-mode t)
 
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -55,12 +48,7 @@
                (t "%b"))))))
 
 ;; show available keybindings after you start typing
-(require 'which-key)
 (which-key-mode +1)
-
-;;; CUSTOM STUFF
-
-(prelude-require-packages '(monokai-theme hl-todo github-modern-theme))
 
 ;;; Sublime like color theme
 (load-theme 'leuven t)
@@ -88,8 +76,7 @@
 (setq ns-use-proxy-icon nil)
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . nil))
 
-
-;;; show line numbers, but not on neotree
+;;; show line numbers on demand
 (global-set-key (kbd "<f7>") 'display-line-numbers-mode)
 (set-face-attribute 'line-number nil
                     :background (face-background 'default)
@@ -112,8 +99,6 @@
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
-;; highlights todo and fixme
-(require 'hl-todo)
 (global-hl-todo-mode t)
 (setq hl-todo-activate-in-modes '(prog-mode emacs-lisp-mode))
 
