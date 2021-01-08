@@ -23,6 +23,8 @@ there's stuff that probably is not necessary anymore
      CLOSED: [2021-01-06 Wed 16:23]
 *** TODO test lsp mode
     start with prelude implementation
+https://github.com/bbatsov/prelude/blob/master/modules/prelude-lsp.el
+https://www.mattduck.com/lsp-python-getting-started.html
 *** TODO review prelude changelog
     check if there's stuff worth bringing from newer commits
 *** TODO hide flycheck multiline warnings

@@ -85,7 +85,7 @@
 (setq py-isort-options '("-l=100"))
 (add-hook 'before-save-hook 'py-isort-before-save)
 
-(setq python-shell-interpreter "/usr/bin/python")
+(setq python-shell-interpreter "/usr/bin/python3")
 
 (defun facundo-pythonic-activate ()
   "If there's a venv directory in the project root, activate it"
@@ -103,6 +103,10 @@
 (setq flycheck-pycheckers-checkers '(flake8 pylint))
 
 (define-key python-mode-map (kbd "<backtab>") 'my-unindent)
+
+;; undo some anaconda bindings that clash with global commands
+(define-key anaconda-mode-map (kbd "C-x 4") nil)
+(define-key anaconda-mode-map (kbd "C-x 5") nil)
 
 ;;  more reasonable behavior when indenting yanked blocks
 (setq indent-region-function nil)
