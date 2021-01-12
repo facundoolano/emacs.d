@@ -4,6 +4,8 @@
  http://endlessparentheses.com/debugging-emacs-lisp-part-1-earn-your-independence.html
 
 ** important stuff
+*** DONE counsel-projectile-find-file-other window sometimes changes current window as well
+    CLOSED: [2021-01-11 Mon 16:07]
 *** DONE review main modules
     CLOSED: [2021-01-07 Thu 14:49]
 there's stuff that probably is not necessary anymore
@@ -21,6 +23,7 @@ there's stuff that probably is not necessary anymore
      CLOSED: [2021-01-06 Wed 12:53]
 **** DONE facundo-global-keybindings.el
      CLOSED: [2021-01-06 Wed 16:23]
+*** TODO journal buffer is very slow after opening more than once
 *** TODO test lsp mode
     start with prelude implementation
 https://github.com/bbatsov/prelude/blob/master/modules/prelude-lsp.el
@@ -28,7 +31,6 @@ https://www.mattduck.com/lsp-python-getting-started.html
 *** TODO review prelude changelog
     check if there's stuff worth bringing from newer commits
 *** TODO hide flycheck multiline warnings
-*** TODO counsel-projectile-find-file-other window sometimes changes current window as well
 *** TODO review smartparens config
     check available options for each pair in the config
     at least improve the erlang ones

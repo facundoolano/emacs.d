@@ -132,22 +132,10 @@ at the top level of DIRECTORY."
              (projectile-add-known-project (projectile-project-root))))))
      subdirs)))
 
-;;; open project in new frame
-(defun counsel-projectile-find-file-other-window ()
-  "Open a file in the current project in a separate window."
-  (interactive)
-  (ivy-read (projectile-prepend-project-name "Find file: ")
-            (projectile-current-project-files)
-            :matcher counsel-projectile-find-file-matcher
-            :require-match t
-            :sort t
-            :action #'counsel-projectile-find-file-action-other-window
-            :caller 'counsel-projectile-find-file))
-
 (global-set-key (kbd "C-c p") 'projectile-command-map)
 
-(global-set-key (kbd "s-p") 'counsel-projectile-find-file)
-(global-set-key (kbd "s-P") 'counsel-projectile-find-file-other-window)
+(global-set-key (kbd "s-p") 'projectile-find-file-dwim)
+(global-set-key (kbd "s-P") 'projectile-find-file-dwim-other-window)
 (global-set-key (kbd "s-F") 'counsel-projectile-ag)
 (global-set-key (kbd "s-w") 'kill-project-frame)
 ;; FIXME counsel-projectile not working here
