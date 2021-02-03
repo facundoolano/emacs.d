@@ -77,6 +77,10 @@
 (defun org-journal-open-or-create-current ()
   "Switch to the current journal file buffer without creating a new entry."
   (interactive)
+  ;; keep a single open journal buffer
+  (let ((current-buf (get-file-buffer (org-journal--get-entry-path))))
+    (if current-buf
+        (kill-buffer current-buf)))
   (setq current-prefix-arg '(4)) ; C-u to prevent entry creation
   (call-interactively 'org-journal-new-entry))
 
@@ -89,22 +93,12 @@
 (define-key org-mode-map (kbd "M-<up>") 'move-text-up)
 (define-key org-mode-map (kbd "M-<down>") 'move-text-down)
 
-;; pasting this here as a cheatsheet
-;; https://orgmode.org/manual/Structure-Templates.html
-;; a	‘#+BEGIN_EXPORT ascii’ … ‘#+END_EXPORT’
-;; c	‘#+BEGIN_CENTER’ … ‘#+END_CENTER’
-;; C	‘#+BEGIN_COMMENT’ … ‘#+END_COMMENT’
-;; e	‘#+BEGIN_EXAMPLE’ … ‘#+END_EXAMPLE’
-;; E	‘#+BEGIN_EXPORT’ … ‘#+END_EXPORT’
-;; h	‘#+BEGIN_EXPORT html’ … ‘#+END_EXPORT’
-;; l	‘#+BEGIN_EXPORT latex’ … ‘#+END_EXPORT’
-;; q	‘#+BEGIN_QUOTE’ … ‘#+END_QUOTE’
-;; s	‘#+BEGIN_SRC’ … ‘#+END_SRC’
-;; v	‘#+BEGIN_VERSE’ … ‘#+END_VERSE’
-
 (define-key org-mode-map (kbd "<f5>") 'org-present)
 (define-key org-present-mode-keymap (kbd "q") 'org-present-quit)
 (define-key org-present-mode-keymap (kbd "<f5>") 'org-present-quit)
+
+;; need a way to wrap region with emphasize words
+;; https://emacs.stackexchange.com/questions/10029/org-mode-how-to-create-an-org-mode-markup-keybinding
 
 (provide 'facundo-org)
 
