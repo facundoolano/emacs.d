@@ -18,8 +18,8 @@
 (add-to-list 'auto-mode-alist '("\\.config\\’" . erlang-mode))
 (add-to-list 'sp-no-reindent-after-kill-modes 'erlang-mode)
 
-(setq erlang-root-dir "/Users/facundo/kerl/21.3")
-(setq exec-path (cons "/Users/facundo/kerl/21.3/bin" exec-path))
+(setq erlang-root-dir "~/.asdf/installs/erlang/22.3.4.4/")
+(setq exec-path (cons "~/.asdf/installs/erlang/22.3.4.4/bin/" exec-path))
 
 ;; never managed to get the man working
 (setq erlang-man-root-dir "/usr/local/lib/erlang/man")
@@ -29,14 +29,15 @@
 (setq erlang-indent-level 4)
 
 ;; rebar3 checker trips with rebar2 projects
-;; (setq-default flycheck-disabled-checkers '(erlang-rebar3))
+(setq-default flycheck-disabled-checkers '(erlang-rebar3))
 
 ;; add a smart pair for binaries
 (sp-local-pair 'erlang-mode "<<\"" "\">>")
 (sp-local-pair 'erlang-mode "#{" "}")
 
 ;; NOTE I had to replace sed with gsed in ivy-erlang-complete exported funcs for them to work on macos
-(setq ivy-erlang-complete-erlang-root "/Users/facundo/kerl/21.3")
+(setq ivy-erlang-complete-erlang-root "/Users/facundo/.asdf/installs/erlang/22.3.4.4/")
+(setq ivy-erlang-complete-enable-autosave nil)
 (add-hook 'erlang-mode-hook #'ivy-erlang-complete-init)
 ;; automatic update completion data after save
 (add-hook 'after-save-hook #'ivy-erlang-complete-reparse)
