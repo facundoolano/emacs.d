@@ -49,6 +49,10 @@
 ;; ;; CUSTOM STUFF
 
 (cua-mode)
+
+; leave C-x/C-c alone, cut/copy are done with super
+(setq cua-prefix-override-inhibit-delay nil)
+
 ;; TODO check if this is still needed after removing prelude defaults
 (setq mac-option-key-is-meta nil)
 (setq mac-command-modifier 'super)
