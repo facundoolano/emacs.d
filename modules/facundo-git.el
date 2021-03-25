@@ -16,6 +16,8 @@
 
 (add-to-list 'magit-section-initial-visibility-alist '(stashes . hide))
 
+(setq magit-bury-buffer-function 'magit-mode-quit-window)
+
 (require 'git-link)
 
 (setq git-link-open-in-browser t)
