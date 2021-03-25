@@ -26,3 +26,4 @@ tramp
 network-security.data
 anaconda-mode/*
 transient/
+cache/

@@ -4,20 +4,22 @@
  http://endlessparentheses.com/debugging-emacs-lisp-part-1-earn-your-independence.html
 
 ** important stuff
+*** TODO erlang modules take too long to start
+    also randomly enter in slowness for editing
+*** TODO get-link trips on branches. default to master/main
+*** TODO get-link defaults to range even with no selection
 *** TODO disable autocomplete in org mode, or at least in blog mode/writing
 *** DONE counsel-projectile-find-file-other window sometimes changes current window as well
     CLOSED: [2021-03-25 Thu 20:40]
     the problem is with find-file itself. probably a bad interaction with the split window sensible crap I added.
     specifically happens when the file wasn't already open
-*** TODO erlang modules take too long to start
-    also randomly enter in slowness for editing
 *** DONE git-link C-x l binding is not working as expected (text gets cut on region)
     CLOSED: [2021-02-08 Mon 16:28]
-*** TODO get-link trips on branches. default to master/main
 *** TODO move region up/down as lines messes things up
 *** TODO copy forge PR link instead of opening from magit buffer
 *** TODO anaconda still gets in the way of C-x bindings
-*** TODO q in magit buffer also changes the other buffer
+*** DONE q in magit buffer also changes the other buffer
+    CLOSED: [2021-03-25 Thu 20:45]
 *** DONE review main modules
     CLOSED: [2021-01-07 Thu 14:49]
 there's stuff that probably is not necessary anymore
