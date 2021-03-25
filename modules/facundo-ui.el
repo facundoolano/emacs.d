@@ -60,9 +60,7 @@
 
 (defun set-extra-margin ()
   "Add an extra bit of margin for text editing buffers."
-  (setq left-margin-width 2)
-  (set-window-buffer nil (current-buffer))
-  )
+  (setq left-margin-width 2))
 
 ;; (add-hook 'text-mode-hook 'set-extra-margin)
 (add-hook 'prog-mode-hook 'set-extra-margin)

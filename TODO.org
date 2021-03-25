@@ -4,6 +4,7 @@
  http://endlessparentheses.com/debugging-emacs-lisp-part-1-earn-your-independence.html
 
 ** important stuff
+*** TODO disable autocomplete in org mode, or at least in blog mode/writing
 *** DONE counsel-projectile-find-file-other window sometimes changes current window as well
     CLOSED: [2021-01-11 Mon 16:07]
 *** DONE review main modules
@@ -23,20 +24,21 @@ there's stuff that probably is not necessary anymore
      CLOSED: [2021-01-06 Wed 12:53]
 **** DONE facundo-global-keybindings.el
      CLOSED: [2021-01-06 Wed 16:23]
-*** TODO journal buffer is very slow after opening more than once
-*** TODO test lsp mode
-    start with prelude implementation
-https://github.com/bbatsov/prelude/blob/master/modules/prelude-lsp.el
-https://www.mattduck.com/lsp-python-getting-started.html
+*** DONE journal buffer is very slow after opening more than once
+    CLOSED: [2021-01-30 Sat 13:29]
 *** TODO review prelude changelog
     check if there's stuff worth bringing from newer commits
 *** TODO hide flycheck multiline warnings
 *** TODO review smartparens config
     check available options for each pair in the config
     at least improve the erlang ones
-*** TODO review company and hippie expand backends
 *** TODO add binding for multiline edit
 *** TODO keep selection when pasting. copying too https://emacs.stackexchange.com/questions/19989/how-to-copy-text-without-losing-selection
+*** TODO test lsp mode
+    start with prelude implementation
+https://github.com/bbatsov/prelude/blob/master/modules/prelude-lsp.el
+https://www.mattduck.com/lsp-python-getting-started.html
+*** TODO review company and hippie expand backends
 *** TODO tabs in makefile (disable my-indent and use indent-for-tab-command in that mode)
 *** TODO https://github.com/thiderman/makefile-executor.el
 *** TODO profile
@@ -47,7 +49,9 @@ look for opportunities to improve performance
 *** TODO binding/command/prefix to allow grepping/opening file on gitignored dirs
 *** TODO indent/unindet is broken, at least in erlang and python, at least in blocks
 *** TODO paste + indent is broken (maybe differently in different languages)
-*** TODO swap words horizontally
+*** DONE swap words horizontally
+    CLOSED: [2021-01-08 Fri 18:16]
+    transpose word/sexp already does this
 *** TODO C-tab works like crap
 *** TODO go to line incremental (no return needed)
 *** DONE prefer vertical split for other buffer

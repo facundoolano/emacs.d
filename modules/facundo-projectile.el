@@ -134,8 +134,8 @@ at the top level of DIRECTORY."
 
 (global-set-key (kbd "C-c p") 'projectile-command-map)
 
-(global-set-key (kbd "s-p") 'projectile-find-file-dwim)
-(global-set-key (kbd "s-P") 'projectile-find-file-dwim-other-window)
+(global-set-key (kbd "s-p") 'projectile-find-file)
+(global-set-key (kbd "s-P") 'projectile-find-file-other-window)
 (global-set-key (kbd "s-F") 'counsel-projectile-ag)
 (global-set-key (kbd "s-w") 'kill-project-frame)
 ;; FIXME counsel-projectile not working here
