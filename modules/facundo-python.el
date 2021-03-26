@@ -65,6 +65,7 @@
   (anaconda-mode 1)
   (eldoc-mode 1)
   (setq-local my-indentation-offset python-indent-offset)
+  (setq-local forward-sexp-function nil)
   (setq-local electric-layout-rules
               '((?: . (lambda ()
                         (and (zerop (first (syntax-ppss)))
