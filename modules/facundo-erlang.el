@@ -44,6 +44,7 @@
 (setq ivy-erlang-complete-erlang-root "/Users/facundo/.asdf/installs/erlang/22.3.4.4/")
 (setq ivy-erlang-complete-enable-autosave nil)
 (add-hook 'erlang-mode-hook #'ivy-erlang-complete-init)
+(add-hook 'erlang-mode-hook #'subword-mode)
 ;; automatic update completion data after save
 (add-hook 'after-save-hook #'ivy-erlang-complete-reparse)
 (add-hook 'erlang-mode-hook #'company-erlang-init)
