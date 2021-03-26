@@ -4,8 +4,21 @@
  http://endlessparentheses.com/debugging-emacs-lisp-part-1-earn-your-independence.html
 
 ** important stuff
-*** TODO erlang modules take too long to start
+*** DONE test lsp mode
+    CLOSED: [2021-03-26 Fri 08:57]
+    start with prelude implementation
+    https://emacs-lsp.github.io/lsp-mode/page/lsp-erlang/
+https://github.com/erlang-ls/erlang_ls/blob/1f0efcdc4334ebf35f795d07e4de2e90b7d873cb/misc/dotemacs
+https://github.com/bbatsov/prelude/blob/master/modules/prelude-lsp.el
+https://www.mattduck.com/lsp-python-getting-started.html
+
+
+*** TODO add consistent bindings for mark-defun and kill-defun
+*** DONE erlang modules take too long to start
+    CLOSED: [2021-03-26 Fri 08:57]
     also randomly enter in slowness for editing
+*** TODO test origami mode
+
 *** TODO get-link trips on branches. default to master/main
 *** TODO get-link defaults to range even with no selection
 *** TODO disable autocomplete in org mode, or at least in blog mode/writing
@@ -44,10 +57,6 @@ there's stuff that probably is not necessary anymore
     maybe a modeline calculation slownes?
 *** TODO long lines (as in minified js) make buffers very slow
 try so-long mode, maybe with some default thresholds
-*** TODO test lsp mode
-    start with prelude implementation
-https://github.com/bbatsov/prelude/blob/master/modules/prelude-lsp.el
-https://www.mattduck.com/lsp-python-getting-started.html
 *** TODO review prelude changelog
     check if there's stuff worth bringing from newer commits
 *** TODO hide flycheck multiline warnings
@@ -113,7 +122,8 @@ look for opportunities to improve performance
 
 
 ** Python
-*** TODO mark thing doesn't work
+*** DONE mark thing doesn't work
+    CLOSED: [2021-03-26 Fri 08:57]
 *** TODO uknown symbols not marked as errors
 *** TODO pythonic-activate fails some times
 
