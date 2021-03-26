@@ -52,6 +52,15 @@
   (isearch-forward nil 1)
   (isearch-yank-kill))
 
+(defun mark-and-search-backward ()
+  "Easy mark symbol current symbol and search backward for it in the current buffer."
+  (interactive)
+  (easy-mark 1)
+  (cua-copy-region nil)
+  (isearch-backward nil 1)
+  (isearch-yank-kill)
+  (isearch-repeat-backward nil))
+
 (defun mark-and-grep ()
   "Easy mark symbol current symbol and search for it in the project files."
   (interactive)
@@ -82,6 +91,7 @@ Assumes the symbol is a function and tries with a variable describe-function fai
 (global-set-key (kbd "C-c f") 'counsel-recentf)
 
 (global-set-key (kbd "C-S-s") 'mark-and-search)
+(global-set-key (kbd "C-S-r") 'mark-and-search-backward)
 (global-set-key (kbd "C-M-s") 'mark-and-grep)
 
 (provide 'facundo-ivy)
