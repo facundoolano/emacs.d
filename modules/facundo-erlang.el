@@ -8,8 +8,12 @@
 
 ;;; TAKEN FROM prelude-erlang.el
 
+(prelude-require-packages '(erlang))
+
 (require 'facundo-programming)
-(prelude-require-packages '(erlang ivy-erlang-complete company-erlang))
+(require 'ivy-erlang-complete)
+(require 'company-erlang)
+
 
 ;;; CUSTOM STUFF
 
