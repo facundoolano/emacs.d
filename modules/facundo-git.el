@@ -24,14 +24,13 @@
 (setq git-link-default-branch "master") ;leaning on github to redirect master to main when necessary
 
 (defun facundo/git-link ()
+  "Override the default git-link behavior to only show line number if there is
+some region active and use a commit instead of the default branch when there's a prefix argument."
   (interactive)
-  ;; improve git-link behavior: if no selection -> no line number
-  (let ((git-link-use-single-line-number mark-active))
-    (if current-prefix-arg
-        (let ((git-link-use-commit t)
-              (current-prefix-arg nil))
-          (call-interactively 'git-link))
-      (call-interactively 'git-link))))
+  (let ((git-link-use-single-line-number mark-active)
+        (git-link-use-commit current-prefix-arg)
+        (current-prefix-arg nil))
+    (call-interactively 'git-link)))
 
 (global-set-key (kbd "C-x l") 'facundo/git-link)
 
