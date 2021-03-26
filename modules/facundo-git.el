@@ -21,14 +21,17 @@
 (require 'git-link)
 
 (setq git-link-open-in-browser t)
+(setq git-link-default-branch "master") ;leaning on github to redirect master to main when necessary
 
 (defun facundo/git-link ()
   (interactive)
-  (if current-prefix-arg
-      (let ((git-link-use-commit t)
-            (current-prefix-arg nil))
-        (call-interactively 'git-link))
-    (call-interactively 'git-link)))
+  ;; improve git-link behavior: if no selection -> no line number
+  (let ((git-link-use-single-line-number mark-active))
+    (if current-prefix-arg
+        (let ((git-link-use-commit t)
+              (current-prefix-arg nil))
+          (call-interactively 'git-link))
+      (call-interactively 'git-link))))
 
 (global-set-key (kbd "C-x l") 'facundo/git-link)
 

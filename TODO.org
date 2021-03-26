@@ -19,8 +19,10 @@ https://www.mattduck.com/lsp-python-getting-started.html
     also randomly enter in slowness for editing
 *** TODO test origami mode
 
-*** TODO get-link trips on branches. default to master/main
-*** TODO get-link defaults to range even with no selection
+*** DONE get-link trips on branches. default to master/main
+    CLOSED: [2021-03-26 Fri 09:32]
+*** DONE get-link defaults to range even with no selection
+    CLOSED: [2021-03-26 Fri 09:32]
 *** TODO disable autocomplete in org mode, or at least in blog mode/writing
 *** DONE counsel-projectile-find-file-other window sometimes changes current window as well
     CLOSED: [2021-03-25 Thu 20:40]
