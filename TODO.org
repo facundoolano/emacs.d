@@ -85,7 +85,8 @@ look for opportunities to improve performance
 *** DONE swap words horizontally
     CLOSED: [2021-01-08 Fri 18:16]
     transpose word/sexp already does this
-*** TODO C-tab works like crap
+*** DONE C-tab works like crap
+    CLOSED: [2021-03-26 Fri 18:42]
 *** TODO go to line incremental (no return needed)
 *** DONE prefer vertical split for other buffer
     CLOSED: [2020-12-29 Tue 16:34]
