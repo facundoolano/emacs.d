@@ -13,16 +13,17 @@ https://github.com/bbatsov/prelude/blob/master/modules/prelude-lsp.el
 https://www.mattduck.com/lsp-python-getting-started.html
 
 
+*** TODO test origami mode
+
 *** TODO add consistent bindings for mark-defun and kill-defun
 *** DONE erlang modules take too long to start
     CLOSED: [2021-03-26 Fri 08:57]
     also randomly enter in slowness for editing
-*** TODO test origami mode
-
 *** DONE get-link trips on branches. default to master/main
     CLOSED: [2021-03-26 Fri 09:32]
 *** DONE get-link defaults to range even with no selection
     CLOSED: [2021-03-26 Fri 09:32]
+*** TODO add binding for multiline edit
 *** TODO disable autocomplete in org mode, or at least in blog mode/writing
 *** DONE counsel-projectile-find-file-other window sometimes changes current window as well
     CLOSED: [2021-03-25 Thu 20:40]
@@ -65,17 +66,10 @@ try so-long mode, maybe with some default thresholds
 *** TODO review smartparens config
     check available options for each pair in the config
     at least improve the erlang ones
-*** TODO add binding for multiline edit
 *** TODO keep selection when pasting. copying too https://emacs.stackexchange.com/questions/19989/how-to-copy-text-without-losing-selection
-*** TODO test lsp mode
-    start with prelude implementation
-https://github.com/bbatsov/prelude/blob/master/modules/prelude-lsp.el
-https://www.mattduck.com/lsp-python-getting-started.html
 *** TODO review company and hippie expand backends
 *** TODO tabs in makefile (disable my-indent and use indent-for-tab-command in that mode)
 *** TODO https://github.com/thiderman/makefile-executor.el
-*** TODO profile
-look for opportunities to improve performance
 *** TODO variable/function help at echo area
     ideally language agnostic
 *** TODO dont kill scratch

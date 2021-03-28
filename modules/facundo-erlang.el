@@ -18,9 +18,10 @@
 ;;; CUSTOM STUFF
 
 ;; default to erlang mode in .config files
-(add-to-list 'prelude-indent-sensitive-modes 'erlang-mode)
+;; (add-to-list 'prelude-indent-sensitive-modes 'erlang-mode)
 (add-to-list 'auto-mode-alist '("\\.config\\’" . erlang-mode))
 (add-to-list 'sp-no-reindent-after-kill-modes 'erlang-mode)
+(add-to-list 'erlang-electric-commands 'erlang-electric-newline)
 
 (setq erlang-root-dir "~/.asdf/installs/erlang/22.3.4.4/")
 (setq exec-path (cons "~/.asdf/installs/erlang/22.3.4.4/bin/" exec-path))
