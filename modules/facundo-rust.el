@@ -1,28 +1,32 @@
 (require 'facundo-programming)
-(prelude-require-packages '(rust-mode racer))
+(prelude-require-packages '(rustic lsp-mode))
 
-(require 'rust-mode)
+(require 'rustic)
+(require 'lsp)
 
-(setq rust-format-on-save t)
+(add-hook 'rustic-mode-hook #'subword-mode)
 
-(add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'rust-mode-hook (lambda ()
-                            ;; rust-clippy only outputs warnings on the first run after a change. disabling other checks so warnings are not lost
-                            ;; https://github.com/rust-lang/rust-clippy/issues/2604
-                            (setq flycheck-check-syntax-automatically '(mode-enabled save))
-                            (setq flycheck-checker 'rust-clippy)))
-(add-hook 'racer-mode-hook #'eldoc-mode)
-(add-hook 'racer-mode-hook #'company-mode)
+;; (customize-set-variable 'racer-complete-insert-argument-placeholders nil)
 
-(customize-set-variable 'racer-complete-insert-argument-placeholders nil)
+;; uncomment for less flashiness
+;; (setq lsp-eldoc-hook nil)
+;; (setq lsp-enable-symbol-highlighting nil)
+;; (setq lsp-signature-auto-activate nil)
 
-(defun racer-describe-and-switch ()
-  "`racer-describe` symbol at point and switch to the temp buffer for easier killing."
-  (interactive)
-  (racer-describe)
-  (other-window 1))
+(push 'rustic-clippy flycheck-checkers)
+(setq lsp-headerline-breadcrumb-enable nil)
+(setq lsp-enable-snippet nil)
+(setq rustic-format-on-save nil)
+(setq rustic-format-trigger 'on-compile)
+(setq rustic-compile-command "cargo clippy")
+(setq compilation-read-command nil)
 
-(define-key rust-mode-map (kbd "M-?") 'racer-describe-and-switch)
-(define-key rust-mode-map (kbd "s-r") 'rust-run-clippy) ;; same as build but with lint warnings
+(define-key rustic-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
+(define-key rustic-mode-map (kbd "M-.") 'lsp-find-definition)
+(define-key rustic-mode-map (kbd "M-,") 'pop-tag-mark)
+(define-key rustic-mode-map (kbd "s-r") 'rustic-compile)
+
+;; (setq lsp-enable-hover nil)
+(setq lsp-signature-auto-activate nil)
 
 (provide 'facundo-rust)
