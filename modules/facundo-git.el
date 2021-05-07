@@ -21,7 +21,7 @@
 (require 'git-link)
 
 (setq git-link-open-in-browser t)
-(setq git-link-default-branch "master") ;leaning on github to redirect master to main when necessary
+(setq git-link-default-branch "HEAD")
 
 (defun facundo/git-link ()
   "Override the default git-link behavior to only show line number if there is
