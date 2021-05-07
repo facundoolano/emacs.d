@@ -16,15 +16,12 @@ brew install aspell
 pip3 install --user isort
 pip3 install --user autopep8
 
-rustup component add rustfmt
-rustup toolchain add nightly
+rustup component add rls
 rustup component add rust-src
-cargo +nightly install racer
+rustup component add rustfmt
 rustup component add clippy --toolchain=nightly
+
+git clone https://github.com/rust-analyzer/rust-analyzer.git
+cd rust-analyzer
+cargo xtask install --server
 ```
-
-run from spotlight:
-
-- open /usr/local/Cellar/emacs/26.0.91/
-- make alias
-- drag to dock
