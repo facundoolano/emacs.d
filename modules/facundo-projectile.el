@@ -40,6 +40,8 @@
 (setq projectile-globally-ignored-directories (append '("node_modules" "coverage") projectile-globally-ignored-directories))
 (setq shell-file-name "/bin/sh")
 
+;; FIXME this should either not kill project buffers
+;; or do it only if they are not already visible in another frame
 (defun kill-project-frame ()
   "Delete current frame and kill all project buffers."
   (interactive)
@@ -134,12 +136,25 @@ at the top level of DIRECTORY."
              (projectile-add-known-project (projectile-project-root))))))
      subdirs)))
 
+(defun counsel-projectile-find-file-other-window ()
+  "Open a file in the current project in a separate window."
+  (interactive)
+  (ivy-read (projectile-prepend-project-name "Find file: ")
+            (projectile-current-project-files)
+            :matcher counsel-projectile-find-file-matcher
+            :require-match t
+            :sort t
+            :action #'counsel-projectile-find-file-action-other-window
+            :caller 'counsel-projectile-find-file))
+
 (global-set-key (kbd "C-c p") 'projectile-command-map)
 
-(global-set-key (kbd "s-p") 'projectile-find-file)
-(global-set-key (kbd "s-P") 'projectile-find-file-other-window)
+(global-set-key (kbd "s-p") 'counsel-projectile-find-file)
+(global-set-key (kbd "s-P") 'counsel-projectile-find-file-other-window)
 (global-set-key (kbd "s-F") 'counsel-projectile-ag)
 (global-set-key (kbd "s-w") 'kill-project-frame)
+;; FIXME at least until I fix kill project frame, also support plain delete frame
+(global-set-key (kbd "s-W") 'delete-frame)
 ;; FIXME counsel-projectile not working here
 (global-set-key (kbd "s-o") 'projectile-switch-project)
 
