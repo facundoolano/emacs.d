@@ -140,7 +140,7 @@ indent yanked text (with prefix arg don't indent)."
 (define-key prog-mode-map (kbd "<tab>") 'my-indent)
 ;; not using this one anymore since its defined in the company-simple-complete:
 ;; (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
-(define-key company-active-map (kbd "<return>") 'company-select-next)
+(define-key company-active-map (kbd "<return>") 'company-complete-selection)
 (define-key company-active-map (kbd "C-w") 'backward-kill-word)
 (define-key prog-mode-map (kbd "<backtab>") 'my-unindent)
 
