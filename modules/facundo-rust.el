@@ -5,6 +5,7 @@
 (require 'lsp)
 
 (add-hook 'rustic-mode-hook #'subword-mode)
+(add-hook 'rustic-compilation-mode-hook 'visual-line-mode)
 
 ;; (customize-set-variable 'racer-complete-insert-argument-placeholders nil)
 
@@ -17,14 +18,19 @@
 (setq lsp-headerline-breadcrumb-enable nil)
 (setq lsp-enable-snippet nil)
 (setq rustic-format-on-save nil)
-(setq rustic-format-trigger 'on-compile)
+(setq rustic-format-trigger nil)
 (setq rustic-compile-command "cargo clippy")
 (setq compilation-read-command nil)
+(setq lsp-rust-analyzer-server-display-inlay-hints t)
+
+;; show backtace on test output
+(setq rustic-compile-backtrace t)
 
 (define-key rustic-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
 (define-key rustic-mode-map (kbd "M-.") 'lsp-find-definition)
 (define-key rustic-mode-map (kbd "M-,") 'pop-tag-mark)
 (define-key rustic-mode-map (kbd "s-r") 'rustic-compile)
+(define-key rustic-mode-map (kbd "s-f") 'rustic-cargo-fmt)
 
 ;; (setq lsp-enable-hover nil)
 (setq lsp-signature-auto-activate nil)
