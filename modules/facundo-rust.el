@@ -26,10 +26,16 @@
 ;; show backtace on test output
 (setq rustic-compile-backtrace t)
 
+(defun rustic-cargo-release ()
+  "Run 'cargo build' for the current project."
+  (interactive)
+  (rustic-run-cargo-command "cargo build --release"))
+
 (define-key rustic-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
 (define-key rustic-mode-map (kbd "M-.") 'lsp-find-definition)
 (define-key rustic-mode-map (kbd "M-,") 'pop-tag-mark)
 (define-key rustic-mode-map (kbd "s-r") 'rustic-compile)
+(define-key rustic-mode-map (kbd "s-R") 'rustic-cargo-release)
 (define-key rustic-mode-map (kbd "s-f") 'rustic-cargo-fmt)
 
 ;; (setq lsp-enable-hover nil)
