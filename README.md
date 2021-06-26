@@ -3,6 +3,9 @@ My emacs configuration. Previously based on prelude.
 ![](emacs.png)
 
 ``` shell
+alias emacs="emacsclient -c -a emacs"
+export EDITOR=emacs
+
 brew install emacs --with-cocoa --with-gnutls --with-dbus --with-librsvg --with-imagemagick@6 --with-mailutils --devel
 
 npm install -g livedown

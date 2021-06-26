@@ -81,6 +81,8 @@
 
 (require 'facundo-global-keybindings)
 
+;; allow to use emacsclient for shell edition
+(server-start)
 
 ;; Non core modules.
 (safe-require 'facundo-ivy)
