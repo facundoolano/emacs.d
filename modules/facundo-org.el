@@ -8,7 +8,7 @@
 
 ;;; Code:
 
-(prelude-require-packages '(org ox-gfm org-journal))
+(prelude-require-packages '(org ox-gfm org-journal org-present))
 
 (require 'org)
 (require 'org-present)
@@ -51,25 +51,33 @@
 
 (setq org-export-with-sub-superscripts nil)
 
+(setq org-present-text-scale 3)
+
+(set-face-background 'org-block "white")
+
 ;; setup presentation mode
-(eval-after-load "org-present"
-  '(progn
-     (add-hook 'org-present-mode-hook
-               (lambda ()
-                 (org-present-big)
-                 (toggle-frame-fullscreen)
-                 (org-display-inline-images)
-                 (flyspell-mode -1)
-                 (whitespace-mode -1)
-                 (org-present-read-only)))
-     (add-hook 'org-present-mode-quit-hook
-               (lambda ()
-                 (org-present-small)
-                 (toggle-frame-fullscreen)
-                 (org-remove-inline-images)
-                 (flyspell-mode +1)
-                 (whitespace-mode +1)
-                 (org-present-read-write)))))
+(add-hook 'org-present-mode-hook
+          (lambda ()
+            (global-hl-line-mode -1)
+            (org-present-big)
+            (org-toggle-inline-images)
+            (toggle-frame-fullscreen)
+            (setq-local cwm-centered-window-width 140)
+            (centered-window-mode)
+            (flyspell-mode -1)
+            (whitespace-mode -1)
+            ))
+
+(add-hook 'org-present-mode-quit-hook
+          (lambda ()
+            (global-hl-line-mode)
+            (org-present-small)
+            (toggle-frame-fullscreen)
+            (org-toggle-inline-images)
+            (centered-window-mode -1)
+            (flyspell-mode +1)
+            (whitespace-mode +1)
+            ))
 
 (setq org-journal-carryover-items "TODO=\"TODO\"|TODO=\"STARTED\"")
 (setq org-journal-file-header "#+TODO: TODO STARTED | DONE CANCELED\n\n")
