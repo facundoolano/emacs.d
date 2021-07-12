@@ -29,6 +29,19 @@
 
 (add-hook 'org-mode-hook 'prelude-org-mode-defaults)
 
+;; syntax highlight latex (beamer) export
+(require 'ox-latex)
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "bibtex %b"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(setq org-image-actual-width nil)
+
+
 (setq org-startup-folded nil)
 
 ;; allow to resize images
