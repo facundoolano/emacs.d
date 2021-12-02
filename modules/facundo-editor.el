@@ -156,7 +156,8 @@ The body of the advice is in BODY."
   "Enable `whitespace-mode' if `prelude-whitespace' is not nil."
   ;; keep the whitespace decent all the time (in this buffer)
   (add-hook 'before-save-hook 'whitespace-cleanup nil t)
-  (whitespace-mode +1))
+  ;; (whitespace-mode +1)
+  )
 
 (add-hook 'text-mode-hook 'prelude-enable-flyspell)
 (add-hook 'text-mode-hook 'prelude-enable-whitespace)
