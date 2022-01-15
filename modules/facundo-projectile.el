@@ -58,7 +58,7 @@
     (if (file-exists-p readme)
         (find-file readme)))
   (projectile-vc)
-  (neotree-project-sync))
+  (dired-sidebar-show-sidebar))
 
 (setq projectile-switch-project-action 'facundo-switch-project-action)
 

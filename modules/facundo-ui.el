@@ -42,7 +42,6 @@
       '("" (:eval
             (let ((project-dir (projectile-project-root)))
               (cond
-               ((string= (buffer-name) " *NeoTree*") nil)
                ((and project-dir (not (string= project-dir "/"))) (abbreviate-file-name project-dir))
                ((buffer-file-name) (abbreviate-file-name (buffer-file-name)))
                (t "%b"))))))
@@ -94,7 +93,6 @@
 (global-diff-hl-mode +1)
 (diff-hl-margin-mode)
 
-(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
 (global-hl-todo-mode t)

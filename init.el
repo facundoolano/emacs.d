@@ -92,7 +92,7 @@
 (safe-require 'facundo-git)
 (safe-require 'facundo-projectile)
 (safe-require 'facundo-modeline)
-(safe-require 'facundo-neotree)
+(safe-require 'facundo-dired)
 (safe-require 'facundo-org)
 (safe-require 'facundo-blog)
 (safe-require 'facundo-dictionary)
