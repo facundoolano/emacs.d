@@ -6,7 +6,7 @@ My emacs configuration. Previously based on prelude.
 alias emacs="emacsclient -c -a emacs"
 export EDITOR=emacs
 
-brew install emacs --with-cocoa --with-gnutls --with-dbus --with-librsvg --with-imagemagick@6 --with-mailutils --devel
+brew install --cask emacs-mac
 
 npm install -g livedown
 npm install -g mocha
