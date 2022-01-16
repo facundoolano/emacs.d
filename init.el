@@ -51,6 +51,7 @@
 (setq large-file-warning-threshold 100000000)
 
 ;;; remember window layout
+(setq desktop-restore-eager 5)
 (setq desktop-save t)
 (desktop-save-mode 1)
 

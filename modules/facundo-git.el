@@ -7,6 +7,7 @@
                             git-link))
 
 (require 'magit)
+(require 'forge)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
@@ -22,6 +23,8 @@
 
 (setq git-link-open-in-browser t)
 (setq git-link-default-branch "HEAD")
+
+(setq forge-topic-list-limit '(5 . -1))
 
 (defun facundo/git-link ()
   "Override the default git-link behavior to only show line number if there is

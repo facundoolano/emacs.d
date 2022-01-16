@@ -16,6 +16,7 @@
 (require 'py-isort)
 (require 'py-autopep8)
 (require 'python)
+(require 'anaconda-mode)
 
 ;; Copy pasted from ruby-mode.el
 (defun prelude-python--encoding-comment-required-p ()
