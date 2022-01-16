@@ -26,7 +26,7 @@
 
 (prelude-require-packages '(dired-sidebar all-the-icons-dired))
 
-(require 'ls-lisp)
+(require 'dired-sidebar)
 
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
@@ -36,17 +36,27 @@
 (setq dired-listing-switches "-lA --group-directories-first")
 
 (customize-set-variable 'dired-sidebar-use-custom-font t)
+(customize-set-variable 'dired-sidebar-no-delete-other-windows t)
 (setq dired-sidebar-face '(:height 120))
 
 (custom-set-faces
  '(dired-directory ((t (:foreground "DodgerBlue3" :height 130 :background nil :weight normal))))
  '(all-the-icons-dired-dir-face ((((background light)) :foreground "DodgerBlue3" :height 130 :background nil :weight normal)))
- '(dired-header ((t (:foreground "gray" :height 120  :background nil :weight normal))))
- )
+ '(dired-header ((t (:foreground "gray" :height 120  :background nil :weight normal)))))
+
 
 (customize-set-variable 'dired-sidebar-width 26)
 
+(defun dired-sidebar-preview ()
+  "Open file at point in another buffer without leaving the dired sidebar."
+  (interactive)
+  (dired-sidebar-find-file)
+  (dired-sidebar-jump-to-sidebar)
+  (dired-next-line 1))
+
+
 (global-set-key (kbd "<f8>") 'dired-sidebar-toggle-sidebar)
+(define-key dired-sidebar-mode-map (kbd "SPC") 'dired-sidebar-preview)
 
 (provide 'facundo-dired)
 ;;; facundo-dired.el ends here
