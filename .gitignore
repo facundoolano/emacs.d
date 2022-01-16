@@ -27,3 +27,5 @@ network-security.data
 anaconda-mode/*
 transient/
 cache/
+.persistent-scratch
+forge-database.sqlite

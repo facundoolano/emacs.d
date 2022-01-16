@@ -33,7 +33,7 @@
 (diff-hl-dired-mode 0)
 
 (setq insert-directory-program "gls" dired-use-ls-dired t)
-(setq dired-listing-switches "-lA --group-directories-first")
+(setq dired-listing-switches "-l --group-directories-first")
 
 (customize-set-variable 'dired-sidebar-use-custom-font t)
 (customize-set-variable 'dired-sidebar-no-delete-other-windows t)
