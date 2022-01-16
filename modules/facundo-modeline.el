@@ -31,22 +31,23 @@
 
 (defun sml/get-directory ()
   "Decide if we want directory shown. If so, return it."
-  (file-relative-name
-   (cond
-    ;; In email attachments, buffer-file-name is non-nil, but
-    ;; file-name-directory returns nil
-    ((buffer-file-name) (or (file-name-directory (buffer-file-name)) ""))
-    ((eq major-mode 'dired-mode)
-     (replace-regexp-in-string "/[^/]*/$" "/" default-directory))
-    ((and (symbolp major-mode)
-          (member major-mode '(shell-mode eshell-mode term-mode)))
-     default-directory)
-    ;; In indirect buffers, buffer-file-name is nil. The correct value is
-    ;; retrieved from the base buffer.
-    ((buffer-base-buffer)
-     (with-current-buffer (buffer-base-buffer) (sml/get-directory)))
-    (t ""))
-   (projectile-project-root)))
+  (when (projectile-project-root)
+    (file-relative-name
+     (cond
+      ;; In email attachments, buffer-file-name is non-nil, but
+      ;; file-name-directory returns nil
+      ((buffer-file-name) (or (file-name-directory (buffer-file-name)) ""))
+      ((eq major-mode 'dired-mode)
+       (replace-regexp-in-string "/[^/]*/$" "/" default-directory))
+      ((and (symbolp major-mode)
+            (member major-mode '(shell-mode eshell-mode term-mode)))
+       default-directory)
+      ;; In indirect buffers, buffer-file-name is nil. The correct value is
+      ;; retrieved from the base buffer.
+      ((buffer-base-buffer)
+       (with-current-buffer (buffer-base-buffer) (sml/get-directory)))
+      (t ""))
+     (projectile-project-root))))
 
 (defvar mode-line-directory
   '(:propertize
