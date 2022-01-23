@@ -53,7 +53,7 @@
 
 (defun facundo-switch-project-action ()
   "Show magit and the readme when opening a project."
-  (make-frame)
+  (select-frame (make-frame))
   (let ((readme (concat (projectile-project-root) "README.md")))
     (if (file-exists-p readme)
         (find-file readme)))
