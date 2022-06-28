@@ -13,6 +13,7 @@
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (define-key magit-hunk-section-map (kbd "S-<return>") 'magit-diff-visit-file-other-window)
 
+
 (add-to-list 'magit-dwim-selection '(magit-branch-and-checkout nil t))
 
 (add-to-list 'magit-section-initial-visibility-alist '(stashes . hide))
@@ -36,5 +37,6 @@ some region active and use a commit instead of the default branch when there's a
     (call-interactively 'git-link)))
 
 (global-set-key (kbd "C-x l") 'facundo/git-link)
+(define-key magit-status-mode-map (kbd "C-x l") 'forge-copy-url-at-point-as-kill)
 
 (provide 'facundo-git)
