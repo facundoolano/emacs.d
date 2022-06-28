@@ -2,7 +2,7 @@
 
 (require 'livedown)
 
-(prelude-require-packages '(centered-window visual-fill-column writeroom-mode reverse-im))
+(prelude-require-packages '(centered-window visual-fill-column writeroom-mode reverse-im plantuml-mode))
 
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
@@ -67,6 +67,10 @@
 ;; (global-set-key (kbd "M-_") (lambda () (interactive) (insert "---")))
 (define-key text-mode-map (kbd "M-?") (lambda () (interactive) (insert "¿")))
 
+;; use a plantuml executable for previewing of plantuml files
+;; assumes plantuml executable installed and in path
+(setq plantuml-default-exec-mode 'executable)
+(setq plantuml-indent-level 2)
 
 (provide 'facundo-text)
 

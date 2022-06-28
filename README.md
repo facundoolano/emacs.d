@@ -19,6 +19,7 @@ brew install aspell
 pip3 install --user isort
 pip3 install --user autopep8
 
+rustup toolchain install nightly
 rustup component add rls
 rustup component add rust-src
 rustup component add rustfmt
@@ -29,4 +30,5 @@ cd rust-analyzer
 cargo xtask install --server
 
 brew install coreutils
+brew install plantuml
 ```
