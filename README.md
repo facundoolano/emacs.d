@@ -7,6 +7,7 @@ alias emacs="emacsclient -c -a emacs"
 export EDITOR=emacs
 
 brew install --cask emacs-mac
+brew install ag
 
 npm install -g livedown
 npm install -g mocha

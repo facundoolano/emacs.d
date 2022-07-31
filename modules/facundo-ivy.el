@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(prelude-require-packages '(ivy counsel smex anzu))
+(prelude-require-packages '(ivy counsel smex anzu async))
 
 (require 'ivy)
 (require 'counsel)

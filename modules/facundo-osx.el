@@ -29,15 +29,15 @@
 
 ;; On OS X Emacs doesn't use the shell PATH if it's not started from
 ;; the shell. Let's fix that:
-(prelude-require-packages '(exec-path-from-shell vkill))
+(prelude-require-packages '(exec-path-from-shell))
 
 (require 'exec-path-from-shell)
 (exec-path-from-shell-initialize)
 (exec-path-from-shell-copy-env "PATH")
 
 ;; proced-mode doesn't work on OS X so we use vkill instead
-(autoload 'vkill "vkill" nil t)
-(global-set-key (kbd "C-x p") 'vkill)
+;(autoload 'vkill "vkill" nil t)
+;(global-set-key (kbd "C-x p") 'vkill)
 
 ;; It's all in the Meta
 (setq ns-function-modifier 'hyper)

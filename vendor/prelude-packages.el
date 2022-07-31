@@ -60,7 +60,7 @@
 Missing packages are installed automatically."
   (mapc #'prelude-require-package packages))
 
-(define-obsolete-function-alias 'prelude-ensure-module-deps 'prelude-require-packages)
+;(define-obsolete-function-alias 'prelude-ensure-module-deps 'prelude-require-packages)
 
 (defun prelude-install-packages ()
   "Install all packages listed in `prelude-packages'."

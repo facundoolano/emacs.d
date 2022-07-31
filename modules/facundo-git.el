@@ -1,8 +1,7 @@
 (prelude-require-packages '(magit
                             forge
                             git-timemachine
-                            gitconfig-mode
-                            gitignore-mode
+                            git-modes
                             github-review
                             git-link))
 

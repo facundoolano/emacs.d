@@ -29,3 +29,5 @@ transient/
 cache/
 .persistent-scratch
 forge-database.sqlite
+parinfer-rust
+.lsp-session*

@@ -12,6 +12,7 @@
 ;;; TAKEN FROM prelude-editor.el
 
 ;; smart pairing for all
+(prelude-require-package 'smartparens)
 (require 'smartparens-config)
 (setq sp-base-key-bindings 'paredit)
 (setq sp-autoskip-closing-pair 'always)
@@ -43,28 +44,29 @@
 
 ;;; CUSTOM STUFF
 
-(prelude-require-package 'parinfer)
-(require 'parinfer)
+(prelude-require-package 'parinfer-rust-mode)
+; FIXME parinfer deprecated, repalced by rust mode. customizations below need to be updated or removed
+;(require 'parinfer)
 
 ;; use regular yank to avoid weird region replacement
-(define-key parinfer-region-mode-map [remap yank] 'yank)
+;(define-key parinfer-region-mode-map [remap yank] 'yank)
 ;; (define-key parinfer-region-mode-map (kbd "<tab>") 'parinfer-shift-right)
 ;; (define-key parinfer-region-mode-map (kbd "<backtab>") 'parinfer-shift-left)
 
-(define-key parinfer-mode-map (kbd "<tab>") 'parinfer-smart-tab:dwim-right-or-complete)
-(define-key parinfer-mode-map (kbd "<backtab>") 'parinfer-smart-tab:dwim-left)
+;(define-key parinfer-mode-map (kbd "<tab>") 'parinfer-smart-tab:dwim-right-or-complete)
+;(define-key parinfer-mode-map (kbd "<backtab>") 'parinfer-smart-tab:dwim-left)
 
 ;; enable some paredit commands
-(define-key parinfer-mode-map (kbd "C-)") 'sp-forward-slurp-sexp)
-(define-key parinfer-mode-map (kbd "C-(") 'sp-backward-slurp-sexp)
-(define-key parinfer-mode-map (kbd "C-{") 'sp-forward-barf-sexp)
-(define-key parinfer-mode-map (kbd "C-}") 'sp-backward-barf-sexp)
+;; (define-key parinfer-mode-map (kbd "C-)") 'sp-forward-slurp-sexp)
+;; (define-key parinfer-mode-map (kbd "C-(") 'sp-backward-slurp-sexp)
+;; (define-key parinfer-mode-map (kbd "C-{") 'sp-forward-barf-sexp)
+;; (define-key parinfer-mode-map (kbd "C-}") 'sp-backward-barf-sexp)
 
 ;; Redefine defaults to avoid unwanted extensions
-(setq parinfer-extensions '(defaults pretty-parens))
-(add-hook 'parinfer-mode-enable-hook #'parinfer--switch-to-paren-mode)
+;; (setq parinfer-extensions '(defaults pretty-parens))
+;; (add-hook 'parinfer-mode-enable-hook #'parinfer--switch-to-paren-mode)
 
-(global-set-key (kbd "s-(") 'parinfer-toggle-mode)
+(global-set-key (kbd "s-(") 'parinfer-rust-toggle-paren-mode)
 
 (provide 'facundo-parens)
 ;;; facundo-parens.el ends here

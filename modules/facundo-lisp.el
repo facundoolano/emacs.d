@@ -19,12 +19,12 @@
 
 ;; a great lisp coding hook
 (defun prelude-lisp-coding-defaults ()
-  (parinfer-mode)
+  (parinfer-rust-mode)
   (rainbow-delimiters-mode +1))
 
 ;; interactive modes don't need whitespace checks
 (defun prelude-interactive-lisp-coding-defaults ()
-  (parinfer-mode)
+  (parinfer-rust-mode)
   (rainbow-delimiters-mode +1)
   (whitespace-mode -1))
 

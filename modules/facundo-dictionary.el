@@ -1,4 +1,4 @@
-(prelude-require-package 'google-translate)
+(prelude-require-packages '(google-translate popup))
 
 (require 'google-translate)
 (require 'google-translate-smooth-ui)
