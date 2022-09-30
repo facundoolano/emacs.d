@@ -6,10 +6,11 @@
 
 ;;; Code:
 
-(prelude-require-packages '(ivy counsel smex anzu async))
+(prelude-require-packages '(ivy counsel smex anzu async ivy-xref))
 
 (require 'ivy)
 (require 'counsel)
+(require 'ivy-xref)
 
 ;; smex is used to sort commands in counsel-M-x by recency
 (require 'smex)
@@ -42,6 +43,9 @@
 ;; this is required for mark-and-grep to properly work
 (setq counsel-projectile-ag-initial-input '(when (use-region-p)
                                              (buffer-substring-no-properties (region-beginning) (region-end))))
+
+(setq xref-show-definitions-function #'ivy-xref-show-defs)
+(setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
 
 ;; this could maybe be migrated to use swiper instead of isearch
 (defun mark-and-search ()
