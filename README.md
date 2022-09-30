@@ -32,4 +32,6 @@ cargo xtask install --server
 
 brew install coreutils
 brew install plantuml
+
+M-x all-the-icons-install-fonts
 ```
