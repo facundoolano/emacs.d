@@ -118,6 +118,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.graphql\\'" graphql-mode graphql-mode)
     ("\\.groovy\\'" groovy-mode groovy-mode)
     ("\\.haml\\'" haml-mode haml-mode)
+    ("\\.hcl\\'" hcl-mode hcl-mode)
     ("\\.hs\\'" haskell-mode haskell-mode)
     ("\\.jl\\'" julia-mode julia-mode)
     ("\\.json\\'" json-mode json-mode)
