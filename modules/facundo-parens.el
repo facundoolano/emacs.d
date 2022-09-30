@@ -26,6 +26,7 @@
 ;; don't want sp to mess with these global bindings
 (define-key smartparens-mode-map (kbd "<M-up>") nil)
 (define-key smartparens-mode-map (kbd "<M-down>") nil)
+(define-key smartparens-mode-map (kbd "M-?") nil)
 
 
 (defun prelude-wrap-with (s)
