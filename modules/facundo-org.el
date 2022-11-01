@@ -78,8 +78,8 @@
             (setq-local cwm-centered-window-width 140)
             (centered-window-mode)
             (flyspell-mode -1)
-            (whitespace-mode -1)
-            ))
+            (whitespace-mode -1)))
+
 
 (add-hook 'org-present-mode-quit-hook
           (lambda ()
@@ -89,11 +89,11 @@
             (org-toggle-inline-images)
             (centered-window-mode -1)
             (flyspell-mode +1)
-            (whitespace-mode +1)
-            ))
+            (whitespace-mode +1)))
+
 
 (setq org-journal-carryover-items "TODO=\"TODO\"|TODO=\"STARTED\"")
-(setq org-journal-file-header "#+TODO: TODO STARTED | DONE CANCELED\n\n")
+(setq org-journal-file-header "#+TODO: TODO STARTED | DONE CANCELLED\n\n")
 
 (defun org-journal-open-or-create-current ()
   "Switch to the current journal file buffer without creating a new entry."
