@@ -31,12 +31,35 @@
   (interactive)
   (rustic-run-cargo-command "cargo build --release"))
 
+;; making a shortcut since I cannot consistently turn it on-off on startup
+(defun rust-toggle-hints ()
+  "Toggle inlay hints mode"
+  (interactive)
+  (if lsp-rust-analyzer-inlay-hints-mode
+      (lsp-rust-analyzer-inlay-hints-mode -1)
+    (lsp-rust-analyzer-inlay-hints-mode 1)))
+
+;; lsp makes too many file watches and trips on big projects.
+;; this is supposed to bring it back to life
+;; https://www.blogbyben.com/2022/05/gotcha-emacs-on-mac-os-too-many-files.html
+;; see lsp-file-watch-ignored-directories and lsp-file-watch-ignored-files
+;; https://emacs-lsp.github.io/lsp-mode/page/file-watchers/
+(defun file-notify-rm-all-watches ()
+  "Remove all existing file notification watches from Emacs."
+  (interactive)
+  (maphash
+   (lambda (key _value)
+     (file-notify-rm-watch key))
+   file-notify-descriptors))
+
+
 (define-key rustic-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
 (define-key rustic-mode-map (kbd "M-.") 'lsp-find-definition)
 (define-key rustic-mode-map (kbd "M-,") 'pop-tag-mark)
 (define-key rustic-mode-map (kbd "s-r") 'rustic-compile)
 (define-key rustic-mode-map (kbd "s-R") 'rustic-cargo-release)
 (define-key rustic-mode-map (kbd "s-f") 'rustic-cargo-fmt)
+(define-key rustic-mode-map (kbd "M-h") 'rust-toggle-hints)
 
 ;; (setq lsp-enable-hover nil)
 (setq lsp-signature-auto-activate nil)
