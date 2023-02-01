@@ -13,7 +13,24 @@
 (prelude-require-packages '(htmlize))
 
 (require 'org)
-(require 'cl)
+(require 'ox-publish)
+
+;;;###autoload
+(define-derived-mode org-blog-mode org-mode "BLOG"
+  "org-mode extension to write jekyll blog posts exported as html.")
+
+;; default input method spanish
+;; center window mode
+(defun org-blog-setup ()
+  "Setup the blog mode."
+  (ispell-change-dictionary "spanish")
+  (set-input-method "spanish-prefix")
+  (flyspell-mode 1)
+  (company-mode -1)
+  (writeroom-mode 1)
+  (text-scale-increase 1))
+
+(add-hook 'org-blog-mode-hook 'org-blog-setup)
 
 (setq org-publish-project-alist
       '(("blog"
@@ -109,13 +126,6 @@ header."
 %s
 </div>
 </div>")
-
-;; TODO make a major mode
-;; default input method spanish
-;; default flyspell on
-;; default aspell spanish
-;; default company off
-;; center window mode
 
 (provide 'facundo-blog)
 ;;; facundo-blog.el ends here
