@@ -15,7 +15,6 @@
 (require 'org)
 (require 'cl)
 
-
 (setq org-publish-project-alist
       '(("blog"
          ;; Path to org files.
@@ -55,12 +54,21 @@
     (insert "#+BEGIN_EXPORT html\n")
     (insert "---\n")
     (insert "layout: post\n")
+    ;; TODO consider adding empty cover, thumbnail img attrs
     (insert "title: \"") (insert title) (insert "\"\n")
     (insert "date: ") (insert (format-time-string "%Y-%m-%d %H:%M:%S")) (insert "\n")
     (insert "tags: []\n")
     (insert "---\n")
     (insert "#+END_EXPORT\n\n")))
 
+(defun org-blog-insert-separator ()
+  "Insert a *** separtor as an HTML export in the post body."
+  (interactive)
+  (insert "\n#+BEGIN_CENTER\n")
+  (insert "\\ast{} \\ast{} \\ast{}\n")
+  (insert "#+END_CENTER\n\n"))
+
+;; FIXME figure out some way (probably in jekyll config) to allow setting a future date and have the post still showing up
 (defun org-blog-reset-date ()
   "Prompt for a new blog post date and set it in the filename and the Jekyll \
 header."
@@ -86,6 +94,12 @@ header."
   (save-excursion
     (org-publish "blog")))
 
+(defun org-blog-publish-file ()
+  "Run org-publish but only for the current file, without resetting the point in buffer."
+  (interactive)
+  (save-excursion
+    (org-publish-current-file)))
+
 ;; this is easier than overriding the translation
 (customize-set-value 'org-html-footnotes-section
                      "<div id=\"footnotes\">
@@ -95,6 +109,13 @@ header."
 %s
 </div>
 </div>")
+
+;; TODO make a major mode
+;; default input method spanish
+;; default flyspell on
+;; default aspell spanish
+;; default company off
+;; center window mode
 
 (provide 'facundo-blog)
 ;;; facundo-blog.el ends here
