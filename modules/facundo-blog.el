@@ -127,8 +127,8 @@ header."
 </div>
 </div>")
 
-(define-key org-blog-mode-map (kbd "s-e") 'org-blog-publish-file)
-(define-key org-blog-mode-map (kbd "s-E") 'org-blog-publish)
+(define-key org-blog-mode-map (kbd "s-r") 'org-blog-publish-file)
+(define-key org-blog-mode-map (kbd "s-R") 'org-blog-publish)
 
 (provide 'facundo-blog)
 ;;; facundo-blog.el ends here
