@@ -86,6 +86,7 @@
   (insert "#+END_CENTER\n\n"))
 
 ;; FIXME figure out some way (probably in jekyll config) to allow setting a future date and have the post still showing up
+;; TODO add git add and commit
 (defun org-blog-reset-date ()
   "Prompt for a new blog post date and set it in the filename and the Jekyll \
 header."
@@ -103,7 +104,9 @@ header."
       (save-excursion
         (goto-char (point-min))
         (re-search-forward "^date: .*$" nil t)
-        (replace-match (concat "date: " date))))))
+        (replace-match (concat "date: " date)))
+      (org-blog-mode))))
+
 
 (defun org-blog-publish ()
   "Run org-publish on the blog project, without resetting the point in buffer."
