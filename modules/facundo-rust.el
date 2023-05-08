@@ -7,6 +7,9 @@
 (add-hook 'rustic-mode-hook #'subword-mode)
 (add-hook 'rustic-compilation-mode-hook 'visual-line-mode)
 
+;; to update lsp and rustic, delete and install instead of reinstalling
+;; https://emacs-lsp.github.io/lsp-mode/page/troubleshooting/#updating-packageel-packages
+
 ;; (customize-set-variable 'racer-complete-insert-argument-placeholders nil)
 
 ;; uncomment for less flashiness

@@ -3,9 +3,6 @@ My emacs configuration. Previously based on prelude.
 ![](emacs.png)
 
 ``` shell
-alias emacs="emacsclient -c -a emacs"
-export EDITOR=emacs
-
 brew install --cask emacs-mac
 brew install ag
 
@@ -24,11 +21,8 @@ rustup toolchain install nightly
 rustup component add rls
 rustup component add rust-src
 rustup component add rustfmt
+rustup component add rust-analyzer
 rustup component add clippy --toolchain=nightly
-
-git clone https://github.com/rust-analyzer/rust-analyzer.git
-cd rust-analyzer
-cargo xtask install --server
 
 brew install coreutils
 brew install plantuml
