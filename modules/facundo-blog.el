@@ -32,6 +32,9 @@
 
 (add-hook 'org-blog-mode-hook 'org-blog-setup)
 
+;; don't adapt local links. may want to make this setq-local on blog-mode setup if it bothers other use cases
+(setq org-link-file-path-type 'relative)
+
 (setq org-publish-project-alist
       '(("blog"
          ;; Path to org files.
@@ -76,7 +79,8 @@
     (insert "date: ") (insert (format-time-string "%Y-%m-%d %H:%M:%S")) (insert "\n")
     (insert "tags: []\n")
     (insert "---\n")
-    (insert "#+END_EXPORT\n\n")))
+    (insert "#+END_EXPORT\n\n"))
+  (org-blog-mode))
 
 (defun org-blog-insert-separator ()
   "Insert a *** separtor as an HTML export in the post body."
@@ -85,7 +89,6 @@
   (insert "\\ast{} \\ast{} \\ast{}\n")
   (insert "#+END_CENTER\n\n"))
 
-;; FIXME figure out some way (probably in jekyll config) to allow setting a future date and have the post still showing up
 ;; TODO add git add and commit
 (defun org-blog-reset-date ()
   "Prompt for a new blog post date and set it in the filename and the Jekyll \
@@ -105,7 +108,9 @@ header."
         (goto-char (point-min))
         (re-search-forward "^date: .*$" nil t)
         (replace-match (concat "date: " date)))
-      (org-blog-mode))))
+      (org-blog-mode)
+      (org-blog-publish-file))))
+
 
 
 (defun org-blog-publish ()
@@ -119,6 +124,11 @@ header."
   (interactive)
   (save-excursion
     (org-publish-current-file)))
+
+;; TODO add support for linking to another blog post
+;; with org-insert-link
+;; https://orgmode.org/manual/Adding-Hyperlink-Types.html
+
 
 ;; this is easier than overriding the translation
 (customize-set-value 'org-html-footnotes-section
