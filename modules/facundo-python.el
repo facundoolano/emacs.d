@@ -5,18 +5,13 @@
 ;; Some basic configuration for python.el (the latest and greatest
 ;; Python mode Emacs has to offer).
 
-(prelude-require-packages '(anaconda-mode py-isort py-autopep8))
-
-(when (boundp 'company-backends)
-  (prelude-require-package 'company-anaconda)
-  (add-to-list 'company-backends 'company-anaconda))
+(prelude-require-packages '(lsp-mode lsp-pyright py-autopep8 python-isort))
 
 (require 'electric)
-(require 'facundo-programming)
-(require 'py-isort)
-(require 'py-autopep8)
 (require 'python)
-(require 'anaconda-mode)
+(require 'facundo-programming)
+(require 'py-autopep8)
+(require 'lsp-pyright)
 
 ;; Copy pasted from ruby-mode.el
 (defun prelude-python--encoding-comment-required-p ()
@@ -63,8 +58,12 @@
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
-  (anaconda-mode 1)
+  (lsp)
   (eldoc-mode 1)
+  (python-isort-on-save-mode 1)
+  (py-autopep8-mode)
+  (setq-local lsp-pyright-python-executable-cmd "python3")
+  (setq-local lsp-pyright-extra-paths (vector "venv"))
   (setq-local my-indentation-offset python-indent-offset)
   (setq-local forward-sexp-function nil)
   (setq-local electric-layout-rules
@@ -81,23 +80,11 @@
 
 (add-hook 'python-mode-hook 'prelude-python-mode-defaults)
 
-(setq py-autopep8-options '("--max-line-length=200" "--select=E,F,W,C90 "))
-(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+(setq py-autopep8-options '("--max-line-length=100" "--select=E,F,W,C90 "))
 
-(setq py-isort-options '("-l=100"))
-(add-hook 'before-save-hook 'py-isort-before-save)
-
-(setq python-shell-interpreter "/usr/bin/python3")
-
-(defun facundo-pythonic-activate ()
-  "If there's a venv directory in the project root, activate it"
-  (let ((venv (concat (projectile-project-root) "venv")))
-    (if (file-directory-p venv)
-        (pythonic-activate venv))))
+(setq python-shell-interpreter "python3")
 
 ;; TODO new python package module
-
-(add-hook 'python-mode-hook 'facundo-pythonic-activate)
 
 (prelude-require-package 'flycheck-pycheckers)
 
@@ -105,10 +92,6 @@
 (setq flycheck-pycheckers-checkers '(flake8 pylint))
 
 (define-key python-mode-map (kbd "<backtab>") 'my-unindent)
-
-;; undo some anaconda bindings that clash with global commands
-(define-key anaconda-mode-map (kbd "C-x 4") nil)
-(define-key anaconda-mode-map (kbd "C-x 5") nil)
 
 ;;  more reasonable behavior when indenting yanked blocks
 (setq indent-region-function nil)
