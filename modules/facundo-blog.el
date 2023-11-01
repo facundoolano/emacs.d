@@ -47,6 +47,19 @@
          :publishing-function org-html-publish-to-html
          :headline-levels 4
          :html-extension "html"
+         :body-only t)
+
+        ("site"
+         ;; Path to org files.
+         :base-directory "~/dev/facundoolano/olano.dev/org"
+         :base-extension "org"
+
+         ;; Path to Jekyll Posts
+         :publishing-directory "~/dev/facundoolano/olano.dev"
+         :recursive t
+         :publishing-function org-html-publish-to-html
+         :headline-levels 4
+         :html-extension "html"
          :body-only t)))
 
 (defun sluggify (string)
@@ -117,7 +130,7 @@ header."
   "Run org-publish on the blog project, without resetting the point in buffer."
   (interactive)
   (save-excursion
-    (org-publish "blog")))
+    (org-publish-current-project)))
 
 (defun org-blog-publish-file ()
   "Run org-publish but only for the current file, without resetting the point in buffer."
@@ -131,10 +144,11 @@ header."
 
 
 ;; this is easier than overriding the translation
+;; (the var requires two instances of %s, the first for the translated title)
 (customize-set-value 'org-html-footnotes-section
                      "<div id=\"footnotes\">
 <!--h2 class=\"footnotes\">%s: </h2-->
-<h3 class=\"footnotes\">Notas: </h3>
+<h2 class=\"footnotes\">Notas: </h2>
 <div id=\"text-footnotes\">
 %s
 </div>
