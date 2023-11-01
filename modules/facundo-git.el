@@ -25,6 +25,14 @@
 (setq git-link-default-branch "HEAD")
 
 (setq forge-topic-list-limit '(5 . -1))
+(remove-hook 'magit-status-sections-hook 'forge-insert-issues)
+
+
+;; don't show diff by default when committing, to reduce delay in message buffer
+;; instead use C-c C-d to show diff only when necessary
+(remove-hook 'server-switch-hook 'magit-commit-diff)
+(remove-hook 'with-editor-filter-visit-hook 'magit-commit-diff)
+
 
 (defun facundo/git-link ()
   "Override the default git-link behavior to only show line number if there is
