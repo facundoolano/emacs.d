@@ -66,6 +66,8 @@
 
 (setq org-present-text-scale 3)
 
+(setq org-list-allow-alphabetical t)
+
 (set-face-background 'org-block "white")
 
 ;; setup presentation mode

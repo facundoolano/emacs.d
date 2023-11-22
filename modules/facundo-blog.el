@@ -14,6 +14,7 @@
 
 (require 'org)
 (require 'ox-publish)
+(require 'ox-md)
 
 ;;;###autoload
 (define-derived-mode org-blog-mode org-mode "BLOG"
@@ -34,6 +35,20 @@
 
 ;; don't adapt local links. may want to make this setq-local on blog-mode setup if it bothers other use cases
 (setq org-link-file-path-type 'relative)
+
+;; not sure if this is necessary
+(add-to-list 'org-export-backends 'md)
+
+;; adapt the md publish function to be usable in the org-publish-project config
+(defun org-md-publish-to-md (plist filename pub-dir)
+ "Publish an org file to Markdown.
+``''
+FILENAME is the filename of the Org file to be published.  PLIST
+is the property list for the given project.  PUB-DIR is the
+publishing directory.
+
+Return output file name."
+ (org-publish-org-to 'md filename ".md" plist pub-dir))
 
 (setq org-publish-project-alist
       '(("blog"
@@ -57,9 +72,9 @@
          ;; Path to Jekyll Posts
          :publishing-directory "~/dev/facundoolano/olano.dev"
          :recursive t
-         :publishing-function org-html-publish-to-html
+         :publishing-function org-md-publish-to-md
+         :md-toplevel-hlevel 2
          :headline-levels 4
-         :html-extension "html"
          :body-only t)))
 
 (defun sluggify (string)
@@ -145,14 +160,13 @@ header."
 
 ;; this is easier than overriding the translation
 ;; (the var requires two instances of %s, the first for the translated title)
-(customize-set-value 'org-html-footnotes-section
-                     "<div id=\"footnotes\">
-<!--h2 class=\"footnotes\">%s: </h2-->
-<h2 class=\"footnotes\">Notas: </h2>
-<div id=\"text-footnotes\">
+(customize-set-value 'org-md-footnotes-section
+                     "<section class=\"footnotes\" markdown=1>
+## Notas
+<!--- %s -->
 %s
-</div>
-</div>")
+</section>
+")
 
 (define-key org-blog-mode-map (kbd "s-r") 'org-blog-publish-file)
 (define-key org-blog-mode-map (kbd "s-R") 'org-blog-publish)
