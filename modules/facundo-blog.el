@@ -15,6 +15,7 @@
 (require 'org)
 (require 'ox-publish)
 (require 'ox-md)
+(require 'ox-gfm)
 
 ;;;###autoload
 (define-derived-mode org-blog-mode org-mode "BLOG"
@@ -37,7 +38,7 @@
 (setq org-link-file-path-type 'relative)
 
 ;; not sure if this is necessary
-(add-to-list 'org-export-backends 'md)
+(add-to-list 'org-export-backends 'gfm)
 
 ;; adapt the md publish function to be usable in the org-publish-project config
 (defun org-md-publish-to-md (plist filename pub-dir)
@@ -48,7 +49,7 @@ is the property list for the given project.  PUB-DIR is the
 publishing directory.
 
 Return output file name."
- (org-publish-org-to 'md filename ".md" plist pub-dir))
+ (org-publish-org-to 'gfm filename ".md" plist pub-dir))
 
 (setq org-publish-project-alist
       '(("blog"
@@ -158,15 +159,35 @@ header."
 ;; https://orgmode.org/manual/Adding-Hyperlink-Types.html
 
 
-;; this is easier than overriding the translation
-;; (the var requires two instances of %s, the first for the translated title)
-(customize-set-value 'org-md-footnotes-section
-                     "<section class=\"footnotes\" markdown=1>
-## Notas
-<!--- %s -->
-%s
-</section>
-")
+;; gfm doesn't expose a footnote customization variable, so I'm overriding its internal function
+(defun org-gfm-footnote-section (info)
+  "Format the footnote section.
+INFO is a plist used as a communication channel."
+  (let* ((fn-alist (org-export-collect-footnote-definitions info))
+         (fn-alist
+          (cl-loop for (n type raw) in fn-alist collect
+                   (cons n (org-trim (org-export-data raw info))))))
+    (when fn-alist
+      (format
+       "<section class=\"footnotes\" markdown=1>\n## %s\n%s</section>"
+       "Notas"
+       (format
+        "\n%s\n"
+        (mapconcat
+         (lambda (fn)
+           (let ((n (car fn)) (def (cdr fn)))
+             (format
+              "%s %s\n"
+              (format
+               (plist-get info :html-footnote-format)
+               (org-html--anchor
+                (format "fn.%d" n)
+                n
+                (format " class=\"footnum\" href=\"#fnr.%d\"" n)
+                info))
+              def)))
+         fn-alist
+         "\n"))))))
 
 (define-key org-blog-mode-map (kbd "s-r") 'org-blog-publish-file)
 (define-key org-blog-mode-map (kbd "s-R") 'org-blog-publish)
