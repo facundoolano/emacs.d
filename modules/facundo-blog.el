@@ -127,12 +127,12 @@ header."
       (error "Not visiting a blog buffer")
     (let* ((date (read-from-minibuffer "Post date: " (format-time-string "%Y-%m-%d")))
            (filename (buffer-name))
-           (html-filename (concat "../../_posts/"
-                                  (replace-regexp-in-string ".org$" ".html" filename)))
+           (md-filename (concat "../../_posts/"
+                                  (replace-regexp-in-string ".org$" ".md" filename)))
            (new-name (concat date (substring filename 10))))
       (rename-file filename new-name t)
       (set-visited-file-name new-name t t)
-      (delete-file html-filename)
+      (delete-file md-filename)
       (save-excursion
         (goto-char (point-min))
         (re-search-forward "^date: .*$" nil t)
