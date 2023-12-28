@@ -31,6 +31,12 @@
   (let ((newlines (if (looking-at "^\\s *$") "\n" "\n\n")))
     (insert (format "# coding: %s" encoding) newlines)))
 
+(defun py-insert-pdb-trace ()
+  "Insert instructions for the python debugger."
+  (interactive)
+  (python-indent-line)
+  (insert "import pdb; pdb.set_trace()"))
+
 (defun prelude-python-mode-set-encoding ()
   "Insert a magic comment header with the proper encoding if necessary."
   (save-excursion
