@@ -38,7 +38,7 @@
 (setq projectile-require-project-root nil)
 
 (setq projectile-globally-ignored-directories (append '("node_modules" "coverage") projectile-globally-ignored-directories))
-(setq shell-file-name "/bin/sh")
+(setq shell-file-name "/bin/zsh")
 
 ;; FIXME this should either not kill project buffers
 ;; or do it only if they are not already visible in another frame
