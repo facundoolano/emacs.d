@@ -63,6 +63,7 @@
 ;;; TAKEN FROM prelude-mode.el
 
 (require 'crux)
+(require 'goto-chg)
 
 ;; remap instead of just set so we preserve the override in visual line mode
 (global-set-key [remap move-beginning-of-line] 'crux-move-beginning-of-line)
@@ -93,7 +94,8 @@
 (global-set-key (kbd "s--") 'text-scale-decrease)
 
 (global-set-key (kbd "s-Z") 'undo-tree-redo)
-(global-set-key (kbd "s-b") 'go-back)
+(global-set-key (kbd "s-b") 'goto-last-change)
+(global-set-key (kbd "s-B") 'goto-last-change-reverse)
 (global-set-key (kbd "s-d") 'delete-line-or-region)
 (global-set-key (kbd "M-s-f") 'my-replace-string)
 (global-set-key (kbd "C-o") 'crux-smart-open-line)

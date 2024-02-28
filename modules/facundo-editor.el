@@ -318,13 +318,6 @@ i.e. windows tiled side-by-side."
 (setq mouse-wheel-scroll-amount '(0.05))
 (setq mouse-wheel-progressive-speed nil)
 
-(defun go-back ()
-  "Return to the previous position."
-  (interactive)
-  (universal-argument)
-  (cua-set-mark
-   `(4)))
-
 ;; don't want flyspell messing with commenting
 (define-key flyspell-mode-map (kbd "C-;") nil)
 
