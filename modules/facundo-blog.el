@@ -10,8 +10,6 @@
 
 ;;; Code:
 
-(prelude-require-packages '(htmlize))
-
 (require 'org)
 (require 'ox-publish)
 (require 'ox-md)
@@ -25,8 +23,9 @@
 ;; center window mode
 (defun org-blog-setup ()
   "Setup the blog mode."
-  (ispell-change-dictionary "spanish")
-  (set-input-method "spanish-prefix")
+  (if (string= "spanish" (org-kw-language))
+      (ispell-change-dictionary "spanish")
+    (set-input-method "spanish-prefix"))
   (flyspell-mode 1)
   (company-mode -1)
   (writeroom-mode 1)
@@ -140,8 +139,6 @@ header."
       (org-blog-mode)
       (org-blog-publish-file))))
 
-
-
 (defun org-blog-publish ()
   "Run org-publish on the blog project, without resetting the point in buffer."
   (interactive)
@@ -154,10 +151,9 @@ header."
   (save-excursion
     (org-publish-current-file)))
 
-;; TODO add support for linking to another blog post
-;; with org-insert-link
-;; https://orgmode.org/manual/Adding-Hyperlink-Types.html
-
+;; FIXME this is lousy but it's better than nothing
+(defun org-kw-language ()
+  (car (cdr (car (org-collect-keywords '("LANGUAGE"))))))
 
 ;; gfm doesn't expose a footnote customization variable, so I'm overriding its internal function
 (defun org-gfm-footnote-section (info)
@@ -170,7 +166,7 @@ INFO is a plist used as a communication channel."
     (when fn-alist
       (format
        "<section class=\"footnotes\" markdown=1>\n## %s\n%s</section>"
-       "Notas"
+       (if (string= (org-kw-language) "es") "Notas" "Notes")
        (format
         "\n%s\n"
         (mapconcat
