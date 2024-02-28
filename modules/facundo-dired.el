@@ -37,7 +37,7 @@
 
 (customize-set-variable 'dired-sidebar-use-custom-font t)
 (customize-set-variable 'dired-sidebar-no-delete-other-windows t)
-(setq dired-sidebar-face '(:height 120))
+(setq dired-sidebar-face '((t (:height 120))))
 
 (custom-set-faces
  '(dired-directory ((t (:foreground "DodgerBlue3" :height 130 :background nil :weight normal))))
