@@ -105,6 +105,7 @@
 (safe-require 'facundo-rust)
 (safe-require 'facundo-js)
 (safe-require 'facundo-python)
+(safe-require 'facundo-go)
 (safe-require 'facundo-text)
 
 (safe-require 'prelude-elixir)
