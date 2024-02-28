@@ -8,9 +8,10 @@
 
 ;;; Code:
 
-(prelude-require-packages '(smartparens flycheck))
+(prelude-require-packages '(smartparens flycheck lsp-mode))
 (require 'smartparens)
 (require 'flycheck)
+(require 'lsp)
 
 ;;; TAKEN FROM prelude-programming.el
 
@@ -73,6 +74,9 @@
 (global-set-key (kbd "C-M-b") 'backward-sexp)
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
 (global-set-key (kbd "M-s") 'sp-splice-sexp)
+
+;; TODO move to a lsp module
+(define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
 
 (provide 'facundo-programming)
 ;;; facundo-programming.el ends here
