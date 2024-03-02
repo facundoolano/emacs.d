@@ -58,5 +58,20 @@
 (global-set-key (kbd "<f8>") 'dired-sidebar-toggle-sidebar)
 (define-key dired-sidebar-mode-map (kbd "SPC") 'dired-sidebar-preview)
 
+(defun sidebar-rename ()
+  "Like `dired-do-rename' but with `default-directory' set to the one specified by listing header."
+  (interactive)
+  (let ((default-directory (dired-current-directory)))
+    (call-interactively #'dired-do-rename)))
+
+(defun sidebar-copy ()
+  "Like `dired-do-copy' but with `default-directory' set to the one specified by listing header."
+  (interactive)
+  (let ((default-directory (dired-current-directory)))
+    (call-interactively #'dired-do-copy)))
+
+(define-key dired-sidebar-mode-map (kbd "R") 'sidebar-rename)
+(define-key dired-sidebar-mode-map (kbd "C") 'sidebar-copy)
+
 (provide 'facundo-dired)
 ;;; facundo-dired.el ends here
