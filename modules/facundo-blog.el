@@ -23,9 +23,9 @@
 ;; center window mode
 (defun org-blog-setup ()
   "Setup the blog mode."
-  (if (string= "spanish" (org-kw-language))
-      (ispell-change-dictionary "spanish")
-    (set-input-method "spanish-prefix"))
+  (if (string= "es" (org-kw-language))
+      (progn (ispell-change-dictionary "spanish")
+          (set-input-method "spanish-prefix")))
   (flyspell-mode 1)
   (company-mode -1)
   (writeroom-mode 1)
