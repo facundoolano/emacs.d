@@ -69,7 +69,7 @@
   (python-isort-on-save-mode 1)
   (py-autopep8-mode)
   (setq-local lsp-pyright-python-executable-cmd "python3")
-  (setq-local lsp-pyright-extra-paths (vector "venv"))
+  (setq-local lsp-pyright-extra-paths (vector "venv" ".venv"))
   (setq-local my-indentation-offset python-indent-offset)
   (setq-local forward-sexp-function nil)
   (setq-local electric-layout-rules
