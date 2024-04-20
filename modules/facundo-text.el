@@ -72,6 +72,10 @@
 (setq plantuml-default-exec-mode 'executable)
 (setq plantuml-indent-level 2)
 
+;; unset to prevent messing with move text commands
+(define-key markdown-mode-map (kbd "M-p") nil)
+(define-key markdown-mode-map (kbd "M-n") nil)
+
 (provide 'facundo-text)
 
 ;;; facundo-text.el ends here
