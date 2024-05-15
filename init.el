@@ -97,6 +97,8 @@
 (safe-require 'facundo-blog)
 (safe-require 'facundo-dictionary)
 (safe-require 'facundo-spotify)
+(safe-require 'facundo-text)
+(safe-require 'facundo-llm)
 
 ;;; Programming languages support
 (safe-require 'facundo-emacs-lisp)
@@ -106,7 +108,7 @@
 (safe-require 'facundo-js)
 (safe-require 'facundo-python)
 (safe-require 'facundo-go)
-(safe-require 'facundo-text)
+(safe-require 'facundo-ruby)
 
 (safe-require 'prelude-elixir)
 (safe-require 'prelude-c)
