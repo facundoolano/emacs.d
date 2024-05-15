@@ -75,8 +75,30 @@
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
 (global-set-key (kbd "M-s") 'sp-splice-sexp)
 
-;; TODO move to a lsp module
+;; FIXME move to a lsp module
 (define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
+(define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
+(define-key lsp-mode-map (kbd "M-.") 'lsp-find-definition)
+(define-key lsp-mode-map (kbd "M-,") 'pop-tag-mark)
+
+;; lsp makes too many file watches and trips on big projects.
+;; this is supposed to bring it back to life
+;; https://www.blogbyben.com/2022/05/gotcha-emacs-on-mac-os-too-many-files.html
+;; see lsp-file-watch-ignored-directories and lsp-file-watch-ignored-files
+;; https://emacs-lsp.github.io/lsp-mode/page/file-watchers/
+(defun file-notify-rm-all-watches ()
+  "Remove all existing file notification watches from Emacs."
+  (interactive)
+  (maphash
+   (lambda (key _value)
+     (file-notify-rm-watch key))
+   file-notify-descriptors))
+
+
+(setq lsp-file-watch-threshold 5000)
+(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.node_modules\\'")
+(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.venv\\'")
+(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.asdf\\'")
 
 (provide 'facundo-programming)
 ;;; facundo-programming.el ends here
