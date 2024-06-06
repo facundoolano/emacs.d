@@ -12,11 +12,13 @@
 
 (require 'org)
 (require 'org-present)
+(require 'org-journal)
 
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 (setq org-log-done t)
+(setq org-edit-src-content-indentation nil)
 
 (defun prelude-org-mode-defaults ()
   (let ((oldmap (cdr (assoc 'prelude-mode minor-mode-map-alist)))
