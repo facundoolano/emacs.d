@@ -12,6 +12,7 @@
                             browse-kill-ring
                             easy-kill
                             expand-region
+                            goto-chg
                             move-text
                             multiple-cursors))
 
@@ -155,11 +156,11 @@ The body of the advice is in BODY."
 (defun prelude-enable-whitespace ()
   "Enable `whitespace-mode' if `prelude-whitespace' is not nil."
   ;; keep the whitespace decent all the time (in this buffer)
-  (add-hook 'before-save-hook 'whitespace-cleanup nil t)
+  (add-hook 'before-save-hook 'whitespace-cleanup nil t))
   ;; (whitespace-mode +1)
-  )
 
-(add-hook 'text-mode-hook 'prelude-enable-flyspell)
+
+;; (add-hook 'text-mode-hook 'prelude-enable-flyspell)
 (add-hook 'text-mode-hook 'prelude-enable-whitespace)
 
 ;; enable narrowing commands
