@@ -2,7 +2,7 @@
 
 (require 'livedown)
 
-(prelude-require-packages '(centered-window visual-fill-column writeroom-mode reverse-im plantuml-mode))
+(prelude-require-packages '(centered-window visual-fill-column writeroom-mode reverse-im plantuml-mode markdown-toc))
 
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
@@ -14,6 +14,7 @@
 
 (defun text-hook ()
   (whitespace-mode -1)
+  (setq sentence-end-double-space nil)
   (visual-line-mode))
 
 ;; wrap lines in text modes
@@ -36,6 +37,8 @@
   "Setup conveniences for text writing."
 
   (setq hl-line-range-function 'highlight-visual-line)
+  ;; FIXME this breaks blog mode?
+;;  (text-mode)
 
   ;; make scale commands work with this mode
   (advice-add 'text-scale-increase :after
@@ -51,16 +54,16 @@
 
 (add-hook 'writeroom-mode-hook 'setup-writeroom)
 
-(defun toggle-dictionary ()
-  "Switch between english and spanish ispell dictionaries"
-  (interactive)
-  (if (string-equal ispell-current-dictionary "english")
-      (ispell-change-dictionary "es")
-    (ispell-change-dictionary "english"))
-  (flyspell-buffer))
+;; (defun toggle-dictionary ()
+;;   "Switch between english and spanish ispell dictionaries"
+;;   (interactive)
+;;   (if (string-equal ispell-current-dictionary "english")
+;;       (ispell-change-dictionary "es")
+;;     (ispell-change-dictionary "english"))
+;;   (flyspell-buffer))
 
 (global-set-key (kbd "<f9>") 'writeroom-mode)
-(global-set-key (kbd "s-<f9>") 'toggle-dictionary)
+;; (global-set-key (kbd "s-<f9>") 'toggle-dictionary)
 
 ;; some handy writing shortcuts
 ;; FIXME I had to comment this binding out of undo-tree to make it work
