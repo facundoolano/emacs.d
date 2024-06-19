@@ -14,10 +14,11 @@
 (require 'ox-publish)
 (require 'ox-md)
 (require 'ox-gfm)
+(require 'projectile)
 
 ;;;###autoload
 (define-derived-mode org-blog-mode org-mode "BLOG"
-  "org-mode extension to write jekyll blog posts exported as html.")
+  "org-mode extension to write blog posts in org-mode (using jorge).")
 
 ;; default input method spanish
 ;; center window mode
@@ -51,6 +52,16 @@ publishing directory.
 
 Return output file name."
  (org-publish-org-to 'gfm filename ".md" plist pub-dir))
+
+(defun org-blog-new-post (title)
+  "Create a new jorge post with the given TITLE and switch to it in blog mode."
+  (interactive "MPost title: ")
+  (let* ((project-root (projectile-project-root))
+         (default-directory project-root)
+         (output (shell-command-to-string (concat "jorge post \"" title "\"")))
+         (post-path (string-trim (string-remove-prefix "added " output))))
+    (find-file (expand-file-name post-path project-root))
+    (org-blog-mode)))
 
 (defun org-blog-insert-separator ()
   "Insert a *** separtor as an HTML export in the post body."
