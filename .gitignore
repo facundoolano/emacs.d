@@ -31,3 +31,6 @@ cache/
 forge-database.sqlite
 parinfer-rust
 .lsp-session*
+.cache
+org-persist
+.mc-lists.el
