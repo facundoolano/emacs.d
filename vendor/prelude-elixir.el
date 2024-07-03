@@ -33,14 +33,25 @@
 
 (require 'facundo-programming)
 
-(prelude-require-packages '(elixir-mode alchemist))
+(prelude-require-packages '(elixir-mode lsp-mode flycheck-credo))
 
-(exec-path-from-shell-copy-env "_KERL_ACTIVE_DIR")
-(exec-path-from-shell-copy-env "_KERL_PATH_REMOVABLE")
+;; needed to install elixir from source for elixir-ls to pick up stdlib definitions
+;; asdf install elixir ref:v1.17.1
+;; asdf global elixir ref:v1.17.1
+;; https://mister11.dev/posts/fixing_go_to_definition_in_elixir_stdlib/
+;; https://elixirforum.com/t/can-i-point-elixir-lsp-to-built-in-module-sources/41564
+
+(add-to-list 'exec-path "~/dev/elixir/elixir-ls")
 
 ;; Create a buffer-local hook to run elixir-format on save, only when we enable elixir-mode.
+(add-hook 'flycheck-mode-hook 'flycheck-credo-setup)
+
 (add-hook 'elixir-mode-hook
-          (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+          (lambda ()
+            (lsp)
+            (add-hook 'before-save-hook 'elixir-format nil t)))
+
+
 
 (provide 'prelude-elixir)
 
