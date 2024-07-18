@@ -5,12 +5,11 @@
 ;; Some basic configuration for python.el (the latest and greatest
 ;; Python mode Emacs has to offer).
 
-(prelude-require-packages '(lsp-mode lsp-pyright py-autopep8 python-isort))
+(prelude-require-packages '(lsp-mode lsp-pyright))
 
 (require 'electric)
 (require 'python)
 (require 'facundo-programming)
-(require 'py-autopep8)
 (require 'lsp-pyright)
 
 ;; Copy pasted from ruby-mode.el
@@ -66,8 +65,7 @@
   (subword-mode +1)
   (lsp)
   (eldoc-mode 1)
-  (python-isort-on-save-mode 1)
-  (py-autopep8-mode)
+  (ruff-format-on-save-mode 1)
   (setq-local lsp-pyright-python-executable-cmd "python3")
   (setq-local lsp-pyright-extra-paths (vector "venv" ".venv"))
   (setq-local my-indentation-offset python-indent-offset)
@@ -86,16 +84,10 @@
 
 (add-hook 'python-mode-hook 'prelude-python-mode-defaults)
 
-(setq py-autopep8-options '("--max-line-length=100" "--select=E,F,W,C90 "))
-
+(setq flycheck-python-ruff-executable "ruff")
 (setq python-shell-interpreter "python3")
 
 ;; TODO new python package module
-
-(prelude-require-package 'flycheck-pycheckers)
-
-; (add-hook 'flycheck-mode-hook 'flycheck-pycheckers-setup)
-(setq flycheck-pycheckers-checkers '(flake8 pylint))
 
 (define-key python-mode-map (kbd "<backtab>") 'my-unindent)
 
