@@ -1,5 +1,6 @@
 *~
 *.elc
+eln-cache
 auto-save-list
 recentf
 savehist
