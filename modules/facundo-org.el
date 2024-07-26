@@ -70,6 +70,10 @@
 
 (setq org-list-allow-alphabetical t)
 
+;; insert new item after current item subitems on m ret
+;; https://emacs.stackexchange.com/a/79066/14798
+(customize-set-variable 'org-M-RET-may-split-line '((default . t) (item . nil)))
+
 (set-face-background 'org-block "white")
 
 ;; setup presentation mode
