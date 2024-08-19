@@ -28,8 +28,10 @@
 ;;; TAKEN FROM prelude-editor.el
 
 (defvar prelude-indent-sensitive-modes
-  '(conf-mode coffee-mode haml-mode python-mode slim-mode yaml-mode)
+  '(conf-mode coffee-mode haml-mode python-mode slim-mode yaml-mode sql-mode makefile-mode)
   "Modes for which auto-indenting is suppressed.")
+
+(add-hook 'sql-mode (lambda() (electric-indent-mode -1)))
 
 (defvar prelude-yank-indent-threshold 1000
   "Threshold (# chars) over which indentation does not automatically occur.")
