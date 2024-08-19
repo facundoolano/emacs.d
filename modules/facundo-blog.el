@@ -6,7 +6,7 @@
 
 ;;; Commentary:
 
-;; Commands for org/jekyll blog management
+;; Commands for org+jorge blog management
 
 ;;; Code:
 
@@ -27,6 +27,7 @@
   (if (string= "es" (org-kw-language))
       (progn (ispell-change-dictionary "spanish")
           (set-input-method "spanish-prefix")))
+  (setq-local org-footnote-section nil)
   (flyspell-mode 1)
   (company-mode -1)
   (writeroom-mode 1)
@@ -38,20 +39,6 @@
 
 ;; don't adapt local links. may want to make this setq-local on blog-mode setup if it bothers other use cases
 (setq org-link-file-path-type 'relative)
-
-;; not sure if this is necessary
-(add-to-list 'org-export-backends 'gfm)
-
-;; adapt the md publish function to be usable in the org-publish-project config
-(defun org-md-publish-to-md (plist filename pub-dir)
- "Publish an org file to Markdown.
-``''
-FILENAME is the filename of the Org file to be published.  PLIST
-is the property list for the given project.  PUB-DIR is the
-publishing directory.
-
-Return output file name."
- (org-publish-org-to 'gfm filename ".md" plist pub-dir))
 
 (defun org-blog-new-post (title)
   "Create a new jorge post with the given TITLE and switch to it in blog mode."
