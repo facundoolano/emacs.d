@@ -7,6 +7,8 @@
   :key gptel-api-key ;; get it from ~/.authinfo file
   :stream t)
 
+(setq gptel-model "gpt-4o")
+
 (defun facundo/gptel-send ()
   "Switch or create a gptel session buffer, sending the marked region (if any)
 to the prompt. Similar to setting the `g` flag in the gptel menu."
@@ -18,8 +20,6 @@ to the prompt. Similar to setting the `g` flag in the gptel menu."
     (with-current-buffer (other-buffer nil t)
       (if (not (string= text ""))
           (yank)))))
-
-
 
 (global-set-key (kbd "C-c g") 'facundo/gptel-send)
 
