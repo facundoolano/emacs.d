@@ -5,7 +5,7 @@
 ;; Some basic configuration for python.el (the latest and greatest
 ;; Python mode Emacs has to offer).
 
-(prelude-require-packages '(lsp-mode lsp-pyright))
+(prelude-require-packages '(lsp-mode lsp-pyright ruff-format))
 
 (require 'electric)
 (require 'python)
