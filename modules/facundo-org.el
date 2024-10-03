@@ -101,7 +101,7 @@
 
 
 (setq org-journal-carryover-items "TODO=\"TODO\"|TODO=\"STARTED\"")
-(setq org-journal-file-header "#+TODO: STARTED TODO | DONE CANCELLED\n\n")
+(setq org-journal-file-header "#+TODO: TODO STARTED | CANCELLED DONE\n\n")
 
 (defun org-journal-open-or-create-current ()
   "Switch to the current journal file buffer without creating a new entry."
