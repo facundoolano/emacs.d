@@ -70,7 +70,6 @@ indent yanked text (with prefix arg don't indent)."
 (prelude-require-packages '(company))
 
 (require 'company)
-(require 'company-simple-complete)
 
 (setq company-idle-delay 0.5)
 (setq company-tooltip-limit 10)
@@ -79,9 +78,12 @@ indent yanked text (with prefix arg don't indent)."
 ;; is displayed on top (happens near the bottom of windows)
 (setq company-tooltip-flip-when-above t)
 
+;; TODO is this still necessary?
+(customize-set-variable 'company-tng-auto-configure nil)
 (global-company-mode 1)
+(add-hook 'after-init-hook 'company-tng-mode)
 
-;;; CUSTOM STUFF
+';;; CUSTOM STUFF
 
 (require 'company-dabbrev)
 
@@ -140,8 +142,8 @@ indent yanked text (with prefix arg don't indent)."
           (call-interactively 'backward-delete-char))))))
 
 (define-key prog-mode-map (kbd "<tab>") 'my-indent)
-;; not using this one anymore since its defined in the company-simple-complete:
-;; (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
+(define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
+(define-key company-active-map (kbd "<backtab>") 'company-select-previous)
 (define-key company-active-map (kbd "<return>") 'company-complete-selection)
 (define-key company-active-map (kbd "C-w") 'backward-kill-word)
 (define-key prog-mode-map (kbd "<backtab>") 'my-unindent)
