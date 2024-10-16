@@ -66,6 +66,7 @@
   (lsp)
   (eldoc-mode 1)
   (ruff-format-on-save-mode 1)
+  (ruff-isort-on-save-mode 1)
   (setq-local lsp-pyright-python-executable-cmd "python3")
   (setq-local lsp-pyright-extra-paths (vector "venv" ".venv"))
   (setq-local my-indentation-offset python-indent-offset)
@@ -83,6 +84,13 @@
   (add-hook 'after-save-hook 'prelude-python-mode-set-encoding nil 'local))
 
 (add-hook 'python-mode-hook 'prelude-python-mode-defaults)
+
+;; https://github.com/scop/emacs-ruff-format/issues/1
+(reformatter-define ruff-isort
+  :program ruff-format-command
+  :args (list "check" "--select" "I" "--fix" "--stdin-filename" (or (buffer-file-name) input-file))
+  :lighter " RuffIsort"
+  :group 'ruff-format)
 
 (setq flycheck-python-ruff-executable "ruff")
 (setq python-shell-interpreter "python3")

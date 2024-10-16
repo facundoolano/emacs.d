@@ -14,8 +14,7 @@ brew install candid82/brew/joker
 
 brew install aspell
 
-pip3 install --user isort
-pip3 install --user autopep8
+brew install ruff
 
 rustup toolchain install nightly
 rustup component add rls
