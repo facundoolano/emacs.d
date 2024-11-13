@@ -98,7 +98,7 @@
 (safe-require 'facundo-dictionary)
 (safe-require 'facundo-spotify)
 (safe-require 'facundo-text)
-(safe-require 'facundo-llm)
+(safe-require 'facundo-gpt)
 
 ;;; Programming languages support
 (safe-require 'facundo-emacs-lisp)

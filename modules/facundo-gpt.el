@@ -8,22 +8,29 @@
   :stream t)
 
 (setq gptel-model "gpt-4o")
+(setq gptel-default-mode 'org-mode)
 
-(defun facundo/gptel-send ()
+(defun facundo/gptel-buffer ()
   "Switch or create a gptel session buffer, sending the marked region (if any)
 to the prompt. Similar to setting the `g` flag in the gptel menu."
   (interactive)
-  (let ((text (if (use-region-p)
-                  (kill-new (buffer-substring-no-properties (region-beginning) (region-end)))
-                "")))
-    (gptel (concat "**GPTel**") nil  nil t)
-    (with-current-buffer (other-buffer nil t)
-      (if (not (string= text ""))
-          (yank)))))
+  (gptel (concat "**GPTel**") nil  nil t)
+  (with-current-buffer (other-buffer nil t)))
 
-(global-set-key (kbd "C-c g") 'facundo/gptel-send)
+(defun facundo/gptel-send ()
+  "TODO"
+  (interactive)
+  (when (and (not (use-region-p))
+             (not (eolp)))
+    (move-end-of-line 1))
+  (gptel-send))
+
+(global-set-key (kbd "C-c g") 'facundo/gptel-buffer)
+(define-key gptel-mode-map (kbd "C-c RET") 'facundo/gptel-send)
+
+
 
 ;; TODO
 ;; - option to use claude alternatively
 
-(provide 'facundo-llm)
+(provide 'facundo-gpt)
