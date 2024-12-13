@@ -8,7 +8,7 @@
 
 ;;; Code:
 
-(prelude-require-packages '(org ox-gfm org-journal org-present))
+(prelude-require-packages '(org ox-gfm org-journal org-present ob-mermaid))
 
 (require 'org)
 (require 'org-present)
@@ -112,6 +112,21 @@
         (kill-buffer current-buf)))
   (setq current-prefix-arg '(4)) ; C-u to prevent entry creation
   (call-interactively 'org-journal-new-entry))
+
+;; mermaid setup
+(setq ob-mermaid-cli-path "~/.asdf/shims/mmdc")
+
+;; auto display images for mermaid diagram convenience
+;; TODO may not be a reasonable default for all projects
+(setq org-confirm-babel-evaluate nil)
+;; (eval-after-load 'org
+;;   (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((mermaid . t)
+   (emacs-lisp . t)))
+
 
 (global-set-key (kbd "C-x j") 'org-journal-open-or-create-current)
 
