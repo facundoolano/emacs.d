@@ -102,16 +102,17 @@
 
 ;;; Programming languages support
 (safe-require 'facundo-emacs-lisp)
-(safe-require 'facundo-clojure)
-(safe-require 'facundo-erlang)
+;; (safe-require 'facundo-clojure)
+;; (safe-require 'facundo-erlang)
 (safe-require 'facundo-rust)
 (safe-require 'facundo-js)
+(safe-require 'facundo-treesitter)
 (safe-require 'facundo-python)
 (safe-require 'facundo-go)
-(safe-require 'facundo-ruby)
+;; (safe-require 'facundo-ruby)
 
-(safe-require 'prelude-elixir)
-(safe-require 'prelude-c)
+;; (safe-require 'prelude-elixir)
+;; (safe-require 'prelude-c)
 (safe-require 'prelude-web)
 (safe-require 'prelude-xml)
 (safe-require 'prelude-yaml)
