@@ -23,17 +23,20 @@
 ;;
 
 ;;; Code:
-(prelude-require-packages '(js2-mode json-mode add-node-modules-path mocha js2-highlight-vars))
+(prelude-require-packages '(json-mode add-node-modules-path lsp-mode facundo-indent))
 
 (require 'facundo-programming)
-(require 'js2-mode)
-(require 'mocha)
 
 ;; taken from prelude
-(add-to-list 'auto-mode-alist '("\\.js\\'"    . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.pac\\'"   . js2-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'"    . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'"    . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'"    . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'"    . tsx-ts-mode))
 
+(add-hook 'tsx-ts-mode-hook #'lsp-deferred)
+(add-hook 'typescript-ts-mode-hook #'lsp-deferred)
+
+;; FIXME what do we need from this?
 (eval-after-load 'js2-mode
   '(progn
      (defun prelude-js-mode-defaults ()
@@ -45,9 +48,6 @@
      (add-hook 'js2-mode-hook 'prelude-js-mode-defaults)))
 
 ;; custom stuff
-(setq mocha-reporter "spec")
-(setq mocha-options "--no-colors --recursive")
-
 (eval-after-load 'js-mode
   '(add-hook 'js-mode-hook #'add-node-modules-path))
 
@@ -68,22 +68,13 @@
              (revert-buffer t t t))
     (message "ESLint not found.")))
 
-;; (define-key js2-mode-map (kbd "M-n i") 'npm-install)
-;; (define-key js2-mode-map (kbd "M-n d") 'npm-new-dependency)
-;; (define-key js2-mode-map (kbd "M-n p") 'npm-publish)
-;; (define-key js2-mode-map (kbd "M-n M-t") 'mocha-test-project)
-;; (define-key js2-mode-map (kbd "M-n t") 'mocha-test-file)
-;; (define-key js2-mode-map (kbd "M-n T") 'mocha-test-at-point)
-;; (define-key js2-mode-map (kbd "M-n v") 'npm-version)
-(define-key js2-mode-map (kbd "RET") 'js2-line-break) ; auto closes comment blocks on enter
-(define-key js2-mode-map (kbd "s-f") 'eslint-fix)
-(define-key js2-mode-map (kbd "M-h") 'js2-highlight-vars-mode)
-
 (require 'facundo-indent)
 
-(setq js2-basic-offset my-indentation-offset)
-(define-key js2-mode-map (kbd "<tab>") 'my-indent)
-(define-key js2-mode-map (kbd "<backtab>") 'my-unindent)
+(define-key typescript-ts-mode-map (kbd "<tab>") 'my-indent)
+(define-key tsx-ts-mode-map (kbd "<tab>") 'my-indent)
+(define-key typescript-ts-mode-map (kbd "<backtab>") 'my-unindent)
+(define-key tsx-ts-mode-map (kbd "<backtab>") 'my-unindent)
+
 (define-key js2-mode-map [(backspace)] 'backspace-whitespace-to-tab-stop)
 
 (provide 'facundo-js)
