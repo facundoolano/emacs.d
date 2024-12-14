@@ -8,8 +8,9 @@
 
 ;;; Code:
 
-(prelude-require-packages '(smartparens flycheck lsp-mode))
+(prelude-require-packages '(smartparens flycheck lsp-mode apheleia))
 (require 'smartparens)
+(require 'apheleia)
 (require 'flycheck)
 (require 'lsp)
 
@@ -34,6 +35,13 @@
 
 (add-hook 'prog-mode-hook 'prelude-prog-mode-defaults)
 (add-hook 'prog-mode-hook (lambda () (setq flycheck-check-syntax-automatically '(save idle-change new-line mode-enabled))))
+
+;; format on save with apheleia
+;; override python defaults
+;; should also pick up gofmt and prettier without config
+(apheleia-global-mode)
+(setf (alist-get 'python-mode apheleia-mode-alist) '(ruff-isort ruff))
+(setf (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff-isort ruff))
 
 ;; enable on-the-fly syntax checking
 (if (fboundp 'global-flycheck-mode)

@@ -7,8 +7,8 @@ brew install --cask emacs-mac
 brew install ag
 
 npm install -g livedown
-npm install -g mocha
 npm install -g eslint
+npm install -g prettier
 
 brew install candid82/brew/joker
 

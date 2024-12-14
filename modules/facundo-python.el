@@ -65,8 +65,6 @@
   (subword-mode +1)
   (lsp)
   (eldoc-mode 1)
-  (ruff-format-on-save-mode 1)
-  (ruff-isort-on-save-mode 1)
   (setq-local lsp-pyright-python-executable-cmd "python3")
   (setq-local lsp-pyright-extra-paths (vector "venv" ".venv"))
   (setq-local my-indentation-offset python-indent-offset)
