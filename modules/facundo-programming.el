@@ -73,6 +73,11 @@
   (insert "FIXME ")
   (comment-or-uncomment-region-or-line))
 
+(defun lsp-find-definition-other-window ()
+  "Find definiton in other window."
+  (interactive)
+  (lsp-find-definition :display-action 'window))
+
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "s-;") 'insert-todo)
 (global-set-key (kbd "s-:") 'insert-fixme)
@@ -87,6 +92,7 @@
 (define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
 (define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
 (define-key lsp-mode-map (kbd "M-.") 'lsp-find-definition)
+(define-key lsp-mode-map (kbd "C-M-.") 'lsp-find-definition-other-window)
 (define-key lsp-mode-map (kbd "M-,") 'pop-tag-mark)
 
 ;; lsp makes too many file watches and trips on big projects.
