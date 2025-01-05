@@ -16,6 +16,11 @@
                             move-text
                             multiple-cursors))
 
+(defun reload-init-file()
+  "Reload init.el file. Useful for updating config without restarting Emacs."
+  (interactive)
+  (load-file user-init-file))
+
 ;; Death to the tabs!  However, tabs historically indent to the next
 ;; 8-character offset; specifying anything else will cause *mass*
 ;; confusion, as it will change the appearance of every existing file.
@@ -162,7 +167,7 @@ The body of the advice is in BODY."
   "Enable `whitespace-mode' if `prelude-whitespace' is not nil."
   ;; keep the whitespace decent all the time (in this buffer)
   (add-hook 'before-save-hook 'whitespace-cleanup nil t))
-  ;; (whitespace-mode +1)
+;; (whitespace-mode +1)
 
 
 ;; (add-hook 'text-mode-hook 'prelude-enable-flyspell)
