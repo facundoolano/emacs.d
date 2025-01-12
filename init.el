@@ -94,6 +94,7 @@
 (safe-require 'facundo-modeline)
 (safe-require 'facundo-dired)
 (safe-require 'facundo-org)
+(safe-require 'facundo-yaml)
 (safe-require 'facundo-blog)
 (safe-require 'facundo-dictionary)
 (safe-require 'facundo-spotify)
@@ -115,7 +116,6 @@
 ;; (safe-require 'prelude-c)
 (safe-require 'prelude-web)
 (safe-require 'prelude-xml)
-(safe-require 'prelude-yaml)
 
 ;; send custom generated stuff to a separate file
 (setq custom-file "~/.emacs.d/custom.el")
