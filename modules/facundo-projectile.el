@@ -147,6 +147,24 @@ at the top level of DIRECTORY."
             :action #'counsel-projectile-find-file-action-other-window
             :caller 'counsel-projectile-find-file))
 
+(defun projectile-discover-from-github (user-repo)
+  "Clone a GitHub project and add it to Projectile projects.
+USER-REPO should be a string in the format <username/reponame>."
+  (interactive "sGitHub user/repo: ")
+  (let* ((dev-dir "~/dev/")
+         (full-path (concat dev-dir user-repo))
+         (user-dir (file-name-directory full-path)))
+    (unless (file-directory-p dev-dir)
+      (make-directory dev-dir))
+    (unless (file-directory-p user-dir)
+      (make-directory user-dir))
+    (unless (file-directory-p full-path)
+      (shell-command
+       (format "git clone git@github.com:%s.git %s" user-repo full-path)))
+    ;; Discover and switch to the new project
+    (projectile-discover-projects-in-directory user-dir)
+    (projectile-switch-project-by-name full-path)))
+
 (global-set-key (kbd "C-c p") 'projectile-command-map)
 
 (global-set-key (kbd "s-p") 'counsel-projectile-find-file)
