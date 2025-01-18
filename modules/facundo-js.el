@@ -23,9 +23,11 @@
 ;;
 
 ;;; Code:
-(prelude-require-packages '(json-mode add-node-modules-path lsp-mode facundo-indent))
+(prelude-require-packages '(json-mode add-node-modules-path lsp-mode typescript-mode))
 
 (require 'facundo-programming)
+(require 'facundo-indent)
+(require 'typescript-ts-mode)
 
 ;; taken from prelude
 (add-to-list 'auto-mode-alist '("\\.js\\'"    . typescript-ts-mode))
@@ -75,7 +77,7 @@
 (define-key typescript-ts-mode-map (kbd "<backtab>") 'my-unindent)
 (define-key tsx-ts-mode-map (kbd "<backtab>") 'my-unindent)
 
-(define-key js2-mode-map [(backspace)] 'backspace-whitespace-to-tab-stop)
+(define-key js-mode-map [(backspace)] 'backspace-whitespace-to-tab-stop)
 
 (provide 'facundo-js)
 ;;; facundo-js.el ends here

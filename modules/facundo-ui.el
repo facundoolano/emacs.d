@@ -7,12 +7,13 @@
 
 ;;; Code:
 
-(prelude-require-packages '(diff-hl hl-todo which-key))
+(prelude-require-packages '(diff-hl hl-todo which-key projectile))
 
 (require 'diff-hl)
 (require 'diff-hl-margin)
 (require 'hl-todo)
 (require 'which-key)
+(require 'projectile)
 
 ;; the toolbar is just a waste of valuable screen estate
 ;; in a tty tool-bar-mode does not properly auto-load, and is

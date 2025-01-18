@@ -1,5 +1,6 @@
 ;;; facundo-text.el --- text edition configuration
 
+(require 'markdown-mode)
 (require 'livedown)
 
 (prelude-require-packages '(centered-window visual-fill-column writeroom-mode reverse-im plantuml-mode markdown-toc))
@@ -38,7 +39,7 @@
 
   (setq hl-line-range-function 'highlight-visual-line)
   ;; FIXME this breaks blog mode?
-;;  (text-mode)
+  ;;  (text-mode)
 
   ;; make scale commands work with this mode
   (advice-add 'text-scale-increase :after
