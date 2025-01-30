@@ -114,6 +114,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.elixir\\'" elixir-mode elixir-mode)
     ("\\.erl\\'" erlang erlang-mode)
     ("\\.feature\\'" feature-mode feature-mode)
+    ("\\.gleam\\'" gleam-ts-mode gleam-ts-mode)
     ("\\.go\\'" go-mode go-mode)
     ("\\.graphql\\'" graphql-mode graphql-mode)
     ("\\.groovy\\'" groovy-mode groovy-mode)
@@ -155,6 +156,10 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
 (when (package-installed-p 'markdown-mode)
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode)))
+
+(when (package-installed-p 'gleam-ts-mode)
+  (add-to-list 'auto-mode-alist '("\\.gleam\\'" . gleam-ts-mode)))
+
 
 ;; same with adoc-mode
 (when (package-installed-p 'adoc-mode)

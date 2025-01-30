@@ -110,6 +110,7 @@
 (safe-require 'facundo-treesitter)
 (safe-require 'facundo-python)
 (safe-require 'facundo-go)
+(safe-require 'facundo-gleam)
 ;; (safe-require 'facundo-ruby)
 
 ;; (safe-require 'prelude-elixir)
