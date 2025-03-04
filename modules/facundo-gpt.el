@@ -7,7 +7,8 @@
   :key gptel-api-key ;; get it from ~/.authinfo file
   :stream t)
 
-(setq gptel-model "gpt-4o")
+(customize-set-variable 'gptel-backend (gptel-get-backend "Claude"))
+(customize-set-variable 'gptel-model 'claude-3-7-sonnet-20250219)
 (setq gptel-default-mode 'org-mode)
 
 (defun facundo/gptel-buffer ()
