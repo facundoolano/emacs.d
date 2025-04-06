@@ -35,11 +35,8 @@
 (require 'cl)
 (require 'package)
 
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
 ;; set package-user-dir to be relative to Prelude install path
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
-(package-initialize)
 
 (defvar prelude-packages '()
   "A list of packages to ensure are installed at launch.")
@@ -62,123 +59,47 @@ Missing packages are installed automatically."
 
                                         ;(define-obsolete-function-alias 'prelude-ensure-module-deps 'prelude-require-packages)
 
-(defun prelude-install-packages ()
-  "Install all packages listed in `prelude-packages'."
-  (unless (prelude-packages-installed-p)
-    ;; check for new packages (package versions)
-    (message "%s" "Emacs Prelude is now refreshing its package database...")
-    (package-refresh-contents)
-    (message "%s" " done.")
-    ;; install the missing packages
-    (prelude-require-packages prelude-packages)))
+(setq use-package-always-ensure t)
 
-;; run package installation
-(prelude-install-packages)
+(use-package clojure-mode
+  :mode (("\\.clj\\'" . clojure-mode)
+         ("\\.cljc\\'" . clojurec-mode)
+         ("\\.cljs\\'" . clojurescript-mode)
+         ("\\.edn\\'" . clojure-mode)))
 
-(defun prelude-list-foreign-packages ()
-  "Browse third-party packages not bundled with Prelude.
+(use-package cmake-mode
+  :mode (("\\.cmake\\'" . cmake-mode)
+         ("CMakeLists\\.txt\\'" . cmake-mode)))
 
-Behaves similarly to `package-list-packages', but shows only the packages that
-are installed and are not in `prelude-packages'.  Useful for
-removing unwanted packages."
-  (interactive)
-  (package-show-package-list
-   (set-difference package-activated-list prelude-packages)))
+(use-package css-mode :mode "\\.css\\'")
+(use-package csv-mode :mode "\\.csv\\'")
 
-(defmacro prelude-auto-install (extension package mode)
-  "When file with EXTENSION is opened triggers auto-install of PACKAGE.
-PACKAGE is installed only if not already present.  The file is opened in MODE."
-  `(add-to-list 'auto-mode-alist
-                `(,extension . (lambda ()
-                                 (unless (package-installed-p ',package)
-                                   (package-install ',package))
-                                 (,mode)))))
+(use-package elixir-mode
+  :mode (("\\.ex\\'" . elixir-mode)
+         ("\\.exs\\'" . elixir-mode)
+         ("\\.elixir\\'" . elixir-mode)))
 
-(defvar prelude-auto-install-alist
-  '(("\\.adoc\\'" adoc-mode adoc-mode)
-    ("\\.clj\\'" clojure-mode clojure-mode)
-    ("\\.cljc\\'" clojure-mode clojurec-mode)
-    ("\\.cljs\\'" clojure-mode clojurescript-mode)
-    ("\\.edn\\'" clojure-mode clojure-mode)
-    ("\\.cmake\\'" cmake-mode cmake-mode)
-    ("CMakeLists\\.txt\\'" cmake-mode cmake-mode)
-    ("\\.coffee\\'" coffee-mode coffee-mode)
-    ("\\.css\\'" css-mode css-mode)
-    ("\\.csv\\'" csv-mode csv-mode)
-    ("Cask" cask-mode cask-mode)
-    ("\\.d\\'" d-mode d-mode)
-    ("\\.dart\\'" dart-mode dart-mode)
-    ("\\.elm\\'" elm-mode elm-mode)
-    ("\\.ex\\'" elixir-mode elixir-mode)
-    ("\\.exs\\'" elixir-mode elixir-mode)
-    ("\\.elixir\\'" elixir-mode elixir-mode)
-    ("\\.erl\\'" erlang erlang-mode)
-    ("\\.feature\\'" feature-mode feature-mode)
-    ("\\.gleam\\'" gleam-ts-mode gleam-ts-mode)
-    ("\\.go\\'" go-mode go-mode)
-    ("\\.graphql\\'" graphql-mode graphql-mode)
-    ("\\.groovy\\'" groovy-mode groovy-mode)
-    ("\\.haml\\'" haml-mode haml-mode)
-    ("\\.hcl\\'" hcl-mode hcl-mode)
-    ("\\.hs\\'" haskell-mode haskell-mode)
-    ("\\.jl\\'" julia-mode julia-mode)
-    ("\\.json\\'" json-mode json-mode)
-    ("\\.kt\\'" kotlin-mode kotlin-mode)
-    ("\\.kv\\'" kivy-mode kivy-mode)
-    ("\\.latex\\'" auctex LaTeX-mode)
-    ("\\.less\\'" less-css-mode less-css-mode)
-    ("\\.lua\\'" lua-mode lua-mode)
-    ("\\.markdown\\'" markdown-mode markdown-mode)
-    ("\\.md\\'" markdown-mode markdown-mode)
-    ("\\.ml\\'" tuareg tuareg-mode)
-    ("\\.pp\\'" puppet-mode puppet-mode)
-    ("\\.php\\'" php-mode php-mode)
-    ("\\.proto\\'" protobuf-mode protobuf-mode)
-    ("\\.pyd\\'" cython-mode cython-mode)
-    ("\\.pyi\\'" cython-mode cython-mode)
-    ("\\.pyx\\'" cython-mode cython-mode)
-    ("PKGBUILD\\'" pkgbuild-mode pkgbuild-mode)
-    ("\\.rs\\'" rustic rustic-mode)
-    ("\\.sass\\'" sass-mode sass-mode)
-    ("\\.scala\\'" scala-mode scala-mode)
-    ("\\.scss\\'" scss-mode scss-mode)
-    ("\\.slim\\'" slim-mode slim-mode)
-    ("\\.styl\\'" stylus-mode stylus-mode)
-    ("\\.swift\\'" swift-mode swift-mode)
-    ("\\.textile\\'" textile-mode textile-mode)
-    ("\\.thrift\\'" thrift thrift-mode)
-    ("\\.yml\\'" yaml-pro yaml-pro-ts-mode)
-    ("\\.yaml\\'" yaml-pro yaml-pro-ts-mode)
-    ("Dockerfile\\'" dockerfile-mode dockerfile-mode)))
+(use-package erlang :mode "\\.erl\\'")
+(use-package gleam-ts-mode :mode "\\.gleam\\'")
+(use-package go-mode :mode "\\.go\\'")
+(use-package json-mode :mode "\\.json\\'")
+(use-package less-css-mode :mode "\\.less\\'")
+(use-package lua-mode :mode "\\.lua\\'")
 
-;; markdown-mode doesn't have autoloads for the auto-mode-alist
-;; so we add them manually if it's already installed
-(when (package-installed-p 'markdown-mode)
-  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode)))
+(use-package markdown-mode
+  :mode (("\\.markdown\\'" . gfm-mode)
+         ("\\.md\\'" . gfm-mode)))
 
-(when (package-installed-p 'gleam-ts-mode)
-  (add-to-list 'auto-mode-alist '("\\.gleam\\'" . gleam-ts-mode)))
+(use-package php-mode :mode "\\.php\\'")
+(use-package protobuf-mode :mode "\\.proto\\'")
+(use-package rustic :mode "\\.rs\\'")
 
+(use-package yaml-pro
+  :mode (("\\.yml\\'" . yaml-pro-ts-mode)
+         ("\\.yaml\\'" . yaml-pro-ts-mode)))
 
-;; same with adoc-mode
-(when (package-installed-p 'adoc-mode)
-  (add-to-list 'auto-mode-alist '("\\.adoc\\'" . adoc-mode))
-  (add-to-list 'auto-mode-alist '("\\.asciidoc\\'" . adoc-mode)))
+(use-package dockerfile-mode :mode "Dockerfile\\'")
 
-;; and pkgbuild-mode
-(when (package-installed-p 'pkgbuild-mode)
-  (add-to-list 'auto-mode-alist '("PKGBUILD\\'" . pkgbuild-mode)))
-
-;; build auto-install mappings
-(mapc
- (lambda (entry)
-   (let ((extension (car entry))
-         (package (cadr entry))
-         (mode (cadr (cdr entry))))
-     (unless (package-installed-p package)
-       (prelude-auto-install extension package mode))))
- prelude-auto-install-alist)
 
 (provide 'prelude-packages)
 ;; Local Variables:
