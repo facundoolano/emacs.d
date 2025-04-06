@@ -15,14 +15,6 @@
 (require 'which-key)
 (require 'projectile)
 
-;; the toolbar is just a waste of valuable screen estate
-;; in a tty tool-bar-mode does not properly auto-load, and is
-;; already disabled anyway
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-
-(menu-bar-mode -1)
-
 ;; the blinking cursor is nothing, but an annoyance
 (blink-cursor-mode -1)
 
@@ -50,8 +42,6 @@
 ;; show available keybindings after you start typing
 (which-key-mode +1)
 
-;;; Sublime like color theme
-(load-theme 'leuven t)
 (setq-default line-spacing 8)
 
 ;; setup side margins
@@ -67,7 +57,6 @@
 
 (set-face-background 'vertical-border "light gray")
 (set-face-foreground 'vertical-border (face-background 'vertical-border))
-(scroll-bar-mode -1)
 (fringe-mode '(0 . 0))
 
 ;; hide the icon in the title bar
