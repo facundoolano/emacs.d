@@ -8,11 +8,10 @@
 
 ;;; Code:
 
-(prelude-require-packages '(smartparens flycheck lsp-mode apheleia))
-(require 'smartparens)
-(require 'apheleia)
-(require 'flycheck)
-(require 'lsp)
+(use-package smartparens)
+(use-package flycheck)
+(use-package lsp-mode)
+(use-package apheleia)
 
 ;;; TAKEN FROM prelude-programming.el
 
