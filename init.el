@@ -112,11 +112,6 @@
 (safe-require 'facundo-gleam)
 ;; (safe-require 'facundo-ruby)
 
-;; (safe-require 'prelude-elixir)
-;; (safe-require 'prelude-c)
-(safe-require 'prelude-web)
-(safe-require 'prelude-xml)
-
 ;; send custom generated stuff to a separate file
 (setq custom-file "~/.emacs.d/custom.el")
 
