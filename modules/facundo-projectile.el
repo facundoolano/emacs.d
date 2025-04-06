@@ -24,10 +24,8 @@
 
 ;;; Code:
 
-(prelude-require-packages '(projectile counsel-projectile))
-
-(require 'projectile)
-(require 'counsel-projectile)
+(use-package projectile)
+(use-package counsel-projectile)
 
 (setq projectile-completion-system 'ivy)
 

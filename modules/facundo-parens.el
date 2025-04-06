@@ -12,7 +12,10 @@
 ;;; TAKEN FROM prelude-editor.el
 
 ;; smart pairing for all
-(prelude-require-package 'smartparens)
+(use-package smartparens)
+(use-package parinfer-rust-mode)
+
+
 (require 'smartparens-config)
 (setq sp-base-key-bindings 'paredit)
 (setq sp-autoskip-closing-pair 'always)
@@ -45,17 +48,16 @@
 
 ;;; CUSTOM STUFF
 
-(prelude-require-package 'parinfer-rust-mode)
-; FIXME parinfer deprecated, repalced by rust mode. customizations below need to be updated or removed
-;(require 'parinfer)
+                                        ; FIXME parinfer deprecated, repalced by rust mode. customizations below need to be updated or removed
+                                        ;(require 'parinfer)
 
 ;; use regular yank to avoid weird region replacement
-;(define-key parinfer-region-mode-map [remap yank] 'yank)
+                                        ;(define-key parinfer-region-mode-map [remap yank] 'yank)
 ;; (define-key parinfer-region-mode-map (kbd "<tab>") 'parinfer-shift-right)
 ;; (define-key parinfer-region-mode-map (kbd "<backtab>") 'parinfer-shift-left)
 
-;(define-key parinfer-mode-map (kbd "<tab>") 'parinfer-smart-tab:dwim-right-or-complete)
-;(define-key parinfer-mode-map (kbd "<backtab>") 'parinfer-smart-tab:dwim-left)
+                                        ;(define-key parinfer-mode-map (kbd "<tab>") 'parinfer-smart-tab:dwim-right-or-complete)
+                                        ;(define-key parinfer-mode-map (kbd "<backtab>") 'parinfer-smart-tab:dwim-left)
 
 ;; enable some paredit commands
 ;; (define-key parinfer-mode-map (kbd "C-)") 'sp-forward-slurp-sexp)

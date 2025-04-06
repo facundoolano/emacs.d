@@ -7,12 +7,11 @@
 
 ;;; Code:
 
-(prelude-require-packages '(diff-hl hl-todo which-key projectile))
+(use-package diff-hl)
+(use-package hl-todo)
+(use-package which-key)
 
-(require 'diff-hl)
 (require 'diff-hl-margin)
-(require 'hl-todo)
-(require 'which-key)
 (require 'projectile)
 
 ;; the blinking cursor is nothing, but an annoyance
