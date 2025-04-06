@@ -32,34 +32,22 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(require 'cl)
 (require 'package)
 
-;; set package-user-dir to be relative to Prelude install path
-(setq package-user-dir (expand-file-name "elpa" prelude-dir))
-
-(defvar prelude-packages '()
-  "A list of packages to ensure are installed at launch.")
-
-(defun prelude-packages-installed-p ()
-  "Check if all packages in `prelude-packages' are installed."
-  (every #'package-installed-p prelude-packages))
-
+;; FIXME remove
 (defun prelude-require-package (package)
-  "Install PACKAGE unless already installed."
-  (unless (memq package prelude-packages)
-    (add-to-list 'prelude-packages package))
-  (unless (package-installed-p package)
-    (package-install package)))
+  "Install PACKAGE unless already installed.")
 
+;; FIXME remove
 (defun prelude-require-packages (packages)
   "Ensure PACKAGES are installed.
-Missing packages are installed automatically."
-  (mapc #'prelude-require-package packages))
+Missing packages are installed automatically.")
 
-                                        ;(define-obsolete-function-alias 'prelude-ensure-module-deps 'prelude-require-packages)
-
-(setq use-package-always-ensure t)
+(use-package elmacro)
+(use-package persistent-scratch)
+(use-package crux)
+(use-package discover-my-major)
+(use-package undo-tree)
 
 (use-package clojure-mode
   :mode (("\\.clj\\'" . clojure-mode)
@@ -82,7 +70,6 @@ Missing packages are installed automatically."
 (use-package erlang :mode "\\.erl\\'")
 (use-package gleam-ts-mode :mode "\\.gleam\\'")
 (use-package go-mode :mode "\\.go\\'")
-(use-package json-mode :mode "\\.json\\'")
 (use-package less-css-mode :mode "\\.less\\'")
 (use-package lua-mode :mode "\\.lua\\'")
 
@@ -101,7 +88,8 @@ Missing packages are installed automatically."
 (use-package dockerfile-mode :mode "Dockerfile\\'")
 
 
-(provide 'prelude-packages)
+;; FIXME rename to facundo packages
+(provide 'facundo-packages)
 ;; Local Variables:
 ;; byte-compile-warnings: (not cl-functions)
 ;; End:

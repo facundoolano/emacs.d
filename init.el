@@ -16,6 +16,7 @@
 (require 'use-package)
 (setq use-package-always-ensure t) ;; Auto-install packages
 
+
 ;; FIXME review if these are needed
 (defvar prelude-dir (file-name-directory load-file-name)
   "The root dir of the Emacs Prelude distribution.")
@@ -60,16 +61,7 @@
     (require module)))
 
 ;; the core stuff
-(require 'prelude-packages)
-
-;; require some packages that don't belong in any specific module
-;; TODO maybe merge prelude packages here
-(prelude-require-packages '(elmacro
-                            persistent-scratch
-                            crux
-                            discover-my-major
-                            epl
-                            undo-tree))
+(require 'facundo-packages)
 
 (require 'facundo-editor)
 (require 'facundo-ui)
@@ -102,15 +94,12 @@
 
 ;;; Programming languages support
 (safe-require 'facundo-emacs-lisp)
-;; (safe-require 'facundo-clojure)
-;; (safe-require 'facundo-erlang)
 (safe-require 'facundo-rust)
 (safe-require 'facundo-js)
 (safe-require 'facundo-treesitter)
 (safe-require 'facundo-python)
 (safe-require 'facundo-go)
 (safe-require 'facundo-gleam)
-;; (safe-require 'facundo-ruby)
 
 ;; send custom generated stuff to a separate file
 (setq custom-file "~/.emacs.d/custom.el")

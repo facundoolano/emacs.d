@@ -5,12 +5,12 @@
 ;; Some basic configuration for python.el (the latest and greatest
 ;; Python mode Emacs has to offer).
 
-(prelude-require-packages '(lsp-mode lsp-pyright ruff-format))
+(use-package lsp-pyright)
+(use-package ruff-format)
 
 (require 'electric)
 (require 'python)
 (require 'facundo-programming)
-(require 'lsp-pyright)
 
 ;; Copy pasted from ruby-mode.el
 (defun prelude-python--encoding-comment-required-p ()
