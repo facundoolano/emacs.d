@@ -115,35 +115,15 @@
   (let ((project-buffers (-filter 'user-buffer-q (projectile-project-buffers-non-visible))))
     (mapcar 'kill-buffer project-buffers)))
 
-;; Fix discover projects not working
-;; https://github.com/bbatsov/projectile/issues/1165
-(defun projectile-discover-projects-in-directory (directory)
-  "Discover any projects in DIRECTORY and add them to the projectile cache.
-This function is not recursive and only adds projects with roots
-at the top level of DIRECTORY."
-  (interactive
-   (list (read-directory-name "Starting directory: ")))
-  (let ((subdirs (directory-files directory t)))
-    (mapcar
-     (lambda (dir)
-       (when (and (file-directory-p dir)
-                  (not (member (file-name-nondirectory dir) '(".." "."))))
-         (let ((default-directory dir)
-               (projectile-cached-project-root dir))
-           (when (projectile-project-p)
-             (projectile-add-known-project (projectile-project-root))))))
-     subdirs)))
-
-(defun counsel-projectile-find-file-other-window ()
-  "Open a file in the current project in a separate window."
+(defun project-find-file-other-window ()
+  "Open FILENAME from a project in another window."
+  ;; from https://github.com/midsbie/emacs-init
   (interactive)
-  (ivy-read (projectile-prepend-project-name "Find file: ")
-            (projectile-current-project-files)
-            :matcher counsel-projectile-find-file-matcher
-            :require-match t
-            :sort t
-            :action #'counsel-projectile-find-file-action-other-window
-            :caller 'counsel-projectile-find-file))
+  (unwind-protect
+      (progn
+        (advice-add 'find-file :override #'find-file-other-window)
+        (project-find-file))
+    (advice-remove 'find-file #'find-file-other-window)))
 
 (defun projectile-discover-from-github (user-repo)
   "Clone a GitHub project and add it to Projectile projects.
@@ -163,16 +143,15 @@ USER-REPO should be a string in the format <username/reponame>."
     (projectile-discover-projects-in-directory user-dir)
     (projectile-switch-project-by-name full-path)))
 
-(global-set-key (kbd "C-c p") 'projectile-command-map)
+(global-set-key (kbd "s-p") 'project-find-file)
+(global-set-key (kbd "s-P") 'project-find-file-other-window)
+(global-set-key (kbd "s-F") 'counsel-ag)
 
-(global-set-key (kbd "s-p") 'counsel-projectile-find-file)
-(global-set-key (kbd "s-P") 'counsel-projectile-find-file-other-window)
-(global-set-key (kbd "s-F") 'counsel-projectile-ag)
+;; FIXME migrate
 (global-set-key (kbd "s-w") 'kill-project-frame)
-;; FIXME at least until I fix kill project frame, also support plain delete frame
 (global-set-key (kbd "s-W") 'delete-frame)
-;; FIXME counsel-projectile not working here
-(global-set-key (kbd "s-o") 'projectile-switch-project)
+;; FIXME instead I want to open in new frame
+(global-set-key (kbd "s-o") 'project-switch-project)
 
 (global-set-key (kbd "C-<tab>") 'next-project-buffer)
 (global-set-key (kbd "C-S-<tab>") 'previous-project-buffer)
@@ -183,7 +162,7 @@ USER-REPO should be a string in the format <username/reponame>."
 (defun project-shell-command ()
   ""
   (interactive)
-  (let ((default-directory (projectile-project-root)))
+  (let ((default-directory (project-root (project-current t))))
     (shell-command-to-string (read-from-minibuffer "Shell command: "))))
 
 (provide 'facundo-projectile)
