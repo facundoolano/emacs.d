@@ -39,11 +39,6 @@
 ;; include ./ otherwise selecting the completed directory is weird
 (setq ivy-extra-directories '("./"))
 
-;; prepopulate counsel-projectile-ag with current region
-;; this is required for mark-and-grep to properly work
-(setq counsel-projectile-ag-initial-input '(when (use-region-p)
-                                             (buffer-substring-no-properties (region-beginning) (region-end))))
-
 (setq xref-show-definitions-function #'ivy-xref-show-defs)
 (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
 
@@ -69,7 +64,9 @@
   "Easy mark symbol current symbol and search for it in the project files."
   (interactive)
   (easy-mark 1)
-  (counsel-projectile-ag))
+  (if (use-region-p)
+      (counsel-ag (buffer-substring-no-properties (region-beginning) (region-end)))
+    (counsel-ag)))
 
 (defun counsel-describe-function-or-variable ()
   "Display help about the currently selected ivy result.
