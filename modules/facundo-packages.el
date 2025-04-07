@@ -68,7 +68,6 @@ Missing packages are installed automatically.")
          ("\\.elixir\\'" . elixir-mode)))
 
 (use-package erlang :mode "\\.erl\\'")
-(use-package gleam-ts-mode :mode "\\.gleam\\'")
 (use-package go-mode :mode "\\.go\\'")
 (use-package less-css-mode :mode "\\.less\\'")
 (use-package lua-mode :mode "\\.lua\\'")

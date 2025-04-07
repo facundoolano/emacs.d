@@ -1,8 +1,6 @@
-(prelude-require-packages '(gleam-ts-mode))
-
-(require 'lsp-mode)
-(require 'gleam-ts-mode)
-
-(add-hook 'gleam-ts-mode-hook 'lsp-deferred)
+(use-package gleam-ts-mode
+  :mode ("\\.gleam\\'" . gleam-ts-mode)
+  :requires lsp-mode
+  :hook (gleam-ts-mode . lsp-deferred))
 
 (provide 'facundo-gleam)
