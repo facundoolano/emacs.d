@@ -7,7 +7,8 @@
 ;;; Code:
 
 (require 'facundo-programming)
-(prelude-require-packages '(rainbow-delimiters))
+
+(use-package rainbow-delimiters)
 
 ;; Lisp configuration
 (define-key read-expression-map (kbd "TAB") 'completion-at-point)

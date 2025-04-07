@@ -1,6 +1,6 @@
-(prelude-require-packages '(google-translate popup))
+(use-package google-translate)
+(use-package popup)
 
-(require 'google-translate)
 (require 'google-translate-smooth-ui)
 
 (setq google-translate-translation-directions-alist

@@ -1,5 +1,4 @@
-(prelude-require-packages '(gptel))
-(require 'gptel)
+(use-package gptel)
 
 (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
 
