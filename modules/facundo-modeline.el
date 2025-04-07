@@ -68,17 +68,17 @@
 
 (setq-default mode-line-format
               (list
-               " "
-               mode-line-modified
                "  "
                mode-line-directory
                mode-line-buffer-identification
+               " "
+               facundo/mode-line-position
                "   "
                mode-line-my-vc
                "   "
                mode-line-major-mode
-               "      "
-               ;; TODO right align
-               facundo/mode-line-position))
+               "      "))
+;; TODO right align
+
 
 (provide 'facundo-modeline)
