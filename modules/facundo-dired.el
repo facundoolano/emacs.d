@@ -40,9 +40,9 @@
 (setq dired-sidebar-face '((t (:height 120))))
 
 (custom-set-faces
- '(dired-directory ((t (:foreground "DodgerBlue3" :height 130 :background nil :weight normal))))
- '(all-the-icons-dired-dir-face ((((background light)) :foreground "DodgerBlue3" :height 130 :background nil :weight normal)))
- '(dired-header ((t (:foreground "gray" :height 120  :background nil :weight normal)))))
+ '(dired-directory ((t (:foreground "DodgerBlue3" :height 130 :background unspecified :weight normal))))
+ '(all-the-icons-dired-dir-face ((((background light)) :foreground "DodgerBlue3" :height 130 :background unspecified :weight normal)))
+ '(dired-header ((t (:foreground "gray" :height 120  :background unspecified :weight normal)))))
 
 
 (customize-set-variable 'dired-sidebar-width 26)
