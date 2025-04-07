@@ -94,19 +94,25 @@
             (setq i 100))))
     (message "Not in a project")))
 
-;; FIXME rewrite
 (defun kill-this-and-next ()
-  "Kill the current buffer and move to the next current project one if any, else find file in project."
+  "Kill current buffer and move to next project buffer.
+   Refuse to kill if it's the last project buffer.
+   Do nothing for non-project buffers."
   (interactive)
-  (let ((next (car (-filter 'user-buffer-q (projectile-project-buffers-non-visible))))
-        (pname (projectile-project-name)))
-    (prin1 pname)
-    (kill-buffer)
-    (if next
-        (switch-to-buffer next)
-      (progn
-        (projectile-switch-project-by-name pname) ;; FIXME this is not working
-        (counsel-projectile-find-file)))))
+  (if-let ((proj (project-current)))
+      (let* ((current (current-buffer))
+             (proj-buffers (seq-filter
+                            (lambda (buf)
+                              (and (buffer-file-name buf)
+                                   (not (eq buf current))))
+                            (project-buffers proj)))
+             (next-buf (car proj-buffers)))
+        (if next-buf
+            (progn
+              (kill-buffer)
+              (switch-to-buffer next-buf))
+          (message "Won't kill last project buffer")))
+    (message "Not in a project buffer")))
 
 (defun project-find-file-other-window ()
   "Open FILENAME from a project in another window."
