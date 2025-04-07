@@ -1,4 +1,4 @@
-;;; facundo-projectile.el --- project(ile) related configuration  -*- lexical-binding: t; -*-
+;;; facundo-project.el --- project(ile) related configuration  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Facundo Olano
 
@@ -173,5 +173,5 @@ USER-REPO should be a string in the format <username/reponame>."
   (let ((default-directory (project-root (project-current))))
     (shell-command-to-string (read-from-minibuffer "Shell command: "))))
 
-(provide 'facundo-projectile)
+(provide 'facundo-project)
 ;;; facundo-projectile.el ends here
