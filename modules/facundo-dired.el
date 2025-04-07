@@ -24,11 +24,15 @@
 
 ;;; Code:
 
-(prelude-require-packages '(dired-sidebar all-the-icons-dired))
-
-(require 'dired-sidebar)
-
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(use-package all-the-icons-dired)
+(use-package dired-sidebar
+  :after all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode)
+  :bind (("<f8>" . dired-sidebar-toggle-sidebar)
+         :map dired-sidebar-mode-map
+         ("SPC" . dired-sidebar-preview)
+         ("R" . sidebar-rename)
+         ("C" . sidebar-copy)))
 
 (diff-hl-dired-mode 0)
 
@@ -54,10 +58,6 @@
   (dired-sidebar-jump-to-sidebar)
   (dired-next-line 1))
 
-
-(global-set-key (kbd "<f8>") 'dired-sidebar-toggle-sidebar)
-(define-key dired-sidebar-mode-map (kbd "SPC") 'dired-sidebar-preview)
-
 (defun sidebar-rename ()
   "Like `dired-do-rename' but with `default-directory' set to the one specified by listing header."
   (interactive)
@@ -69,9 +69,6 @@
   (interactive)
   (let ((default-directory (dired-current-directory)))
     (call-interactively #'dired-do-copy)))
-
-(define-key dired-sidebar-mode-map (kbd "R") 'sidebar-rename)
-(define-key dired-sidebar-mode-map (kbd "C") 'sidebar-copy)
 
 (provide 'facundo-dired)
 ;;; facundo-dired.el ends here
