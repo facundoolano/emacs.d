@@ -58,26 +58,19 @@
     (:eval (format "[%%l/%d:%%c]" (line-number-at-pos (- (point-max) 1)))))
   "Shows the line, column and position in the current buffer.")
 
-(require 'flycheck)
-
-(defvar mode-line-flycheck-status
-  '(:propertize
-    (:eval (flycheck-mode-line-status-text)))
-  "Shows the current major mode.")
-
 
 (setq-default mode-line-format
               (list
-               "  "
+               "   "
                mode-line-directory
                mode-line-buffer-identification
-               " "
+               "  "
                facundo/mode-line-position
-               "   "
+               "     "
                mode-line-my-vc
-               "   "
+               "     "
                mode-line-major-mode
-               "      "))
+               ))
 ;; TODO right align
 
 

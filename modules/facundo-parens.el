@@ -48,16 +48,16 @@
 
 ;;; CUSTOM STUFF
 
-                                        ; FIXME parinfer deprecated, repalced by rust mode. customizations below need to be updated or removed
-                                        ;(require 'parinfer)
+;; FIXME parinfer deprecated, repalced by rust mode. customizations below need to be updated or removed
+;;(require 'parinfer)
 
 ;; use regular yank to avoid weird region replacement
-                                        ;(define-key parinfer-region-mode-map [remap yank] 'yank)
+;;(define-key parinfer-region-mode-map [remap yank] 'yank)
 ;; (define-key parinfer-region-mode-map (kbd "<tab>") 'parinfer-shift-right)
 ;; (define-key parinfer-region-mode-map (kbd "<backtab>") 'parinfer-shift-left)
 
-                                        ;(define-key parinfer-mode-map (kbd "<tab>") 'parinfer-smart-tab:dwim-right-or-complete)
-                                        ;(define-key parinfer-mode-map (kbd "<backtab>") 'parinfer-smart-tab:dwim-left)
+;;(define-key parinfer-mode-map (kbd "<tab>") 'parinfer-smart-tab:dwim-right-or-complete)
+;;(define-key parinfer-mode-map (kbd "<backtab>") 'parinfer-smart-tab:dwim-left)
 
 ;; enable some paredit commands
 ;; (define-key parinfer-mode-map (kbd "C-)") 'sp-forward-slurp-sexp)

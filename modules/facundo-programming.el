@@ -87,7 +87,7 @@
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
 (global-set-key (kbd "M-s") 'sp-splice-sexp)
 
-;; FIXME move to a lsp module
+;; FIXME move to use-package definition
 (define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
 (define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
 (define-key lsp-mode-map (kbd "M-.") 'lsp-find-definition)
