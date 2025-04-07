@@ -81,10 +81,6 @@ Missing packages are installed automatically.")
 (use-package protobuf-mode :mode "\\.proto\\'")
 (use-package rustic :mode "\\.rs\\'")
 
-(use-package yaml-pro
-  :mode (("\\.yml\\'" . yaml-pro-ts-mode)
-         ("\\.yaml\\'" . yaml-pro-ts-mode)))
-
 (use-package dockerfile-mode :mode "Dockerfile\\'")
 
 
