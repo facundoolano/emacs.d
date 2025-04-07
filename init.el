@@ -88,7 +88,6 @@
 (safe-require 'facundo-yaml)
 (safe-require 'facundo-blog)
 (safe-require 'facundo-dictionary)
-(safe-require 'facundo-spotify)
 (safe-require 'facundo-text)
 (safe-require 'facundo-gpt)
 
