@@ -19,7 +19,7 @@
   (add-hook 'after-save-hook
             (lambda ()
               (when (and
-                     (string-prefix-p prelude-dir (file-truename buffer-file-name))
+                     (string-prefix-p root-dir (file-truename buffer-file-name))
                      (file-exists-p (byte-compile-dest-file buffer-file-name)))
                 (emacs-lisp-byte-compile)))
             nil

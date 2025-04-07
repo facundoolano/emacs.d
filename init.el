@@ -17,37 +17,33 @@
 (setq use-package-always-ensure t) ;; Auto-install packages
 
 
-;; FIXME review if these are needed
-(defvar prelude-dir (file-name-directory load-file-name)
+(defvar root-dir (file-name-directory load-file-name)
   "The root dir of the Emacs Prelude distribution.")
 
-(defvar prelude-modules-dir (expand-file-name  "modules" prelude-dir)
+(defvar modules-dir (expand-file-name  "modules" root-dir)
   "This directory houses all of the built-in Prelude modules.")
 
-(defvar prelude-vendor-dir (expand-file-name "vendor" prelude-dir)
+(defvar vendor-dir (expand-file-name "vendor" root-dir)
   "This directory houses packages that are not yet available in ELPA (or MELPA).")
-(defvar prelude-savefile-dir (expand-file-name "savefile" prelude-dir)
+(defvar savefile-dir (expand-file-name "savefile" root-dir)
   "This folder stores all the automatically generated save/history-files.")
 
-(unless (file-exists-p prelude-savefile-dir)
-  (make-directory prelude-savefile-dir))
+(unless (file-exists-p savefile-dir)
+  (make-directory savefile-dir))
 
-(defun prelude-add-subfolders-to-load-path (parent-dir)
+(defun add-subfolders-to-load-path (parent-dir)
   "Add all level PARENT-DIR subdirs to the `load-path'."
   (dolist (f (directory-files parent-dir))
     (let ((name (expand-file-name f parent-dir)))
       (when (and (file-directory-p name)
                  (not (string-prefix-p "." f)))
         (add-to-list 'load-path name)
-        (prelude-add-subfolders-to-load-path name)))))
+        (add-subfolders-to-load-path name)))))
 
 ;; add Prelude's directories to Emacs's `load-path'
-(add-to-list 'load-path prelude-modules-dir)
-(add-to-list 'load-path prelude-vendor-dir)
-(prelude-add-subfolders-to-load-path prelude-vendor-dir)
-
-;; warn when opening files bigger than 100MB
-(setq large-file-warning-threshold 100000000)
+(add-to-list 'load-path modules-dir)
+(add-to-list 'load-path vendor-dir)
+(add-subfolders-to-load-path vendor-dir)
 
 ;;; remember window layout
 ;; FIXME review
@@ -77,7 +73,6 @@
 
 ;; Non core modules.
 (safe-require 'facundo-ivy)
-
 (safe-require 'facundo-indent)
 (safe-require 'facundo-parens)
 (safe-require 'facundo-git)

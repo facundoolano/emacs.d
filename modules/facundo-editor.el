@@ -56,7 +56,7 @@
 (global-auto-revert-mode t)
 
 ;; saveplace remembers your location in a file when saving files
-(setq save-place-file (expand-file-name "saveplace" prelude-savefile-dir))
+(setq save-place-file (expand-file-name "saveplace" savefile-dir))
 ;; activate it for all buffers
 (if (< emacs-major-version 25)
     (progn (require 'saveplace)
@@ -71,12 +71,12 @@
       ;; save every minute
       savehist-autosave-interval 60
       ;; keep the home clean
-      savehist-file (expand-file-name "savehist" prelude-savefile-dir))
+      savehist-file (expand-file-name "savehist" savefile-dir))
 (savehist-mode +1)
 
 ;; save recent files
 (require 'recentf)
-(setq recentf-save-file (expand-file-name "recentf" prelude-savefile-dir)
+(setq recentf-save-file (expand-file-name "recentf" savefile-dir)
       recentf-max-saved-items 500
       recentf-max-menu-items 15
       ;; disable recentf-cleanup on Emacs start, because it can cause
@@ -86,7 +86,7 @@
 (recentf-mode +1)
 
 ;; keep scratch across sessions
-(setq persistent-scratch-save-file (expand-file-name "persistent-scratch" prelude-savefile-dir))
+(setq persistent-scratch-save-file (expand-file-name "persistent-scratch" savefile-dir))
 (persistent-scratch-setup-default)
 
 (defun switch-to-special-buffer (buffer)

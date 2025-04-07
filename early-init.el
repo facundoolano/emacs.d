@@ -1,7 +1,10 @@
 ;; taken from https://emacsredux.com/blog/2025/03/28/speed-up-emacs-startup-by-tweaking-the-gc-settings/
 
+(setq large-file-warning-threshold 100000000)
+
 ;; Temporarily increase GC threshold during startup
 (setq gc-cons-threshold most-positive-fixnum)
+
 
 ;; Restore to normal value after startup (e.g. 100MB)
 (add-hook 'emacs-startup-hook

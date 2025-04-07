@@ -14,7 +14,7 @@
 (use-package ivy-xref)
 
 ;; smex is used to sort commands in counsel-M-x by recency
-(setq smex-save-file (expand-file-name "smex-items" prelude-savefile-dir))
+(setq smex-save-file (expand-file-name "smex-items" savefile-dir))
 
 (ivy-mode 1)
 (global-anzu-mode +1)

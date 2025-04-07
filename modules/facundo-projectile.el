@@ -29,7 +29,7 @@
 
 (setq projectile-completion-system 'ivy)
 
-(setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
+(setq projectile-cache-file (expand-file-name  "projectile.cache" savefile-dir))
 (projectile-mode t)
 
 ;; don't fail when not in projectile mode
