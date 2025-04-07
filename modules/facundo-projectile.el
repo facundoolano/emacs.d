@@ -24,18 +24,7 @@
 
 ;;; Code:
 
-(use-package projectile)
-(use-package counsel-projectile)
 
-(setq projectile-completion-system 'ivy)
-
-(setq projectile-cache-file (expand-file-name  "projectile.cache" savefile-dir))
-(projectile-mode t)
-
-;; don't fail when not in projectile mode
-(setq projectile-require-project-root nil)
-
-(setq projectile-globally-ignored-directories (append '("node_modules" "coverage") projectile-globally-ignored-directories))
 (setq shell-file-name "/bin/zsh")
 
 ;; FIXME this should either not kill project buffers
@@ -53,7 +42,7 @@
   "Show magit and the readme when opening a project."
   (interactive)
   (select-frame (make-frame))
-  (let ((readme (concat (project-root (project-current t)) "README.md")))
+  (let ((readme (concat (project-root (project-current)) "README.md")))
     (if (file-exists-p readme)
         (find-file readme)))
   (magit-project-status)
@@ -164,7 +153,7 @@ USER-REPO should be a string in the format <username/reponame>."
 (defun project-shell-command ()
   ""
   (interactive)
-  (let ((default-directory (project-root (project-current t))))
+  (let ((default-directory (project-root (project-current))))
     (shell-command-to-string (read-from-minibuffer "Shell command: "))))
 
 (provide 'facundo-projectile)

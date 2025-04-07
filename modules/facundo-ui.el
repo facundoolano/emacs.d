@@ -12,7 +12,7 @@
 (use-package which-key)
 
 (require 'diff-hl-margin)
-(require 'projectile)
+(require 'project)
 
 ;; the blinking cursor is nothing, but an annoyance
 (blink-cursor-mode -1)
@@ -32,7 +32,7 @@
 ;; buffer name (if the buffer isn't visiting a file)
 (setq frame-title-format
       '("" (:eval
-            (let ((project-dir (projectile-project-root)))
+            (let ((project-dir (project-root (project-current))))
               (cond
                ((and project-dir (not (string= project-dir "/"))) (abbreviate-file-name project-dir))
                ((buffer-file-name) (abbreviate-file-name (buffer-file-name)))
