@@ -1,12 +1,10 @@
-(prelude-require-packages '(magit
-                            forge
-                            git-timemachine
-                            git-modes
-                            github-review
-                            git-link))
+(use-package magit)
+(use-package forge)
+(use-package git-timemachine)
+(use-package git-modes)
+(use-package github-review)
+(use-package git-link)
 
-(require 'magit)
-(require 'forge)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)

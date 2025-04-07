@@ -8,11 +8,13 @@
 
 ;;; Code:
 
-(prelude-require-packages '(org ox-gfm org-journal org-present ob-mermaid))
 
-(require 'org)
-(require 'org-present)
-(require 'org-journal)
+(use-package org)
+(use-package ox-gfm)
+(use-package org-journal)
+(use-package org-present)
+(use-package ob-mermaid)
+
 
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)

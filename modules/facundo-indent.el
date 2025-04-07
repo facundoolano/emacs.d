@@ -67,9 +67,7 @@ indent yanked text (with prefix arg don't indent)."
                                          try-complete-lisp-symbol))
 
 ;;; TAKEN FROM prelude-company.el
-(prelude-require-packages '(company))
-
-(require 'company)
+(use-package company)
 
 (setq company-idle-delay 0.5)
 (setq company-tooltip-limit 10)
@@ -99,12 +97,12 @@ indent yanked text (with prefix arg don't indent)."
   (interactive)
   (if mark-active
       (save-mark-and-excursion
-       (let ((beg (region-beginning)) (end (region-end)))
-         (save-excursion
-           (setq beg (progn (goto-char beg) (line-beginning-position))
-                 end (progn (goto-char end) (line-end-position)))
-           (indent-code-rigidly beg end my-indentation-offset)))
-       (setq deactivate-mark nil))
+        (let ((beg (region-beginning)) (end (region-end)))
+          (save-excursion
+            (setq beg (progn (goto-char beg) (line-beginning-position))
+                  end (progn (goto-char end) (line-end-position)))
+            (indent-code-rigidly beg end my-indentation-offset)))
+        (setq deactivate-mark nil))
     (if (looking-at "\\_>")
         (company-complete-common-or-cycle)
       (indent-according-to-mode))))
@@ -113,14 +111,14 @@ indent yanked text (with prefix arg don't indent)."
   "If mark is active shift left the code block, extending the region to include whole lines.  if no mark is set shift the current line."
   (interactive)
   (if mark-active
-   (save-mark-and-excursion
-    (let ((beg (region-beginning)) (end (region-end)))
-      (save-excursion
-         (setq beg (progn (goto-char beg) (line-beginning-position))
-               end (progn (goto-char end) (line-end-position)))
-         (indent-code-rigidly beg end (- my-indentation-offset)))
-      (setq deactivate-mark nil)))
-   (indent-code-rigidly (line-beginning-position) (line-end-position) (- my-indentation-offset))))
+      (save-mark-and-excursion
+        (let ((beg (region-beginning)) (end (region-end)))
+          (save-excursion
+            (setq beg (progn (goto-char beg) (line-beginning-position))
+                  end (progn (goto-char end) (line-end-position)))
+            (indent-code-rigidly beg end (- my-indentation-offset)))
+          (setq deactivate-mark nil)))
+    (indent-code-rigidly (line-beginning-position) (line-end-position) (- my-indentation-offset))))
 
 (defun backspace-whitespace-to-tab-stop ()
   "Delete whitespace backwards to the next tab-stop, otherwise delete one character."

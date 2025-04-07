@@ -3,7 +3,12 @@
 (require 'markdown-mode)
 (require 'livedown)
 
-(prelude-require-packages '(centered-window visual-fill-column writeroom-mode reverse-im plantuml-mode markdown-toc))
+(use-package centered-window)
+(use-package visual-fill-column)
+(use-package writeroom-mode)
+(use-package reverse-im)
+(use-package plantuml-mode)
+(use-package markdown-toc)
 
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."

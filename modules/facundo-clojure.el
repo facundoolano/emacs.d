@@ -10,7 +10,9 @@
 ;; TAKEN FROM prelude-clojure.el
 
 (require 'facundo-lisp)
-(prelude-require-packages '(clojure-mode cider))
+(use-package clojure-mode)
+(use-package cider)
+(use-package flycheck-joker)
 
 (eval-after-load 'clojure-mode
   '(progn
@@ -33,9 +35,6 @@
      (add-hook 'cider-repl-mode-hook 'prelude-cider-repl-mode-defaults)))
 
 ;;; CUSTOM STUFF
-
-(require 'cider)
-(require 'flycheck-joker)
 
 (setq cider-repl-scroll-on-output nil)
 (setq cider-repl-wrap-history t)

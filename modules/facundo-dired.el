@@ -24,11 +24,15 @@
 
 ;;; Code:
 
-(prelude-require-packages '(dired-sidebar all-the-icons-dired))
-
-(require 'dired-sidebar)
-
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(use-package all-the-icons-dired)
+(use-package dired-sidebar
+  :after all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode)
+  :bind (("<f8>" . dired-sidebar-toggle-sidebar)
+         :map dired-sidebar-mode-map
+         ("SPC" . dired-sidebar-preview)
+         ("R" . sidebar-rename)
+         ("C" . sidebar-copy)))
 
 (diff-hl-dired-mode 0)
 
@@ -40,9 +44,9 @@
 (setq dired-sidebar-face '((t (:height 120))))
 
 (custom-set-faces
- '(dired-directory ((t (:foreground "DodgerBlue3" :height 130 :background nil :weight normal))))
- '(all-the-icons-dired-dir-face ((((background light)) :foreground "DodgerBlue3" :height 130 :background nil :weight normal)))
- '(dired-header ((t (:foreground "gray" :height 120  :background nil :weight normal)))))
+ '(dired-directory ((t (:foreground "DodgerBlue3" :height 130 :background unspecified :weight normal))))
+ '(all-the-icons-dired-dir-face ((((background light)) :foreground "DodgerBlue3" :height 130 :background unspecified :weight normal)))
+ '(dired-header ((t (:foreground "gray" :height 120  :background unspecified :weight normal)))))
 
 
 (customize-set-variable 'dired-sidebar-width 26)
@@ -53,10 +57,6 @@
   (dired-sidebar-find-file)
   (dired-sidebar-jump-to-sidebar)
   (dired-next-line 1))
-
-
-(global-set-key (kbd "<f8>") 'dired-sidebar-toggle-sidebar)
-(define-key dired-sidebar-mode-map (kbd "SPC") 'dired-sidebar-preview)
 
 (defun sidebar-rename ()
   "Like `dired-do-rename' but with `default-directory' set to the one specified by listing header."
@@ -69,9 +69,6 @@
   (interactive)
   (let ((default-directory (dired-current-directory)))
     (call-interactively #'dired-do-copy)))
-
-(define-key dired-sidebar-mode-map (kbd "R") 'sidebar-rename)
-(define-key dired-sidebar-mode-map (kbd "C") 'sidebar-copy)
 
 (provide 'facundo-dired)
 ;;; facundo-dired.el ends here

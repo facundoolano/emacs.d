@@ -6,15 +6,15 @@
 
 ;;; Code:
 
-(prelude-require-packages '(ivy counsel smex anzu async ivy-xref))
-
-(require 'ivy)
-(require 'counsel)
-(require 'ivy-xref)
+(use-package ivy)
+(use-package counsel)
+(use-package smex)
+(use-package anzu)
+(use-package async)
+(use-package ivy-xref)
 
 ;; smex is used to sort commands in counsel-M-x by recency
-(require 'smex)
-(setq smex-save-file (expand-file-name "smex-items" prelude-savefile-dir))
+(setq smex-save-file (expand-file-name "smex-items" savefile-dir))
 
 (ivy-mode 1)
 (global-anzu-mode +1)

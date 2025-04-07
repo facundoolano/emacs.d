@@ -1,12 +1,11 @@
 ;; mode line configuration
 
-(prelude-require-package 'all-the-icons)
+(use-package all-the-icons)
 
 (custom-set-faces
  '(mode-line ((t (:background "#335EA8" :box (:line-width 3 :color "#335EA8")))))
  '(mode-line-inactive ((t (:background "#9B9C97" :box (:line-width 3 :color "#9B9C97"))))))
 
-(require 'all-the-icons)
 ;; will also need to call `all-the-icons-install-fonts`
 
 ;; show fancy branch icon for current branch
@@ -59,27 +58,20 @@
     (:eval (format "[%%l/%d:%%c]" (line-number-at-pos (- (point-max) 1)))))
   "Shows the line, column and position in the current buffer.")
 
-(require 'flycheck)
-
-(defvar mode-line-flycheck-status
-  '(:propertize
-    (:eval (flycheck-mode-line-status-text)))
-  "Shows the current major mode.")
-
 
 (setq-default mode-line-format
               (list
-               " "
-               mode-line-modified
-               "  "
+               "   "
                mode-line-directory
                mode-line-buffer-identification
-               "   "
+               "  "
+               facundo/mode-line-position
+               "     "
                mode-line-my-vc
-               "   "
+               "     "
                mode-line-major-mode
-               "      "
-               ;; TODO right align
-               facundo/mode-line-position))
+               ))
+;; TODO right align
+
 
 (provide 'facundo-modeline)

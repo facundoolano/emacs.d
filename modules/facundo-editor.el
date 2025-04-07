@@ -8,13 +8,13 @@
 
 ;;; TAKEN FROM prelude-editor.el
 
-(prelude-require-packages '(toggle-quotes
-                            browse-kill-ring
-                            easy-kill
-                            expand-region
-                            goto-chg
-                            move-text
-                            multiple-cursors))
+(use-package toggle-quotes)
+(use-package browse-kill-ring)
+(use-package easy-kill)
+(use-package expand-region)
+(use-package goto-chg)
+(use-package move-text)
+(use-package multiple-cursors)
 
 (defun reload-init-file()
   "Reload init.el file. Useful for updating config without restarting Emacs."
@@ -34,15 +34,6 @@
 (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
 (setq-default tab-width 8)            ;; but maintain correct appearance
 (setq-default initial-major-mode 'fundamental-mode)
-
-;; increase from default -12
-(add-to-list 'default-frame-alist '(font . "Menlo-14"))
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;; workaround for large title bar on macOS Sonoma
-;; see https://github.com/doomemacs/doomemacs/issues/7532
-(add-to-list 'after-make-frame-functions (lambda (frame) (tool-bar-mode 1) (tool-bar-mode 0)))
-
 
 ;; Newline at end of file
 (setq require-final-newline t)
@@ -65,7 +56,7 @@
 (global-auto-revert-mode t)
 
 ;; saveplace remembers your location in a file when saving files
-(setq save-place-file (expand-file-name "saveplace" prelude-savefile-dir))
+(setq save-place-file (expand-file-name "saveplace" savefile-dir))
 ;; activate it for all buffers
 (if (< emacs-major-version 25)
     (progn (require 'saveplace)
@@ -80,12 +71,12 @@
       ;; save every minute
       savehist-autosave-interval 60
       ;; keep the home clean
-      savehist-file (expand-file-name "savehist" prelude-savefile-dir))
+      savehist-file (expand-file-name "savehist" savefile-dir))
 (savehist-mode +1)
 
 ;; save recent files
 (require 'recentf)
-(setq recentf-save-file (expand-file-name "recentf" prelude-savefile-dir)
+(setq recentf-save-file (expand-file-name "recentf" savefile-dir)
       recentf-max-saved-items 500
       recentf-max-menu-items 15
       ;; disable recentf-cleanup on Emacs start, because it can cause
@@ -95,7 +86,7 @@
 (recentf-mode +1)
 
 ;; keep scratch across sessions
-(setq persistent-scratch-save-file (expand-file-name "persistent-scratch" prelude-savefile-dir))
+(setq persistent-scratch-save-file (expand-file-name "persistent-scratch" savefile-dir))
 (persistent-scratch-setup-default)
 
 (defun switch-to-special-buffer (buffer)

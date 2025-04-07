@@ -24,14 +24,12 @@
 
 ;;; Code:
 
-(prelude-require-packages '(projectile counsel-projectile))
-
-(require 'projectile)
-(require 'counsel-projectile)
+(use-package projectile)
+(use-package counsel-projectile)
 
 (setq projectile-completion-system 'ivy)
 
-(setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
+(setq projectile-cache-file (expand-file-name  "projectile.cache" savefile-dir))
 (projectile-mode t)
 
 ;; don't fail when not in projectile mode

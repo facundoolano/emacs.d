@@ -23,61 +23,26 @@
 ;;
 
 ;;; Code:
-(prelude-require-packages '(json-mode add-node-modules-path lsp-mode typescript-mode))
-
 (require 'facundo-programming)
 (require 'facundo-indent)
-(require 'typescript-ts-mode)
 
-;; taken from prelude
-(add-to-list 'auto-mode-alist '("\\.js\\'"    . typescript-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.ts\\'"    . typescript-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'"    . tsx-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'"    . tsx-ts-mode))
+(use-package json-mode :mode "\\.json\\'")
+(use-package json-mode :mode "\\.json\\'")
 
-(add-hook 'tsx-ts-mode-hook #'lsp-deferred)
-(add-hook 'typescript-ts-mode-hook #'lsp-deferred)
+(use-package typescript-ts-mode
+  :mode (("\\.js\\'"    . typescript-ts-mode)
+         ("\\.ts\\'"    . typescript-ts-mode)
+         ("\\.jsx\\'"    . tsx-ts-mode)
+         ("\\.tsx\\'"    . tsx-ts-mode))
 
-;; FIXME what do we need from this?
-(eval-after-load 'js2-mode
-  '(progn
-     (defun prelude-js-mode-defaults ()
-       ;; electric-layout-mode doesn't play nice with smartparens
-       (setq-local electric-layout-rules '((?\; . after)))
-       (setq mode-name "JS2")
-       (js2-imenu-extras-mode +1))
-
-     (add-hook 'js2-mode-hook 'prelude-js-mode-defaults)))
-
-;; custom stuff
-(eval-after-load 'js-mode
-  '(add-hook 'js-mode-hook #'add-node-modules-path))
-
-(eval-after-load 'js2-mode
-  '(add-hook 'js2-mode-hook #'add-node-modules-path))
-
-;; to avoid ugly output in npm commands
-(add-to-list
- 'comint-preoutput-filter-functions
- (lambda (output)
-   (replace-regexp-in-string "\\[[0-9]+[GK]" "" output)))
-
-(defun eslint-fix ()
-  "Format the current file with ESLint."
-  (interactive)
-  (if (executable-find "eslint")
-      (progn (call-process "eslint" nil "*ESLint Errors*" nil "--fix" buffer-file-name)
-             (revert-buffer t t t))
-    (message "ESLint not found.")))
-
-(require 'facundo-indent)
-
-(define-key typescript-ts-mode-map (kbd "<tab>") 'my-indent)
-(define-key tsx-ts-mode-map (kbd "<tab>") 'my-indent)
-(define-key typescript-ts-mode-map (kbd "<backtab>") 'my-unindent)
-(define-key tsx-ts-mode-map (kbd "<backtab>") 'my-unindent)
-
-(define-key js-mode-map [(backspace)] 'backspace-whitespace-to-tab-stop)
+  :hook ((typescript-ts-mode . lsp-deferred)
+         (tsx-ts-mode . lsp-deferred))
+  :bind (:map typescript-ts-mode-map
+              ("<tab>" . my-indent)
+              ("<backtab>" . my-unindent)
+              :map tsx-ts-mode-map
+              ("<tab>" . my-indent)
+              ("<backtab>" . my-unindent)))
 
 (provide 'facundo-js)
 ;;; facundo-js.el ends here
