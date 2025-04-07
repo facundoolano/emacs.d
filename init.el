@@ -85,7 +85,6 @@
 (safe-require 'facundo-modeline)
 (safe-require 'facundo-dired)
 (safe-require 'facundo-org)
-(safe-require 'facundo-yaml)
 (safe-require 'facundo-blog)
 (safe-require 'facundo-dictionary)
 (safe-require 'facundo-text)
@@ -97,8 +96,6 @@
 (safe-require 'facundo-js)
 (safe-require 'facundo-treesitter)
 (safe-require 'facundo-python)
-(safe-require 'facundo-go)
-(safe-require 'facundo-gleam)
 
 ;; send custom generated stuff to a separate file
 (setq custom-file "~/.emacs.d/custom.el")

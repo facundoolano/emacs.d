@@ -49,6 +49,34 @@ Missing packages are installed automatically.")
 (use-package discover-my-major)
 (use-package undo-tree)
 
+(use-package gleam-ts-mode
+  :mode "\\.gleam\\'"
+  :after lsp-mode
+  :hook (gleam-ts-mode . lsp-deferred))
+
+(use-package go-mode
+  :hook ((go-mode . lsp-deferred)
+         (go-mode . subword-mode)
+         (go-mode . (lambda () (setq tab-width 4)))))
+
+(use-package yaml-mode)
+(use-package yaml-pro
+  :after yaml-mode
+  :hook (yaml-mode . (lambda ()
+                       (yaml-pro-mode 1)
+                       (subword-mode)
+                       (visual-line-mode 0)))
+  :bind (:map yaml-mode-map
+              ("M-p" . yaml-pro-ts-move-subtree-up)
+              ("M-n" . yaml-pro-ts-move-subtree-down)
+              ("M-RET" . yaml-pro-ts-meta-return)
+              ("M-<left>" . (lambda () (interactive)
+                              (let ((current-prefix-arg '(4)))
+                                (yaml-pro-unindent-subtree))))
+              ("M-<right>" . (lambda () (interactive)
+                               (let ((current-prefix-arg '(4)))
+                                 (yaml-pro-indent-subtree))))))
+
 (use-package clojure-mode
   :mode (("\\.clj\\'" . clojure-mode)
          ("\\.cljc\\'" . clojurec-mode)
