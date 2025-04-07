@@ -1,11 +1,14 @@
 (require 'facundo-programming)
-(prelude-require-packages '(rustic lsp-mode))
+(use-package rustic
+  :hook ((rustic-mode . subword-mode)
+         (rustic-compilation-mode . visual-line-mode))
+  :bind (:map rustic-mode-map ("s-r" . rustic-compile)
+              ("s-R" . rustic-cargo-release)
+              ("s-f" . rustic-cargo-fmt)
+              ("M-h" . rust-toggle-hints)))
 
-(require 'rustic)
+
 (require 'lsp)
-
-(add-hook 'rustic-mode-hook #'subword-mode)
-(add-hook 'rustic-compilation-mode-hook 'visual-line-mode)
 
 ;; to update lsp and rustic, delete and install instead of reinstalling
 ;; https://emacs-lsp.github.io/lsp-mode/page/troubleshooting/#updating-packageel-packages
@@ -41,11 +44,6 @@
   (if lsp-rust-analyzer-inlay-hints-mode
       (lsp-rust-analyzer-inlay-hints-mode -1)
     (lsp-rust-analyzer-inlay-hints-mode 1)))
-
-(define-key rustic-mode-map (kbd "s-r") 'rustic-compile)
-(define-key rustic-mode-map (kbd "s-R") 'rustic-cargo-release)
-(define-key rustic-mode-map (kbd "s-f") 'rustic-cargo-fmt)
-(define-key rustic-mode-map (kbd "M-h") 'rust-toggle-hints)
 
 ;; (setq lsp-enable-hover nil)
 (setq lsp-signature-auto-activate nil)

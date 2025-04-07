@@ -8,13 +8,13 @@
 
 ;;; TAKEN FROM prelude-editor.el
 
-(prelude-require-packages '(toggle-quotes
-                            browse-kill-ring
-                            easy-kill
-                            expand-region
-                            goto-chg
-                            move-text
-                            multiple-cursors))
+(use-package toggle-quotes)
+(use-package browse-kill-ring)
+(use-package easy-kill)
+(use-package expand-region)
+(use-package goto-chg)
+(use-package move-text)
+(use-package multiple-cursors)
 
 (defun reload-init-file()
   "Reload init.el file. Useful for updating config without restarting Emacs."
