@@ -8,21 +8,10 @@
 
 ;; Always load newest byte code
 
-;; FIXME move to a package related module
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-
-(require 'use-package)
-(setq use-package-always-ensure t) ;; Auto-install packages
-
-
 (defvar root-dir (file-name-directory load-file-name)
   "The root dir of the Emacs Prelude distribution.")
-
 (defvar modules-dir (expand-file-name  "modules" root-dir)
   "This directory houses all of the built-in Prelude modules.")
-
 (defvar vendor-dir (expand-file-name "vendor" root-dir)
   "This directory houses packages that are not yet available in ELPA (or MELPA).")
 (defvar savefile-dir (expand-file-name "savefile" root-dir)
@@ -31,45 +20,27 @@
 (unless (file-exists-p savefile-dir)
   (make-directory savefile-dir))
 
-(defun add-subfolders-to-load-path (parent-dir)
-  "Add all level PARENT-DIR subdirs to the `load-path'."
-  (dolist (f (directory-files parent-dir))
-    (let ((name (expand-file-name f parent-dir)))
-      (when (and (file-directory-p name)
-                 (not (string-prefix-p "." f)))
-        (add-to-list 'load-path name)
-        (add-subfolders-to-load-path name)))))
-
-;; add Prelude's directories to Emacs's `load-path'
 (add-to-list 'load-path modules-dir)
 (add-to-list 'load-path vendor-dir)
-(add-subfolders-to-load-path vendor-dir)
 
 ;;; remember window layout
-;; FIXME review
 (setq desktop-save t)
 (desktop-save-mode 1)
+
+;; the core stuff
+(require 'facundo-packages)
+(require 'facundo-editor)
+(require 'facundo-ui)
+(require 'facundo-global-keybindings)
+
+(when (eq system-type 'darwin)
+  (require 'facundo-osx))
 
 (defun safe-require (module)
   "Load the given MODULE, catch and log any error, move on."
   (message (concat "loading " (symbol-name module)))
   (with-demoted-errors "THERE WAS AN ERROR: %s"
     (require module)))
-
-;; the core stuff
-(require 'facundo-packages)
-
-(require 'facundo-editor)
-(require 'facundo-ui)
-
-;; OSX specific settings
-(when (eq system-type 'darwin)
-  (require 'facundo-osx))
-
-(require 'facundo-global-keybindings)
-
-;; allow to use emacsclient for shell edition
-(server-start)
 
 ;; Non core modules.
 (safe-require 'facundo-ivy)
