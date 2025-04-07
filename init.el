@@ -29,6 +29,7 @@
 
 ;; the core stuff
 (require 'facundo-packages)
+(require 'facundo-projectile)
 (require 'facundo-editor)
 (require 'facundo-ui)
 (require 'facundo-global-keybindings)
@@ -47,7 +48,6 @@
 (safe-require 'facundo-indent)
 (safe-require 'facundo-parens)
 (safe-require 'facundo-git)
-(safe-require 'facundo-projectile)
 (safe-require 'facundo-modeline)
 (safe-require 'facundo-dired)
 (safe-require 'facundo-org)

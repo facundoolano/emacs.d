@@ -85,9 +85,6 @@
 (global-set-key (kbd "C-c I") 'crux-find-user-init-file)
 (global-set-key (kbd "C-c S") 'crux-find-shell-init-file)
 
-;; extra prefix for projectile
-(global-set-key (kbd "s-p") 'projectile-command-map)
-
 ;;; CUSTOM STUFF
 
 (global-set-key (kbd "s-=") 'text-scale-increase)
