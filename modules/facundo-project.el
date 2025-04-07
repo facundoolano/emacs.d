@@ -61,9 +61,9 @@
             (i 0))
         (next-buffer)
         (while (< i 20)
-          (if (or (not (user-buffer-q))
-                  (not (memq (current-buffer) proj-buffers))
-                  (not (buffer-file-name (current-buffer))))
+          (if (or
+               (not (memq (current-buffer) proj-buffers))
+               (not (buffer-file-name (current-buffer))))
               (progn
                 (next-buffer)
                 (setq i (1+ i))
@@ -83,8 +83,7 @@
             (i 0))
         (previous-buffer)
         (while (< i 20)
-          (if (or (not (user-buffer-q))
-                  (not (memq (current-buffer) proj-buffers))
+          (if (or (not (memq (current-buffer) proj-buffers))
                   (not (buffer-file-name (current-buffer))))
               (progn
                 (previous-buffer)
@@ -95,15 +94,7 @@
             (setq i 100))))
     (message "Not in a project")))
 
-(defun user-buffer-q (&optional buffer)
-  "Return t if BUFFER is a user buffer, else nil.  BUFFER defaults to the current bufer."
-  (interactive)
-  (if (string-equal "*" (substring (buffer-name buffer) 0 1))
-      nil
-    (if (string-equal major-mode "dired-mode")
-        nil
-      t)))
-
+;; FIXME rewrite
 (defun kill-this-and-next ()
   "Kill the current buffer and move to the next current project one if any, else find file in project."
   (interactive)
@@ -116,12 +107,6 @@
       (progn
         (projectile-switch-project-by-name pname) ;; FIXME this is not working
         (counsel-projectile-find-file)))))
-
-(defun kill-other-project-buffers ()
-  "Kill all user buffers from this project, except the current one."
-  (interactive)
-  (let ((project-buffers (-filter 'user-buffer-q (projectile-project-buffers-non-visible))))
-    (mapcar 'kill-buffer project-buffers)))
 
 (defun project-find-file-other-window ()
   "Open FILENAME from a project in another window."
