@@ -13,3 +13,6 @@
 (scroll-bar-mode -1)
 
 (load-theme 'leuven t)
+
+(add-to-list 'default-frame-alist '(font . "Menlo-14"))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))

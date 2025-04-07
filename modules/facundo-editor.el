@@ -35,15 +35,6 @@
 (setq-default tab-width 8)            ;; but maintain correct appearance
 (setq-default initial-major-mode 'fundamental-mode)
 
-;; increase from default -12
-(add-to-list 'default-frame-alist '(font . "Menlo-14"))
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;; workaround for large title bar on macOS Sonoma
-;; see https://github.com/doomemacs/doomemacs/issues/7532
-(add-to-list 'after-make-frame-functions (lambda (frame) (tool-bar-mode 1) (tool-bar-mode 0)))
-
-
 ;; Newline at end of file
 (setq require-final-newline t)
 
