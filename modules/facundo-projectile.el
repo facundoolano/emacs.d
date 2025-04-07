@@ -51,14 +51,16 @@
 
 (defun facundo-switch-project-action ()
   "Show magit and the readme when opening a project."
+  (interactive)
   (select-frame (make-frame))
-  (let ((readme (concat (projectile-project-root) "README.md")))
+  (let ((readme (concat (project-root (project-current t)) "README.md")))
     (if (file-exists-p readme)
         (find-file readme)))
-  (projectile-vc)
+  (magit-project-status)
   (dired-sidebar-show-sidebar))
 
-(setq projectile-switch-project-action 'facundo-switch-project-action)
+;; make switch project action open using the function above instead of prompting
+(customize-set-variable 'project-switch-commands 'facundo-switch-project-action)
 
 ;;; navigate buffers
 (defun next-project-buffer ()
