@@ -79,7 +79,6 @@ Missing packages are installed automatically.")
 
 (use-package php-mode :mode "\\.php\\'")
 (use-package protobuf-mode :mode "\\.proto\\'")
-(use-package rustic :mode "\\.rs\\'")
 
 (use-package dockerfile-mode :mode "Dockerfile\\'")
 

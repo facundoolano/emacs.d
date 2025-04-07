@@ -1,5 +1,8 @@
 (require 'facundo-programming)
+
 (use-package rustic
+  :mode ("\\.rs\\'" . rustic-mode)
+  :defer t
   :hook ((rustic-mode . subword-mode)
          (rustic-compilation-mode . visual-line-mode))
   :bind (:map rustic-mode-map ("s-r" . rustic-compile)
