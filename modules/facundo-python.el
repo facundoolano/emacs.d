@@ -51,8 +51,6 @@
 
 (add-hook 'python-mode-hook 'prelude-python-mode-defaults)
 
-(setq flycheck-python-ruff-executable "ruff")
-
 (setq python-shell-interpreter "python3")
 
 ;; TODO new python package module

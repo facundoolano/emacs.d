@@ -9,7 +9,6 @@
 ;;; Code:
 
 (use-package smartparens)
-(use-package flycheck)
 (use-package eglot)
 (use-package apheleia)
 
@@ -32,21 +31,16 @@
     (flyspell-prog-mode))
   (electric-pair-mode -1)
   (smartparens-mode +1)
+  (flymake-mode 1)
   (prelude-enable-whitespace)
   (prelude-local-comment-auto-fill))
 
 (add-hook 'prog-mode-hook 'prelude-prog-mode-defaults)
-(add-hook 'prog-mode-hook (lambda () (setq flycheck-check-syntax-automatically '(save idle-change new-line mode-enabled))))
 
 ;; format on save with apheleia
 ;; override python defaults
 ;; should also pick up gofmt and prettier without config
 (apheleia-global-mode)
-
-;; enable on-the-fly syntax checking
-(if (fboundp 'global-flycheck-mode)
-    (global-flycheck-mode +1)
-  (add-hook 'prog-mode-hook 'flycheck-mode))
 
 ;;; CUSTOM STUFF
 

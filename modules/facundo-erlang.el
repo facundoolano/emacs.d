@@ -23,9 +23,6 @@
 
 (setq erlang-indent-level 4)
 
-;; rebar3 checker trips with rebar2 projects
-;; (setq-default flycheck-disabled-checkers '(erlang-rebar3))
-
 ;; add a smart pair for binaries
 ;; TODO add smarter sp configuration for these
 (sp-local-pair 'erlang-mode "<<\"" "\">>")
