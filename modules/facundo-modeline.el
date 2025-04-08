@@ -1,6 +1,7 @@
 ;; mode line configuration
 
 (use-package all-the-icons)
+(require 'project)
 
 (custom-set-faces
  '(mode-line ((t (:background "#335EA8" :box (:line-width 3 :color "#335EA8")))))
@@ -30,7 +31,7 @@
 
 (defun sml/get-directory ()
   "Decide if we want directory shown. If so, return it."
-  (when (project-root (project-current))
+  (when (project-current)
     (file-relative-name
      (cond
       ;; In email attachments, buffer-file-name is non-nil, but
@@ -69,9 +70,6 @@
                "     "
                mode-line-my-vc
                "     "
-               mode-line-major-mode
-               ))
-;; TODO right align
-
+               mode-line-major-mode))
 
 (provide 'facundo-modeline)

@@ -39,8 +39,8 @@ Start `ielm' if it's not already running."
   "Sensible defaults for `emacs-lisp-mode'."
   (prelude-lisp-coding-defaults)
   (eldoc-mode +1)
-  (prelude-recompile-elc-on-save)
-  )
+  (prelude-recompile-elc-on-save))
+
 
 (add-hook 'emacs-lisp-mode-hook 'prelude-emacs-lisp-mode-defaults)
 
