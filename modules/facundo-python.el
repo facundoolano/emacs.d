@@ -6,7 +6,6 @@
 ;; Python mode Emacs has to offer).
 
 (use-package lsp-pyright)
-(use-package ruff-format)
 
 (require 'electric)
 (require 'python)
