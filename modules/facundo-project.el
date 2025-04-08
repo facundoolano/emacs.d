@@ -1,9 +1,9 @@
-;;; facundo-project.el --- project(ile) related configuration  -*- lexical-binding: t; -*-
+;;; facundo-project.el --- project related configuration  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Facundo Olano
 
 ;; Author: Facundo Olano;; <facundo@madmobile>
-;; Keywords: projectile
+;; Keywords: project.el
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,21 +20,18 @@
 
 ;;; Commentary:
 
-;;
-
 ;;; Code:
 
 
 (setq shell-file-name "/bin/zsh")
 
-;; FIXME this should either not kill project buffers
 ;; or do it only if they are not already visible in another frame
 (defun kill-project-frame ()
   "Delete current frame and kill all project buffers."
   (interactive)
   (if (> (length (frame-list)) 1)
       (progn
-        (mapc 'kill-buffer (projectile-project-buffers))
+        (mapc 'kill-buffer (project-buffers (project-current)))
         (delete-frame))
     (message "Attempted to kill the solely visible frame.")))
 
