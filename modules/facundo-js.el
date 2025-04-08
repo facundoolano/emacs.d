@@ -35,8 +35,8 @@
          ("\\.jsx\\'"    . tsx-ts-mode)
          ("\\.tsx\\'"    . tsx-ts-mode))
 
-  :hook ((typescript-ts-mode . lsp-deferred)
-         (tsx-ts-mode . lsp-deferred))
+  :hook ((typescript-ts-mode . eglot-ensure)
+         (tsx-ts-mode . eglot-ensure))
   :bind (:map typescript-ts-mode-map
               ("<tab>" . my-indent)
               ("<backtab>" . my-unindent)

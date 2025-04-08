@@ -10,8 +10,11 @@
 
 (use-package smartparens)
 (use-package flycheck)
-(use-package lsp-mode)
+(use-package eglot)
 (use-package apheleia)
+
+(add-to-list 'eglot-server-programs
+             '(python-mode . ("pyright-langserver" "--stdio")))
 
 ;;; TAKEN FROM prelude-programming.el
 
@@ -72,11 +75,6 @@
   (insert "FIXME ")
   (comment-or-uncomment-region-or-line))
 
-(defun lsp-find-definition-other-window ()
-  "Find definiton in other window."
-  (interactive)
-  (lsp-find-definition :display-action 'window))
-
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "s-;") 'insert-todo)
 (global-set-key (kbd "s-:") 'insert-fixme)
@@ -87,31 +85,11 @@
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
 (global-set-key (kbd "M-s") 'sp-splice-sexp)
 
-;; FIXME move to use-package definition
-(define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
-(define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
-(define-key lsp-mode-map (kbd "M-.") 'lsp-find-definition)
-(define-key lsp-mode-map (kbd "C-M-.") 'lsp-find-definition-other-window)
-(define-key lsp-mode-map (kbd "M-,") 'pop-tag-mark)
-
-;; lsp makes too many file watches and trips on big projects.
-;; this is supposed to bring it back to life
-;; https://www.blogbyben.com/2022/05/gotcha-emacs-on-mac-os-too-many-files.html
-;; see lsp-file-watch-ignored-directories and lsp-file-watch-ignored-files
-;; https://emacs-lsp.github.io/lsp-mode/page/file-watchers/
-(defun file-notify-rm-all-watches ()
-  "Remove all existing file notification watches from Emacs."
-  (interactive)
-  (maphash
-   (lambda (key _value)
-     (file-notify-rm-watch key))
-   file-notify-descriptors))
-
-
-(setq lsp-file-watch-threshold 5000)
-(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.node_modules\\'")
-(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.venv\\'")
-(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.asdf\\'")
+;; TODO check if these aren't already the defaults
+(define-key eglot-mode-map (kbd "M-?") 'eldoc-doc-buffer)
+(define-key eglot-mode-map (kbd "M-.") 'xref-find-definitions)
+(define-key eglot-mode-map (kbd "C-M-.") 'xref-find-definitions-other-window)
+(define-key eglot-mode-map (kbd "M-,") 'pop-tag-mark)
 
 (provide 'facundo-programming)
 ;;; facundo-programming.el ends here

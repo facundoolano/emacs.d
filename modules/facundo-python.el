@@ -5,11 +5,16 @@
 ;; Some basic configuration for python.el (the latest and greatest
 ;; Python mode Emacs has to offer).
 
-(use-package lsp-pyright)
-
 (require 'electric)
 (require 'python)
 (require 'facundo-programming)
+
+(use-package python-mode
+  :hook (python-mode . eglot-ensure)
+  :config
+  (with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs
+                 '(python-mode . ("pyright-langserver" "--stdio")))))
 
 ;; Copy pasted from ruby-mode.el
 (defun prelude-python--encoding-comment-required-p ()
@@ -62,10 +67,9 @@
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
-  (lsp)
   (eldoc-mode 1)
-  (setq-local lsp-pyright-python-executable-cmd "python3")
-  (setq-local lsp-pyright-extra-paths (vector "venv" ".venv"))
+  ;; (setq-local lsp-pyright-python-executable-cmd "python3")
+  ;; (setq-local lsp-pyright-extra-paths (vector "venv" ".venv"))
   (setq-local my-indentation-offset python-indent-offset)
   (setq-local forward-sexp-function nil)
   (setq-local electric-layout-rules

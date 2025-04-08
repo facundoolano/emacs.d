@@ -30,7 +30,7 @@
 
 (defun sml/get-directory ()
   "Decide if we want directory shown. If so, return it."
-  (when (project-current)
+  (when (project-root (project-current))
     (file-relative-name
      (cond
       ;; In email attachments, buffer-file-name is non-nil, but
