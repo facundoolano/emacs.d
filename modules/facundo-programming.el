@@ -42,8 +42,6 @@
 ;; override python defaults
 ;; should also pick up gofmt and prettier without config
 (apheleia-global-mode)
-(setf (alist-get 'python-mode apheleia-mode-alist) '(ruff-isort ruff))
-(setf (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff-isort ruff))
 
 ;; enable on-the-fly syntax checking
 (if (fboundp 'global-flycheck-mode)
