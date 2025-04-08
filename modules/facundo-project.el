@@ -25,7 +25,6 @@
 
 (setq shell-file-name "/bin/zsh")
 
-;; or do it only if they are not already visible in another frame
 (defun kill-project-frame ()
   "Delete current frame and kill all project buffers."
   (interactive)
