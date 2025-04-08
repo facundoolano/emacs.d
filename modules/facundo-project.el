@@ -94,7 +94,7 @@
 (defun kill-this-and-next ()
   "Kill current buffer and move to next project buffer.
    Refuse to kill if it's the last project buffer.
-   Do nothing for non-project buffers."
+   For non-project buffers, delete window if in split, otherwise do nothing."
   (interactive)
   (if-let ((proj (project-current)))
       (let* ((current (current-buffer))
@@ -109,7 +109,9 @@
               (kill-buffer)
               (switch-to-buffer next-buf))
           (message "Won't kill last project buffer")))
-    (message "Not in a project buffer")))
+    (if (> (count-windows) 1)
+        (delete-window)
+      (message "Not in a project buffer"))))
 
 (defun project-find-file-other-window ()
   "Open FILENAME from a project in another window."
@@ -121,6 +123,7 @@
         (project-find-file))
     (advice-remove 'find-file #'find-file-other-window)))
 
+;; FIXME update to project.el, no need to discover anymore
 (defun projectile-discover-from-github (user-repo)
   "Clone a GitHub project and add it to Projectile projects.
 USER-REPO should be a string in the format <username/reponame>."
@@ -139,14 +142,18 @@ USER-REPO should be a string in the format <username/reponame>."
     (projectile-discover-projects-in-directory user-dir)
     (projectile-switch-project-by-name full-path)))
 
+(defun project-shell-command ()
+  ""
+  (interactive)
+  (let ((default-directory (project-root (project-current))))
+    (shell-command-to-string (read-from-minibuffer "Shell command: "))))
+
 (global-set-key (kbd "s-p") 'project-find-file)
 (global-set-key (kbd "s-P") 'project-find-file-other-window)
 (global-set-key (kbd "s-F") 'counsel-ag)
 
-;; FIXME migrate
 (global-set-key (kbd "s-w") 'kill-project-frame)
 (global-set-key (kbd "s-W") 'delete-frame)
-;; FIXME instead I want to open in new frame
 (global-set-key (kbd "s-o") 'project-switch-project)
 
 (global-set-key (kbd "C-<tab>") 'next-project-buffer)
@@ -154,12 +161,6 @@ USER-REPO should be a string in the format <username/reponame>."
 
 (global-set-key (kbd "s-k") 'kill-this-and-next)
 (global-set-key (kbd "s-K") 'kill-other-project-buffers)
-
-(defun project-shell-command ()
-  ""
-  (interactive)
-  (let ((default-directory (project-root (project-current))))
-    (shell-command-to-string (read-from-minibuffer "Shell command: "))))
 
 (provide 'facundo-project)
 ;;; facundo-projectile.el ends here
