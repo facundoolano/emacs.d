@@ -15,12 +15,16 @@
 (add-to-list 'eglot-server-programs
              '(python-mode . ("pyright-langserver" "--stdio")))
 
-;;; TAKEN FROM prelude-programming.el
-
-;; smart curly braces
-;; (sp-pair "{ nil :post-handlers
-;;          '(((lambda (&rest _ignored)
-;;               (crux-smart-open-line-above)) "RET")))
+;; show single line eldoc in the minibuffer
+;; if there is flymake error show that first
+(with-eval-after-load 'eglot
+  (add-hook 'eglot-managed-mode-hook
+            (lambda ()
+              (setq eldoc-echo-area-use-multiline-p nil)
+              (setq eldoc-documentation-functions
+                    (cons #'flymake-eldoc-function
+                          (remove #'flymake-eldoc-function eldoc-documentation-functions)))
+              (setq eldoc-documentation-strategy #'eldoc-documentation-compose))))
 
 (defun prelude-local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
