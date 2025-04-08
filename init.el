@@ -29,7 +29,7 @@
 
 ;; the core stuff
 (require 'facundo-packages)
-(require 'facundo-projectile)
+(require 'facundo-project)
 (require 'facundo-editor)
 (require 'facundo-ui)
 (require 'facundo-global-keybindings)

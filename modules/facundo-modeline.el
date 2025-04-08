@@ -30,7 +30,7 @@
 
 (defun sml/get-directory ()
   "Decide if we want directory shown. If so, return it."
-  (when (projectile-project-root)
+  (when (project-current)
     (file-relative-name
      (cond
       ;; In email attachments, buffer-file-name is non-nil, but
@@ -46,7 +46,7 @@
       ((buffer-base-buffer)
        (with-current-buffer (buffer-base-buffer) (sml/get-directory)))
       (t ""))
-     (projectile-project-root))))
+     (project-root (project-current)))))
 
 (defvar mode-line-directory
   '(:propertize

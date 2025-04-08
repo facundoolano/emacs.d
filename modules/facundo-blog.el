@@ -14,7 +14,7 @@
 (require 'ox-publish)
 (require 'ox-md)
 (require 'ox-gfm)
-(require 'projectile)
+(require 'project)
 
 ;;;###autoload
 (define-derived-mode org-blog-mode org-mode "BLOG"
@@ -26,7 +26,7 @@
   "Setup the blog mode."
   (if (string= "es" (org-kw-language))
       (progn (ispell-change-dictionary "spanish")
-          (set-input-method "spanish-prefix")))
+             (set-input-method "spanish-prefix")))
   (setq-local org-footnote-section nil)
   (flyspell-mode 1)
   (company-mode -1)
@@ -43,7 +43,7 @@
 (defun org-blog-new-post (title)
   "Create a new jorge post with the given TITLE and switch to it in blog mode."
   (interactive "MPost title: ")
-  (let* ((project-root (projectile-project-root))
+  (let* ((project-root (project-root (project-current)))
          (default-directory project-root)
          (output (shell-command-to-string (concat "jorge post \"" title "\"")))
          (post-path (string-trim (string-remove-prefix "added " output))))
