@@ -123,9 +123,8 @@
         (project-find-file))
     (advice-remove 'find-file #'find-file-other-window)))
 
-;; FIXME update to project.el, no need to discover anymore
-(defun projectile-discover-from-github (user-repo)
-  "Clone a GitHub project and add it to Projectile projects.
+(defun project-discover-from-github (user-repo)
+  "Clone a GitHub project and add it to the known projects list.
 USER-REPO should be a string in the format <username/reponame>."
   (interactive "sGitHub user/repo: ")
   (let* ((dev-dir "~/dev/")
@@ -137,10 +136,12 @@ USER-REPO should be a string in the format <username/reponame>."
       (make-directory user-dir))
     (unless (file-directory-p full-path)
       (shell-command
-       (format "git clone git@github.com:%s.git %s" user-repo full-path)))
-    ;; Discover and switch to the new project
-    (projectile-discover-projects-in-directory user-dir)
-    (projectile-switch-project-by-name full-path)))
+       (format "git clone git@github.com:%s.git %s" user-repo full-path))
+      (project-remember-project (project-current nil full-path))
+      (project-switch-project full-path))))
+
+;; TODO implement
+(defun project-init-new ())
 
 (defun project-shell-command ()
   ""
@@ -163,4 +164,4 @@ USER-REPO should be a string in the format <username/reponame>."
 (global-set-key (kbd "s-K") 'kill-other-project-buffers)
 
 (provide 'facundo-project)
-;;; facundo-projectile.el ends here
+;;; facundo-project.el ends here
