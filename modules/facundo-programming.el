@@ -12,9 +12,6 @@
 (use-package eglot)
 (use-package apheleia)
 
-(add-to-list 'eglot-server-programs
-             '(python-mode . ("pyright-langserver" "--stdio")))
-
 ;; show single line eldoc in the minibuffer
 ;; if there is flymake error show that first
 (with-eval-after-load 'eglot

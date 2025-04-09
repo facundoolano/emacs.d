@@ -13,6 +13,10 @@
 
 (add-hook 'python-mode-hook #'eglot-ensure)
 
+(use-package pet
+  :config
+  (add-hook 'python-base-mode-hook 'pet-mode -10))
+
 (add-to-list 'eglot-server-programs
              '(python-mode . ("pyright-langserver" "--stdio")))
 
@@ -32,9 +36,7 @@
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
-  (eldoc-mode 1)
-  ;; (setq-local lsp-pyright-python-executable-cmd "python3")
-  ;; (setq-local lsp-pyright-extra-paths (vector "venv" ".venv"))
+  (eglot-ensure)
   (setq-local my-indentation-offset python-indent-offset)
   (setq-local forward-sexp-function nil)
   (setq-local electric-layout-rules
@@ -42,9 +44,7 @@
                         (and (zerop (first (syntax-ppss)))
                              (python-info-statement-starts-block-p)
                              'after)))))
-  (when (fboundp #'python-imenu-create-flat-index)
-    (setq-local imenu-create-index-function
-                #'python-imenu-create-flat-index))
+
   (add-hook 'post-self-insert-hook
             #'electric-layout-post-self-insert-function nil 'local))
 
@@ -52,8 +52,6 @@
 (add-hook 'python-mode-hook 'prelude-python-mode-defaults)
 
 (setq python-shell-interpreter "python3")
-
-;; TODO new python package module
 
 (define-key python-mode-map (kbd "<backtab>") 'my-unindent)
 
