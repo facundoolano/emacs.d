@@ -41,6 +41,8 @@
 
 (add-hook 'prog-mode-hook 'prelude-prog-mode-defaults)
 
+(setq flymake-no-changes-timeout 1.0)
+
 ;; format on save with apheleia
 ;; override python defaults
 ;; should also pick up gofmt and prettier without config
