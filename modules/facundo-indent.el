@@ -25,35 +25,54 @@
 ;;; Code:
 
 
-;;; TAKEN FROM prelude-editor.el
+(use-package corfu
+  ;; TAB-and-Go customizations
+  :custom
+  (corfu-cycle t)           ;; Enable cycling for `corfu-next/previous'
+  (corfu-preselect 'prompt) ;; Always preselect the prompt
 
-(defvar prelude-indent-sensitive-modes
-  '(conf-mode coffee-mode haml-mode python-mode slim-mode yaml-mode sql-mode makefile-mode)
-  "Modes for which auto-indenting is suppressed.")
+  ;; Use TAB for cycling, default is `corfu-complete'.
+  :bind
+  (:map corfu-map
+        ("TAB" . corfu-next)
+        ([tab] . corfu-next)
+        ("S-TAB" . corfu-previous)
+        ([backtab] . corfu-previous))
 
-(add-hook 'sql-mode (lambda() (electric-indent-mode -1)))
+  :init
+  (global-corfu-mode))
 
-(defvar prelude-yank-indent-threshold 1000
-  "Threshold (# chars) over which indentation does not automatically occur.")
+;; TODO review if we want this feature
+;; (defvar prelude-indent-sensitive-modes
+;;   '(conf-mode coffee-mode haml-mode python-mode slim-mode yaml-mode sql-mode makefile-mode)
+;;   "Modes for which auto-indenting is suppressed.")
 
-;; automatically indenting yanked text if in programming-modes
-(defun yank-advised-indent-function (beg end)
-  "Do indentation, as long as the region isn't too large."
-  (if (<= (- end beg) prelude-yank-indent-threshold)
-      (indent-region beg end nil)))
+;; (add-hook 'sql-mode (lambda() (electric-indent-mode -1)))
 
-(advise-commands "indent" (yank yank-pop) after
-                 "If current mode is one of `prelude-yank-indent-modes',
-indent yanked text (with prefix arg don't indent)."
-                 (if (and (not (ad-get-arg 0))
-                          (not (member major-mode prelude-indent-sensitive-modes))
-                          (derived-mode-p 'prog-mode))
-                     (let ((transient-mark-mode nil))
-                       (yank-advised-indent-function (region-beginning) (region-end)))))
+;; (defvar prelude-yank-indent-threshold 1000
+;;   "Threshold (# chars) over which indentation does not automatically occur.")
+
+;; ;; automatically indenting yanked text if in programming-modes
+;; (defun yank-advised-indent-function (beg end)
+;;   "Do indentation, as long as the region isn't too large."
+;;   (if (<= (- end beg) prelude-yank-indent-threshold)
+;;       (indent-region beg end nil)))
+
+;; (advise-commands "indent" (yank yank-pop) after
+;;                  "If current mode is one of `prelude-yank-indent-modes',
+;; indent yanked text (with prefix arg don't indent)."
+;;                  (if (and (not (ad-get-arg 0))
+;;                           (not (member major-mode prelude-indent-sensitive-modes))
+;;                           (derived-mode-p 'prog-mode))
+;;                      (let ((transient-mark-mode nil))
+;;                        (yank-advised-indent-function (region-beginning) (region-end)))))
 
 ;; smart tab behavior - indent or complete
+;; TODO verify we still need this
 (setq tab-always-indent 'complete)
+(setq tab-first-completion 'word)
 
+;; TODO verify we still need this
 ;; hippie expand is dabbrev expand on steroids
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev
                                          try-expand-dabbrev-all-buffers
@@ -66,34 +85,11 @@ indent yanked text (with prefix arg don't indent)."
                                          try-complete-lisp-symbol-partially
                                          try-complete-lisp-symbol))
 
-;;; TAKEN FROM prelude-company.el
-(use-package company)
-
-(setq company-idle-delay 0.5)
-(setq company-tooltip-limit 10)
-(setq company-minimum-prefix-length 2)
-;; invert the navigation direction if the the completion popup-isearch-match
-;; is displayed on top (happens near the bottom of windows)
-(setq company-tooltip-flip-when-above t)
-
-;; TODO is this still necessary?
-(customize-set-variable 'company-tng-auto-configure nil)
-(global-company-mode 1)
-(add-hook 'after-init-hook 'company-tng-mode)
-
-;;; CUSTOM STUFF
-
-(require 'company-dabbrev)
-
 (setq my-indentation-offset 2)
 
-;; make tab cycle wrap list
-(setq company-selection-wrap-around 1)
-(setq company-dabbrev-downcase nil)
-
-;;; TODO tge whole extend region to line beg/end deal should be factored out to its own function
 (defun my-indent ()
-  "If mark is active indent code block, otherwise call company indet or complete."
+  "If mark is active indent code block, otherwise indent or complete based on \
+the position and the mode."
   (interactive)
   (if mark-active
       (save-mark-and-excursion
@@ -104,7 +100,7 @@ indent yanked text (with prefix arg don't indent)."
             (indent-code-rigidly beg end my-indentation-offset)))
         (setq deactivate-mark nil))
     (if (looking-at "\\_>")
-        (company-complete-common-or-cycle)
+        (completion-at-point)
       (indent-according-to-mode))))
 
 (defun my-unindent ()
@@ -140,10 +136,6 @@ indent yanked text (with prefix arg don't indent)."
           (call-interactively 'backward-delete-char))))))
 
 (define-key prog-mode-map (kbd "<tab>") 'my-indent)
-(define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
-(define-key company-active-map (kbd "<backtab>") 'company-select-previous)
-(define-key company-active-map (kbd "<return>") 'company-complete-selection)
-(define-key company-active-map (kbd "C-w") 'backward-kill-word)
 (define-key prog-mode-map (kbd "<backtab>") 'my-unindent)
 (provide 'facundo-indent)
 ;;; facundo-indent.el ends here
