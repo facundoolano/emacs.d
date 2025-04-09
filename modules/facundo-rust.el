@@ -1,6 +1,5 @@
 (require 'facundo-programming)
 
-;; FIXME need to instruct eglot
 (use-package rustic
   :mode ("\\.rs\\'" . rustic-mode)
   :defer t
