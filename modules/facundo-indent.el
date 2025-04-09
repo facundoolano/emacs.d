@@ -81,7 +81,7 @@ indent yanked text (with prefix arg don't indent)."
 (global-company-mode 1)
 (add-hook 'after-init-hook 'company-tng-mode)
 
-';;; CUSTOM STUFF
+;;; CUSTOM STUFF
 
 (require 'company-dabbrev)
 
@@ -145,6 +145,5 @@ indent yanked text (with prefix arg don't indent)."
 (define-key company-active-map (kbd "<return>") 'company-complete-selection)
 (define-key company-active-map (kbd "C-w") 'backward-kill-word)
 (define-key prog-mode-map (kbd "<backtab>") 'my-unindent)
-
 (provide 'facundo-indent)
 ;;; facundo-indent.el ends here
