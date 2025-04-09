@@ -24,12 +24,20 @@
 
 ;;; Code:
 
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (orderless-smart-case t)
+  (orderless-matching-styles '(orderless-literal orderless-literal-prefix))
+  (completion-category-overrides '((eglot (styles orderless))
+                                   (eglot-capf (styles orderless)))))
 
 (use-package corfu
   ;; TAB-and-Go customizations
   :custom
   (corfu-cycle t)           ;; Enable cycling for `corfu-next/previous'
-  (corfu-preselect 'prompt) ;; Always preselect the prompt
+  (corfu-preselect 'first) ;; preselect first candidate
 
   ;; Use TAB for cycling, default is `corfu-complete'.
   :bind
@@ -40,7 +48,18 @@
         ([backtab] . corfu-previous))
 
   :init
-  (global-corfu-mode))
+  (global-corfu-mode)
+  (corfu-history-mode))
+
+;; (use-package cape)
+;; (defun my/eglot-capf ()
+;;   (setq-local completion-at-point-functions
+;;               (list (cape-capf-super
+;;                      #'cape-dabbrev
+;;                      #'eglot-completion-at-point
+;;                      #'cape-file))))
+
+;; (add-hook 'eglot-managed-mode-hook #'my/eglot-capf)
 
 ;; TODO review if we want this feature
 ;; (defvar prelude-indent-sensitive-modes
@@ -69,21 +88,8 @@
 
 ;; smart tab behavior - indent or complete
 ;; TODO verify we still need this
-(setq tab-always-indent 'complete)
-(setq tab-first-completion 'word)
-
-;; TODO verify we still need this
-;; hippie expand is dabbrev expand on steroids
-(setq hippie-expand-try-functions-list '(try-expand-dabbrev
-                                         try-expand-dabbrev-all-buffers
-                                         try-expand-dabbrev-from-kill
-                                         try-complete-file-name-partially
-                                         try-complete-file-name
-                                         try-expand-all-abbrevs
-                                         try-expand-list
-                                         try-expand-line
-                                         try-complete-lisp-symbol-partially
-                                         try-complete-lisp-symbol))
+;; (setq tab-always-indent 'complete)
+;; (setq tab-first-completion 'word)
 
 (setq my-indentation-offset 2)
 
