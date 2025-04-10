@@ -71,6 +71,13 @@
   (insert "FIXME ")
   (comment-or-uncomment-region-or-line))
 
+(defun my-eldoc-visual-line-mode (&rest _)
+  (with-current-buffer eldoc--doc-buffer
+    (setq-local visual-fill-column-center-text nil)
+    (turn-on-visual-line-mode)))
+(advice-add 'eldoc-doc-buffer :after #'my-eldoc-visual-line-mode)
+
+
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "s-;") 'insert-todo)
 (global-set-key (kbd "s-:") 'insert-fixme)
