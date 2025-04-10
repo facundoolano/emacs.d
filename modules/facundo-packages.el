@@ -15,6 +15,8 @@
 (use-package gleam-ts-mode
   :mode "\\.gleam\\'"
   :hook (gleam-ts-mode . eglot-ensure)
+  :config (add-to-list 'eglot-server-programs
+                       '(gleam-ts-mode . ("gleam" "lsp")))
   :init (when (and (fboundp 'treesit-language-available-p)
                    (not (treesit-language-available-p 'gleam)))
           (gleam-ts-install-grammar)))
