@@ -11,8 +11,6 @@
 (require 'facundo-programming)
 (require 'apheleia)
 
-(add-hook 'python-mode-hook #'eglot-ensure)
-
 (add-to-list 'eglot-server-programs
              '(python-mode . ("pyright-langserver" "--stdio")))
 
@@ -32,7 +30,9 @@
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
-  (pet-mode -10)
+  ;; pet-mode magically detect venv in projects and injects it in pyright
+  ;; needs to come before eglot-ensure
+  (pet-mode 1)
   (eglot-ensure)
   (setq-local my-indentation-offset python-indent-offset)
   (setq-local forward-sexp-function nil)
@@ -43,7 +43,7 @@
                              'after)))))
 
   (add-hook 'post-self-insert-hook
-            #'electric-layout-post-self-insert-function nil 'local))
+            #'electric-layoutp-post-self-insert-function nil 'local))
 
 
 (add-hook 'python-mode-hook 'prelude-python-mode-defaults)
