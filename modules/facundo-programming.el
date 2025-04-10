@@ -80,11 +80,11 @@
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
 (global-set-key (kbd "M-s") 'sp-splice-sexp)
 
-;; TODO check if these aren't already the defaults
+;; TODO would be good to have something similar for no eldoc / eglot managed langs eg elisp
 (define-key eglot-mode-map (kbd "M-?") 'eldoc-doc-buffer)
-(define-key eglot-mode-map (kbd "M-.") 'xref-find-definitions)
-(define-key eglot-mode-map (kbd "C-M-.") 'xref-find-definitions-other-window)
-(define-key eglot-mode-map (kbd "M-,") 'pop-tag-mark)
+(define-key prog-mode-map (kbd "M-.") 'xref-find-definitions)
+(define-key prog-mode-map (kbd "C-M-.") 'xref-find-definitions-other-window)
+(define-key prog-mode-map (kbd "M-,") 'pop-tag-mark)
 
 (provide 'facundo-programming)
 ;;; facundo-programming.el ends here
