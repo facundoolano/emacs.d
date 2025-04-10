@@ -13,10 +13,6 @@
 
 (add-hook 'python-mode-hook #'eglot-ensure)
 
-(use-package pet
-  :config
-  (add-hook 'python-base-mode-hook 'pet-mode -10))
-
 (add-to-list 'eglot-server-programs
              '(python-mode . ("pyright-langserver" "--stdio")))
 
@@ -36,6 +32,7 @@
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
+  (pet-mode -10)
   (eglot-ensure)
   (setq-local my-indentation-offset python-indent-offset)
   (setq-local forward-sexp-function nil)
