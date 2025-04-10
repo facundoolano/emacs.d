@@ -39,6 +39,7 @@
 (add-hook 'prog-mode-hook 'prelude-prog-mode-defaults)
 
 (setq flymake-no-changes-timeout 1.0)
+(setq xref-prompt-for-identifier nil)
 
 ;; format on save with apheleia
 ;; override python defaults
