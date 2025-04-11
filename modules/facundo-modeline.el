@@ -1,6 +1,7 @@
 ;; mode line configuration
 
 (use-package all-the-icons)
+(require 'project)
 
 (custom-set-faces
  '(mode-line ((t (:background "#335EA8" :box (:line-width 3 :color "#335EA8")))))
@@ -69,9 +70,6 @@
                "     "
                mode-line-my-vc
                "     "
-               mode-line-major-mode
-               ))
-;; TODO right align
-
+               mode-line-major-mode))
 
 (provide 'facundo-modeline)

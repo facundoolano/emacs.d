@@ -80,8 +80,8 @@ Assumes the symbol is a function and tries with a variable describe-function fai
        (describe-variable current-symbol)))))
 
 (define-key counsel-describe-map (kbd "TAB") 'counsel-describe-function-or-variable)
-(define-key ivy-occur-grep-mode-map (kbd "n") 'next-error)
-(define-key ivy-occur-grep-mode-map (kbd "p") 'previous-error)
+(define-key ivy-occur-mode-map (kbd "n") 'next-error)
+(define-key ivy-occur-mode-map (kbd "p") 'previous-error)
 
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "M-y") 'counsel-yank-pop)

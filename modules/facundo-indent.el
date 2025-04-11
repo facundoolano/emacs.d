@@ -24,76 +24,43 @@
 
 ;;; Code:
 
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (orderless-smart-case t)
+  (orderless-matching-styles '(orderless-literal orderless-literal-prefix orderless-prefixes))
+  (completion-category-overrides '((eglot (styles orderless))
+                                   (eglot-capf (styles orderless)))))
 
-;;; TAKEN FROM prelude-editor.el
+(use-package corfu
+  :custom
+  ;; (corfu-quit-no-match t) ;; commented to allow some typos
+  (corfu-cycle t)
+  (corfu-preselect 'prompt) ;; better not preselect when auto is t
+  (corfu-auto t)
+  (corfu-echo-delay 0)
+  (corfu-auto-delay 0.5) ;; wait a bit so there's more chance to tab complete if I'm typing fast
 
-(defvar prelude-indent-sensitive-modes
-  '(conf-mode coffee-mode haml-mode python-mode slim-mode yaml-mode sql-mode makefile-mode)
-  "Modes for which auto-indenting is suppressed.")
+  ;; Use TAB for cycling, default is `corfu-complete'.
+  :bind
+  (:map corfu-map
+        ("TAB" . corfu-next)
+        ([tab] . corfu-next)
+        ("S-TAB" . corfu-previous)
+        ([backtab] . corfu-previous))
 
-(add-hook 'sql-mode (lambda() (electric-indent-mode -1)))
+  :init
+  (global-corfu-mode)
+  (corfu-history-mode)
+  (corfu-echo-mode))
 
-(defvar prelude-yank-indent-threshold 1000
-  "Threshold (# chars) over which indentation does not automatically occur.")
-
-;; automatically indenting yanked text if in programming-modes
-(defun yank-advised-indent-function (beg end)
-  "Do indentation, as long as the region isn't too large."
-  (if (<= (- end beg) prelude-yank-indent-threshold)
-      (indent-region beg end nil)))
-
-(advise-commands "indent" (yank yank-pop) after
-                 "If current mode is one of `prelude-yank-indent-modes',
-indent yanked text (with prefix arg don't indent)."
-                 (if (and (not (ad-get-arg 0))
-                          (not (member major-mode prelude-indent-sensitive-modes))
-                          (derived-mode-p 'prog-mode))
-                     (let ((transient-mark-mode nil))
-                       (yank-advised-indent-function (region-beginning) (region-end)))))
-
-;; smart tab behavior - indent or complete
-(setq tab-always-indent 'complete)
-
-;; hippie expand is dabbrev expand on steroids
-(setq hippie-expand-try-functions-list '(try-expand-dabbrev
-                                         try-expand-dabbrev-all-buffers
-                                         try-expand-dabbrev-from-kill
-                                         try-complete-file-name-partially
-                                         try-complete-file-name
-                                         try-expand-all-abbrevs
-                                         try-expand-list
-                                         try-expand-line
-                                         try-complete-lisp-symbol-partially
-                                         try-complete-lisp-symbol))
-
-;;; TAKEN FROM prelude-company.el
-(use-package company)
-
-(setq company-idle-delay 0.5)
-(setq company-tooltip-limit 10)
-(setq company-minimum-prefix-length 2)
-;; invert the navigation direction if the the completion popup-isearch-match
-;; is displayed on top (happens near the bottom of windows)
-(setq company-tooltip-flip-when-above t)
-
-;; TODO is this still necessary?
-(customize-set-variable 'company-tng-auto-configure nil)
-(global-company-mode 1)
-(add-hook 'after-init-hook 'company-tng-mode)
-
-';;; CUSTOM STUFF
-
-(require 'company-dabbrev)
 
 (setq my-indentation-offset 2)
 
-;; make tab cycle wrap list
-(setq company-selection-wrap-around 1)
-(setq company-dabbrev-downcase nil)
-
-;;; TODO tge whole extend region to line beg/end deal should be factored out to its own function
 (defun my-indent ()
-  "If mark is active indent code block, otherwise call company indet or complete."
+  "If mark is active indent code block, otherwise indent or complete based on \
+the position and the mode."
   (interactive)
   (if mark-active
       (save-mark-and-excursion
@@ -103,8 +70,12 @@ indent yanked text (with prefix arg don't indent)."
                   end (progn (goto-char end) (line-end-position)))
             (indent-code-rigidly beg end my-indentation-offset)))
         (setq deactivate-mark nil))
-    (if (looking-at "\\_>")
-        (company-complete-common-or-cycle)
+    ;; FIXME this is getting hackier not sure I like it
+    ;; triggers completion if at end of symbol or after stuff like dot and :
+    ;; otherwise tries to indent
+    (if (or (looking-at "\\_>")
+            (member (char-before) '(?. ?: ?> ?/)))
+        (completion-at-point)
       (indent-according-to-mode))))
 
 (defun my-unindent ()
@@ -140,11 +111,6 @@ indent yanked text (with prefix arg don't indent)."
           (call-interactively 'backward-delete-char))))))
 
 (define-key prog-mode-map (kbd "<tab>") 'my-indent)
-(define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
-(define-key company-active-map (kbd "<backtab>") 'company-select-previous)
-(define-key company-active-map (kbd "<return>") 'company-complete-selection)
-(define-key company-active-map (kbd "C-w") 'backward-kill-word)
 (define-key prog-mode-map (kbd "<backtab>") 'my-unindent)
-
 (provide 'facundo-indent)
 ;;; facundo-indent.el ends here

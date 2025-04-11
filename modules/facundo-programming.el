@@ -9,16 +9,19 @@
 ;;; Code:
 
 (use-package smartparens)
-(use-package flycheck)
-(use-package lsp-mode)
+(use-package eglot)
 (use-package apheleia)
 
-;;; TAKEN FROM prelude-programming.el
-
-;; smart curly braces
-;; (sp-pair "{ nil :post-handlers
-;;          '(((lambda (&rest _ignored)
-;;               (crux-smart-open-line-above)) "RET")))
+;; show single line eldoc in the minibuffer
+;; if there is flymake error show that first
+(with-eval-after-load 'eglot
+  (add-hook 'eglot-managed-mode-hook
+            (lambda ()
+              (setq eldoc-echo-area-use-multiline-p nil)
+              (setq eldoc-documentation-functions
+                    (cons #'flymake-eldoc-function
+                          (remove #'flymake-eldoc-function eldoc-documentation-functions)))
+              (setq eldoc-documentation-strategy #'eldoc-documentation-compose))))
 
 (defun prelude-local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
@@ -29,23 +32,19 @@
     (flyspell-prog-mode))
   (electric-pair-mode -1)
   (smartparens-mode +1)
+  (flymake-mode 1)
   (prelude-enable-whitespace)
   (prelude-local-comment-auto-fill))
 
 (add-hook 'prog-mode-hook 'prelude-prog-mode-defaults)
-(add-hook 'prog-mode-hook (lambda () (setq flycheck-check-syntax-automatically '(save idle-change new-line mode-enabled))))
+
+(setq flymake-no-changes-timeout 1.0)
+(setq xref-prompt-for-identifier nil)
 
 ;; format on save with apheleia
 ;; override python defaults
 ;; should also pick up gofmt and prettier without config
 (apheleia-global-mode)
-(setf (alist-get 'python-mode apheleia-mode-alist) '(ruff-isort ruff))
-(setf (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff-isort ruff))
-
-;; enable on-the-fly syntax checking
-(if (fboundp 'global-flycheck-mode)
-    (global-flycheck-mode +1)
-  (add-hook 'prog-mode-hook 'flycheck-mode))
 
 ;;; CUSTOM STUFF
 
@@ -72,10 +71,12 @@
   (insert "FIXME ")
   (comment-or-uncomment-region-or-line))
 
-(defun lsp-find-definition-other-window ()
-  "Find definiton in other window."
-  (interactive)
-  (lsp-find-definition :display-action 'window))
+(defun my-eldoc-visual-line-mode (&rest _)
+  (with-current-buffer eldoc--doc-buffer
+    (setq-local visual-fill-column-center-text nil)
+    (turn-on-visual-line-mode)))
+(advice-add 'eldoc-doc-buffer :after #'my-eldoc-visual-line-mode)
+
 
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "s-;") 'insert-todo)
@@ -87,31 +88,11 @@
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
 (global-set-key (kbd "M-s") 'sp-splice-sexp)
 
-;; FIXME move to use-package definition
-(define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
-(define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
-(define-key lsp-mode-map (kbd "M-.") 'lsp-find-definition)
-(define-key lsp-mode-map (kbd "C-M-.") 'lsp-find-definition-other-window)
-(define-key lsp-mode-map (kbd "M-,") 'pop-tag-mark)
-
-;; lsp makes too many file watches and trips on big projects.
-;; this is supposed to bring it back to life
-;; https://www.blogbyben.com/2022/05/gotcha-emacs-on-mac-os-too-many-files.html
-;; see lsp-file-watch-ignored-directories and lsp-file-watch-ignored-files
-;; https://emacs-lsp.github.io/lsp-mode/page/file-watchers/
-(defun file-notify-rm-all-watches ()
-  "Remove all existing file notification watches from Emacs."
-  (interactive)
-  (maphash
-   (lambda (key _value)
-     (file-notify-rm-watch key))
-   file-notify-descriptors))
-
-
-(setq lsp-file-watch-threshold 5000)
-(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.node_modules\\'")
-(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.venv\\'")
-(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.asdf\\'")
+;; TODO would be good to have something similar for no eldoc / eglot managed langs eg elisp
+(define-key eglot-mode-map (kbd "M-?") 'eldoc-doc-buffer)
+(define-key prog-mode-map (kbd "M-.") 'xref-find-definitions)
+(define-key prog-mode-map (kbd "C-M-.") 'xref-find-definitions-other-window)
+(define-key prog-mode-map (kbd "M-,") 'pop-tag-mark)
 
 (provide 'facundo-programming)
 ;;; facundo-programming.el ends here

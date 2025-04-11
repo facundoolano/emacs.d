@@ -32,11 +32,12 @@
 ;; buffer name (if the buffer isn't visiting a file)
 (setq frame-title-format
       '("" (:eval
-            (let ((project-dir (project-root (project-current))))
-              (cond
-               ((and project-dir (not (string= project-dir "/"))) (abbreviate-file-name project-dir))
-               ((buffer-file-name) (abbreviate-file-name (buffer-file-name)))
-               (t "%b"))))))
+            (cond
+             ((project-current)
+              (abbreviate-file-name (project-root (project-current))))
+             ((buffer-file-name)
+              (abbreviate-file-name (buffer-file-name)))
+             (t "%b")))))
 
 ;; show available keybindings after you start typing
 (which-key-mode +1)

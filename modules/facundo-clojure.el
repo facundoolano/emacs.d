@@ -12,7 +12,6 @@
 (require 'facundo-lisp)
 (use-package clojure-mode)
 (use-package cider)
-(use-package flycheck-joker)
 
 (eval-after-load 'clojure-mode
   '(progn
