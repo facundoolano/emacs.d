@@ -29,15 +29,17 @@
   :custom
   (completion-styles '(orderless basic))
   (orderless-smart-case t)
-  (orderless-matching-styles '(orderless-literal orderless-literal-prefix))
+  (orderless-matching-styles '(orderless-literal orderless-literal-prefix orderless-prefixes))
   (completion-category-overrides '((eglot (styles orderless))
                                    (eglot-capf (styles orderless)))))
 
 (use-package corfu
   ;; TAB-and-Go customizations
   :custom
+  (corfu-quit-no-match t)
   (corfu-cycle t)           ;; Enable cycling for `corfu-next/previous'
   (corfu-preselect 'first) ;; preselect first candidate
+  (corfu-echo-delay 0)
 
   ;; Use TAB for cycling, default is `corfu-complete'.
   :bind
