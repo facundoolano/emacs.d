@@ -13,10 +13,14 @@
 
 (add-to-list 'eglot-server-programs
              '(python-mode . ("pyright-langserver" "--stdio")))
+(add-to-list 'eglot-server-programs
+             '(python-ts-mode . ("pyright-langserver" "--stdio")))
 
 (setf (alist-get 'python-mode apheleia-mode-alist) '(ruff-isort ruff))
 (setf (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff-isort ruff))
 
+
+(use-package pet)
 
 (defun py-insert-pdb-trace ()
   "Insert instructions for the python debugger."
@@ -32,7 +36,7 @@
   (subword-mode +1)
   ;; pet-mode magically detect venv in projects and injects it in pyright
   ;; needs to come before eglot-ensure
-  (pet-mode 1)
+  (pet-eglot-setup)
   (eglot-ensure)
   (setq-local my-indentation-offset python-indent-offset)
   (setq-local forward-sexp-function nil)
@@ -47,6 +51,7 @@
 
 
 (add-hook 'python-mode-hook 'prelude-python-mode-defaults)
+(add-hook 'python-ts-mode-hook 'prelude-python-mode-defaults)
 
 (setq python-shell-interpreter "python3")
 
