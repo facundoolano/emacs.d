@@ -45,7 +45,7 @@
 
 ;; Non core modules.
 (safe-require 'facundo-ivy)
-(safe-require 'facundo-indent)
+(safe-require 'facundo-complete)
 (safe-require 'facundo-parens)
 (safe-require 'facundo-git)
 (safe-require 'facundo-modeline)

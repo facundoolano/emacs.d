@@ -24,7 +24,7 @@
 
 ;;; Code:
 (require 'facundo-programming)
-(require 'facundo-indent)
+(require 'facundo-complete)
 
 (use-package json-mode :mode "\\.json\\'")
 (use-package json-mode :mode "\\.json\\'")

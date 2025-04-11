@@ -1,4 +1,4 @@
-;;; facundo-indent.el --- indent and tab behavior commands  -*- lexical-binding: t; -*-
+;;; facundo-complete.el --- indent and tab behavior commands  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Facundo Olano
 
@@ -112,5 +112,5 @@ the position and the mode."
 
 (define-key prog-mode-map (kbd "<tab>") 'my-indent)
 (define-key prog-mode-map (kbd "<backtab>") 'my-unindent)
-(provide 'facundo-indent)
-;;; facundo-indent.el ends here
+(provide 'facundo-complete)
+;;; facundo-complete.el ends here
