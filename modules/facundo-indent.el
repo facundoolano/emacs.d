@@ -51,47 +51,9 @@
 
   :init
   (global-corfu-mode)
-  (corfu-history-mode))
+  (corfu-history-mode)
+  (corfu-echo-mode))
 
-;; (use-package cape)
-;; (defun my/eglot-capf ()
-;;   (setq-local completion-at-point-functions
-;;               (list (cape-capf-super
-;;                      #'cape-dabbrev
-;;                      #'eglot-completion-at-point
-;;                      #'cape-file))))
-
-;; (add-hook 'eglot-managed-mode-hook #'my/eglot-capf)
-
-;; TODO review if we want this feature
-;; (defvar prelude-indent-sensitive-modes
-;;   '(conf-mode coffee-mode haml-mode python-mode slim-mode yaml-mode sql-mode makefile-mode)
-;;   "Modes for which auto-indenting is suppressed.")
-
-;; (add-hook 'sql-mode (lambda() (electric-indent-mode -1)))
-
-;; (defvar prelude-yank-indent-threshold 1000
-;;   "Threshold (# chars) over which indentation does not automatically occur.")
-
-;; ;; automatically indenting yanked text if in programming-modes
-;; (defun yank-advised-indent-function (beg end)
-;;   "Do indentation, as long as the region isn't too large."
-;;   (if (<= (- end beg) prelude-yank-indent-threshold)
-;;       (indent-region beg end nil)))
-
-;; (advise-commands "indent" (yank yank-pop) after
-;;                  "If current mode is one of `prelude-yank-indent-modes',
-;; indent yanked text (with prefix arg don't indent)."
-;;                  (if (and (not (ad-get-arg 0))
-;;                           (not (member major-mode prelude-indent-sensitive-modes))
-;;                           (derived-mode-p 'prog-mode))
-;;                      (let ((transient-mark-mode nil))
-;;                        (yank-advised-indent-function (region-beginning) (region-end)))))
-
-;; smart tab behavior - indent or complete
-;; TODO verify we still need this
-;; (setq tab-always-indent 'complete)
-;; (setq tab-first-completion 'word)
 
 (setq my-indentation-offset 2)
 
