@@ -31,7 +31,9 @@
 
 (defun sml/get-directory ()
   "Decide if we want directory shown. If so, return it."
-  (when (project-current)
+  ;; Return nil for special buffers or when not in a project
+  (when (and (project-current)
+             (not (string-match-p "^\\*.*\\*$" (buffer-name))))
     (file-relative-name
      (cond
       ;; In email attachments, buffer-file-name is non-nil, but
