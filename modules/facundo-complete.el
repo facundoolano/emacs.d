@@ -51,9 +51,13 @@
         ([backtab] . corfu-previous))
 
   :init
-  (global-corfu-mode)
+  ;; (global-corfu-mode)
   (corfu-history-mode)
   (corfu-echo-mode))
+
+;; only for programming. alternatively consider disabling auto complete
+;; which is the annoying part in text editing
+(add-hook 'prog-mode-hook #'corfu-mode)
 
 
 (setq my-indentation-offset 2)
