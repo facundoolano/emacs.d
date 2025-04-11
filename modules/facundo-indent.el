@@ -105,7 +105,11 @@ the position and the mode."
                   end (progn (goto-char end) (line-end-position)))
             (indent-code-rigidly beg end my-indentation-offset)))
         (setq deactivate-mark nil))
-    (if (looking-at "\\_>")
+    ;; FIXME this is getting hackier not sure I like it
+    ;; triggers completion if at end of symbol or after stuff like dot and :
+    ;; otherwise tries to indent
+    (if (or (looking-at "\\_>")
+            (member (char-before) '(?. ?: ?> ?/)))
         (completion-at-point)
       (indent-according-to-mode))))
 
