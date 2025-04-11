@@ -1,3 +1,3 @@
-My emacs configuration. Previously based on prelude.
+My emacs configuration.
 
 ![](emacs.png)
