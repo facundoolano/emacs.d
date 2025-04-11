@@ -34,12 +34,13 @@
                                    (eglot-capf (styles orderless)))))
 
 (use-package corfu
-  ;; TAB-and-Go customizations
   :custom
-  (corfu-quit-no-match t)
-  (corfu-cycle t)           ;; Enable cycling for `corfu-next/previous'
-  (corfu-preselect 'first) ;; preselect first candidate
+  ;; (corfu-quit-no-match t) ;; commented to allow some typos
+  (corfu-cycle t)
+  (corfu-preselect 'prompt) ;; better not preselect when auto is t
+  (corfu-auto t)
   (corfu-echo-delay 0)
+  (corfu-auto-delay 0.5) ;; wait a bit so there's more chance to tab complete if I'm typing fast
 
   ;; Use TAB for cycling, default is `corfu-complete'.
   :bind
