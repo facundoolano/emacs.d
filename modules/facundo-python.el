@@ -43,7 +43,7 @@
                              'after)))))
 
   (add-hook 'post-self-insert-hook
-            #'electric-layoutp-post-self-insert-function nil 'local))
+            #'electric-layout-post-self-insert-function nil 'local))
 
 
 (add-hook 'python-mode-hook 'prelude-python-mode-defaults)
