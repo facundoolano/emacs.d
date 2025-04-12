@@ -31,11 +31,21 @@
 (when (fboundp 'exec-path-from-shell-copy-env)
   (exec-path-from-shell-copy-env "PYTHONPATH"))
 
+;; maybe related to this https://github.com/wyuenho/emacs-pet/issues/50
+(defun python-eglot-refresh ()
+  "Force a config reload. I find this is necessary for python projects after\
+ an Emacs restart somewhat similar to shutdown eglot but faster and no prompt."
+  (interactive)
+  (let ((server (eglot-current-server)))
+    (when (member '(python-mode . "python") (eglot--languages server))
+      (message "Signaling config change to Python server: %s"
+               (eglot-project-nickname server))
+      (eglot-signal-didChangeConfiguration server))))
+
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
   ;; pet-mode magically detect venv in projects and injects it in pyright
-  ;; needs to come before eglot-ensure
   (pet-eglot-setup)
   (eglot-ensure)
   (setq-local my-indentation-offset python-indent-offset)
