@@ -169,7 +169,7 @@ USER-REPO should be a string in the format <username/reponame>."
 
 (global-set-key (kbd "s-p") 'project-find-file)
 (global-set-key (kbd "s-P") 'project-find-file-other-window)
-(global-set-key (kbd "s-F") 'counsel-ag)
+(global-set-key (kbd "s-F") 'counsel-rg)
 
 (global-set-key (kbd "s-w") 'kill-project-frame)
 (global-set-key (kbd "s-W") 'delete-frame)
