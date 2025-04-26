@@ -179,6 +179,7 @@ USER-REPO should be a string in the format <username/reponame>."
 (global-set-key (kbd "C-S-<tab>") 'previous-project-buffer)
 
 (global-set-key (kbd "s-k") 'kill-this-and-next)
+;; FIXME this doesn't exist
 (global-set-key (kbd "s-K") 'kill-other-project-buffers)
 
 (provide 'facundo-project)

@@ -9,19 +9,16 @@
 ;;; Code:
 
 (use-package smartparens)
-(use-package eglot)
 (use-package apheleia)
+(use-package flycheck)
+(require 'ispell)
 
-;; show single line eldoc in the minibuffer
-;; if there is flymake error show that first
-(with-eval-after-load 'eglot
-  (add-hook 'eglot-managed-mode-hook
-            (lambda ()
-              (setq eldoc-echo-area-use-multiline-p nil)
-              (setq eldoc-documentation-functions
-                    (cons #'flymake-eldoc-function
-                          (remove #'flymake-eldoc-function eldoc-documentation-functions)))
-              (setq eldoc-documentation-strategy #'eldoc-documentation-compose))))
+(use-package lsp-mode
+  :custom
+  (lsp-enable-snippet nil)
+  (lsp-headerline-breadcrumb-enable nil)
+  (lsp-completion-show-kind nil))
+
 
 (defun prelude-local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
@@ -32,13 +29,14 @@
     (flyspell-prog-mode))
   (electric-pair-mode -1)
   (smartparens-mode +1)
-  (flymake-mode 1)
-  (prelude-enable-whitespace)
   (prelude-local-comment-auto-fill))
 
 (add-hook 'prog-mode-hook 'prelude-prog-mode-defaults)
+(add-hook 'prog-mode-hook (lambda () (setq flycheck-check-syntax-automatically '(save idle-change new-line mode-enabled))))
 
-(setq flymake-no-changes-timeout 1.0)
+(flymake-mode -1)
+(global-flycheck-mode +1)
+
 (setq xref-prompt-for-identifier nil)
 
 ;; format on save with apheleia
@@ -71,50 +69,10 @@
   (insert "FIXME ")
   (comment-or-uncomment-region-or-line))
 
-(defun my-eldoc-visual-line-mode (&rest _)
-  (with-current-buffer eldoc--doc-buffer
-    (setq-local visual-fill-column-center-text nil)
-    (turn-on-visual-line-mode)))
-(advice-add 'eldoc-doc-buffer :after #'my-eldoc-visual-line-mode)
-
-;; Fixes html entities in eldoc buffer
-;; https://emacs.stackexchange.com/a/82952/14798
-(defvar rb--eldoc-html-patterns
-  '(("&nbsp;" " ")
-    ("&lt;" "<")
-    ("&gt;" ">")
-    ("&amp;" "&")
-    ("&quot;" "\"")
-    ("&apos;" "'"))
-  "List of (PATTERN . REPLACEMENT) to replace in eldoc output.")
-
-(defun rb--string-replace-all (patterns in-string)
-  "Replace all cars from PATTERNS in IN-STRING with their pair."
-  (mapc (lambda (pattern-pair)
-          (setq in-string
-                (string-replace (car pattern-pair) (cadr pattern-pair) in-string)))
-        patterns)
-  in-string)
-
-(defun rb--eldoc-preprocess (orig-fun &rest args)
-  "Preprocess the docs to be displayed by eldoc to replace HTML escapes."
-  (let ((doc (car args)))
-    ;; The first argument is a list of (STRING :KEY VALUE ...) entries
-    ;; we replace the text in each such string
-    ;; see docstring of `eldoc-display-functions'
-    (when (listp doc)
-      (setq doc (mapcar
-                 (lambda (doc) (cons
-                                (rb--string-replace-all rb--eldoc-html-patterns (car doc))
-                                (cdr doc)))
-                 doc)))
-
-
-    (apply orig-fun (cons doc (cdr args)))))
-
-(advice-add 'eldoc-display-in-buffer :around #'rb--eldoc-preprocess)
-
-
+(defun lsp-find-definition-other-window ()
+  "Find definiton in other window."
+  (interactive)
+  (lsp-find-definition :display-action 'window))
 
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "s-;") 'insert-todo)
@@ -126,11 +84,10 @@
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
 (global-set-key (kbd "M-s") 'sp-splice-sexp)
 
-;; TODO would be good to have something similar for no eldoc / eglot managed langs eg elisp
-(define-key eglot-mode-map (kbd "M-?") 'eldoc-doc-buffer)
-(define-key prog-mode-map (kbd "M-.") 'xref-find-definitions)
-(define-key prog-mode-map (kbd "C-M-.") 'xref-find-definitions-other-window)
-(define-key prog-mode-map (kbd "M-,") 'pop-tag-mark)
+(define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
+(define-key lsp-mode-map (kbd "M-.") 'lsp-find-definition)
+(define-key lsp-mode-map (kbd "C-M-.") 'lsp-find-definition-other-window)
+(define-key lsp-mode-map (kbd "M-,") 'pop-tag-mark)
 
 (provide 'facundo-programming)
 ;;; facundo-programming.el ends here

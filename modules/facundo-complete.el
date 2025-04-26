@@ -24,40 +24,42 @@
 
 ;;; Code:
 
+(use-package company)
+
 (use-package orderless
   :ensure t
   :custom
   (completion-styles '(orderless basic))
+  (company-completion-styles '(orderless))
   (orderless-smart-case t)
-  (orderless-matching-styles '(orderless-literal orderless-literal-prefix orderless-prefixes))
-  (completion-category-overrides '((eglot (styles orderless))
-                                   (eglot-capf (styles orderless)))))
+  (orderless-matching-styles '(orderless-literal orderless-literal-prefix orderless-prefixes)))
 
-(use-package corfu
-  :custom
-  ;; (corfu-quit-no-match t) ;; commented to allow some typos
-  (corfu-cycle t)
-  (corfu-preselect 'prompt) ;; better not preselect when auto is t
-  (corfu-auto t)
-  (corfu-echo-delay 0)
-  (corfu-auto-delay 0.5) ;; wait a bit so there's more chance to tab complete if I'm typing fast
 
-  ;; Use TAB for cycling, default is `corfu-complete'.
-  :bind
-  (:map corfu-map
-        ("TAB" . corfu-next)
-        ([tab] . corfu-next)
-        ("S-TAB" . corfu-previous)
-        ([backtab] . corfu-previous))
+;; (use-package corfu
+;;   :custom
+;;   ;; (corfu-quit-no-match t) ;; commented to allow some typos
+;;   (corfu-cycle t)
+;;   (corfu-preselect 'prompt) ;; better not preselect when auto is t
+;;   (corfu-auto t)
+;;   (corfu-echo-delay 0)
+;;   (corfu-auto-delay 0.5) ;; wait a bit so there's more chance to tab complete if I'm typing fast
 
-  :init
-  ;; (global-corfu-mode)
-  (corfu-history-mode)
-  (corfu-echo-mode))
+;;   ;; Use TAB for cycling, default is `corfu-complete'.
+;;   :bind
+;;   (:map corfu-map
+;;         ("TAB" . corfu-next)
+;;         ([tab] . corfu-next)
+;;         ("S-TAB" . corfu-previous)
+;;         ([backtab] . corfu-previous))
+
+;;   :init
+;;   ;; (global-corfu-mode)
+;;   (corfu-history-mode)
+;;   (corfu-echo-mode))
 
 ;; only for programming. alternatively consider disabling auto complete
 ;; which is the annoying part in text editing
-(add-hook 'prog-mode-hook #'corfu-mode)
+(add-hook 'prog-mode-hook #'company-mode)
 
 
 (setq my-indentation-offset 2)
@@ -79,7 +81,7 @@ the position and the mode."
     ;; otherwise tries to indent
     (if (or (looking-at "\\_>")
             (member (char-before) '(?. ?: ?> ?/)))
-        (completion-at-point)
+        (company-complete-common)
       (indent-according-to-mode))))
 
 (defun my-unindent ()

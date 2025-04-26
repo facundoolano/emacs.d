@@ -2,7 +2,6 @@
 
 (use-package rustic
   :mode ("\\.rs\\'" . rustic-mode)
-  :defer t
   :hook ((rustic-mode . subword-mode)
          (rustic-compilation-mode . visual-line-mode))
   :bind (:map rustic-mode-map
@@ -10,14 +9,12 @@
               ("s-R" . rustic-cargo-release)
               ("s-f" . rustic-cargo-fmt))
   :custom
-  (rustic-lsp-client 'eglot)
+  (lsp-rust-analyzer-server-display-inlay-hints t)
   (rustic-compile-command "cargo clippy")
   (compilation-read-command nil)
   (rustic-compile-backtrace t))
 
-(setq-default eglot-workspace-configuration
-              (cons '(rust-analyzer . (:checkOnSave (:command "clippy")))
-                    eglot-workspace-configuration))
+(push 'rustic-clippy flycheck-checkers)
 
 (defun rustic-cargo-release ()
   "Run 'cargo build' for the current project."
