@@ -25,12 +25,17 @@
 ;;; Code:
 
 (use-package orderless
-  :ensure t
+  ;; fixes weird lsp-mode override of orderless behavior
+  ;; https://magnus.therning.org/2024-05-04-orderless-completion-in-lsp-mode.html
+  ;; https://github.com/minad/corfu/issues/41
+  :hook (lsp-completion-mode . (lambda ()
+                                 (setq-local completion-category-defaults
+                                             (assoc-delete-all 'lsp-capf completion-category-defaults))))
   :custom
-  (completion-styles '(orderless))
-  (company-completion-styles '(orderless))
+  (completion-styles '(orderless basic))
   (orderless-smart-case t)
   (orderless-matching-styles '(orderless-literal orderless-literal-prefix orderless-prefixes)))
+
 
 (use-package company
   ;; :hook (company-mode . company-tng-mode) 
@@ -39,7 +44,7 @@
   (company-minimum-prefix-length 2)
   (company-tooltip-limit 10)
   (company-tooltip-flip-when-above t)
-  (company-backends '((company-capf company-dabbrev-code) company-files))
+  (company-backends '(company-capf company-files))
   (company-frontends '(
                        ;; company-tng-frontend
                        company-pseudo-tooltip-unless-just-one-frontend
