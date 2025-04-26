@@ -24,7 +24,24 @@
 
 ;;; Code:
 
-(use-package company)
+(use-package company
+  ;; :hook (company-mode . company-tng-mode) 
+  :custom
+  (company-tooltip-align-annotations t)
+  (company-minimum-prefix-length 2)
+  (company-tooltip-limit 10)
+  (company-tooltip-flip-when-above t)
+  (company-frontends '(
+                       ;; company-tng-frontend
+                       company-pseudo-tooltip-unless-just-one-frontend
+                       company-preview-if-just-one-frontend
+                       ;; company-preview-if-just-one-frontend
+                       company-echo-metadata-frontend))
+  
+  
+  (company-idle-delay 0.5)
+  :bind (:map company-active-map
+              ("C-w" . backward-kill-word)))
 
 (use-package orderless
   :ensure t
