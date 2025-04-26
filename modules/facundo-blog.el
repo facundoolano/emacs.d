@@ -29,7 +29,6 @@
              (set-input-method "spanish-prefix")))
   (setq-local org-footnote-section nil)
   (flyspell-mode 1)
-  (corfu-mode -1)
   (writeroom-mode 1)
   (hl-line-mode -1)
   (global-hl-line-mode -1)

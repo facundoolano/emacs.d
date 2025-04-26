@@ -32,9 +32,9 @@
                                  (setq-local completion-category-defaults
                                              (assoc-delete-all 'lsp-capf completion-category-defaults))))
   :custom
-  (completion-styles '(orderless basic))
+  (completion-styles '(orderless))
   (orderless-smart-case t)
-  (orderless-matching-styles '(orderless-literal orderless-literal-prefix orderless-prefixes)))
+  (orderless-matching-styles '(orderless-prefixes)))
 
 
 (use-package company
@@ -81,7 +81,7 @@ the position and the mode."
     ;; otherwise tries to indent
     (if (or (looking-at "\\_>")
             (member (char-before) '(?. ?: ?> ?/)))
-        (company-complete-common)
+        (company-complete)
       (indent-according-to-mode))))
 
 (defun my-unindent ()
