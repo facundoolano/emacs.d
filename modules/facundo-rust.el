@@ -7,9 +7,10 @@
   :bind (:map rustic-mode-map
               ("s-r" . rustic-compile)
               ("s-R" . rustic-cargo-release)
+              ("M-h" . lsp-inlay-hints-mode)
               ("s-f" . rustic-cargo-fmt))
   :custom
-  (lsp-rust-analyzer-server-display-inlay-hints t)
+  (lsp-inlay-hint-enable t)
   (rustic-compile-command "cargo clippy")
   (compilation-read-command nil)
   (rustic-compile-backtrace t))
