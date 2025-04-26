@@ -24,6 +24,14 @@
 
 ;;; Code:
 
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless))
+  (company-completion-styles '(orderless))
+  (orderless-smart-case t)
+  (orderless-matching-styles '(orderless-literal orderless-literal-prefix orderless-prefixes)))
+
 (use-package company
   ;; :hook (company-mode . company-tng-mode) 
   :custom
@@ -31,6 +39,7 @@
   (company-minimum-prefix-length 2)
   (company-tooltip-limit 10)
   (company-tooltip-flip-when-above t)
+  (company-backends '((company-capf company-dabbrev-code) company-files))
   (company-frontends '(
                        ;; company-tng-frontend
                        company-pseudo-tooltip-unless-just-one-frontend
@@ -43,13 +52,7 @@
   :bind (:map company-active-map
               ("C-w" . backward-kill-word)))
 
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-styles '(orderless basic))
-  (company-completion-styles '(orderless))
-  (orderless-smart-case t)
-  (orderless-matching-styles '(orderless-literal orderless-literal-prefix orderless-prefixes)))
+
 
 
 ;; (use-package corfu
