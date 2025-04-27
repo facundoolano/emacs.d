@@ -17,8 +17,13 @@
   :custom
   (lsp-enable-snippet nil)
   (lsp-headerline-breadcrumb-enable nil)
-  (lsp-completion-show-kind nil))
-
+  (lsp-completion-show-kind nil)
+  (lsp-file-watch-threshold 5000)
+  :config
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.node_modules\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.venv\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.asdf\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\/opt\\/homebrew\\'"))
 
 (defun prelude-local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
