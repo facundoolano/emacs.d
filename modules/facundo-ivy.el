@@ -8,15 +8,13 @@
 
 (use-package ivy)
 (use-package counsel)
-(use-package smex)
+(use-package prescient)
+(use-package ivy-prescient)
 (use-package anzu)
-(use-package async)
 (use-package ivy-xref)
 
-;; smex is used to sort commands in counsel-M-x by recency
-(setq smex-save-file (expand-file-name "smex-items" savefile-dir))
-
 (ivy-mode 1)
+(ivy-prescient-mode 1)
 (global-anzu-mode +1)
 
 ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.
