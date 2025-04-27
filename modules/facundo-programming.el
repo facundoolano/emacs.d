@@ -10,10 +10,18 @@
 
 (use-package smartparens)
 (use-package apheleia)
-(use-package flycheck)
-(require 'ispell)
+(use-package flycheck
+  :config (flymake-mode -1)
+  (global-flycheck-mode +1)) 
+
+(require 'ispell) 
 
 (use-package lsp-mode
+  :bind (:map lsp-mode-map
+              ("M-?" . lsp-describe-thing-at-point)
+              ("M-." . lsp-find-definition)
+              ("C-M-." . lsp-find-definition-other-window)
+              ("M-," . pop-tag-mark)) 
   :custom
   (lsp-enable-snippet nil)
   (lsp-headerline-breadcrumb-enable nil)
@@ -38,9 +46,6 @@
 
 (add-hook 'prog-mode-hook 'prelude-prog-mode-defaults)
 (add-hook 'prog-mode-hook (lambda () (setq flycheck-check-syntax-automatically '(save idle-change new-line mode-enabled))))
-
-(flymake-mode -1)
-(global-flycheck-mode +1)
 
 (setq xref-prompt-for-identifier nil)
 
@@ -88,11 +93,6 @@
 (global-set-key (kbd "C-M-b") 'backward-sexp)
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
 (global-set-key (kbd "M-s") 'sp-splice-sexp)
-
-(define-key lsp-mode-map (kbd "M-?") 'lsp-describe-thing-at-point)
-(define-key lsp-mode-map (kbd "M-.") 'lsp-find-definition)
-(define-key lsp-mode-map (kbd "C-M-.") 'lsp-find-definition-other-window)
-(define-key lsp-mode-map (kbd "M-,") 'pop-tag-mark)
 
 (provide 'facundo-programming)
 ;;; facundo-programming.el ends here

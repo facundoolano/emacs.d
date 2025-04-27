@@ -38,7 +38,10 @@
 
 
 (use-package company
-  ;; :hook (company-mode . company-tng-mode) 
+  ;; only for programming. alternatively consider disabling auto complete
+  ;; which is the annoying part in text editing
+  :hook (prog-mode-hook . company-mode)
+  ;; (company-mode . company-tng-mode)
   :custom
   (company-tooltip-align-annotations t)
   (company-minimum-prefix-length 2)
@@ -56,10 +59,6 @@
   (company-idle-delay 0.5)
   :bind (:map company-active-map
               ("C-w" . backward-kill-word)))
-
-;; only for programming. alternatively consider disabling auto complete
-;; which is the annoying part in text editing
-(add-hook 'prog-mode-hook #'company-mode)
 
 
 (setq my-indentation-offset 2)

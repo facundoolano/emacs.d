@@ -7,9 +7,10 @@
 
 (require 'electric)
 (require 'python)
-(require 'lsp-mode)
 (require 'facundo-programming)
 (require 'apheleia)
+
+(use-package lsp-pyright)
 
 (setf (alist-get 'python-mode apheleia-mode-alist) '(ruff-isort ruff))
 (setf (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff-isort ruff))

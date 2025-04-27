@@ -1,4 +1,5 @@
 (require 'facundo-programming)
+(require 'flycheck)
 
 (use-package rustic
   :mode ("\\.rs\\'" . rustic-mode)
