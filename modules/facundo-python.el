@@ -7,20 +7,13 @@
 
 (require 'electric)
 (require 'python)
-(require 'eglot)
 (require 'facundo-programming)
 (require 'apheleia)
 
-(add-to-list 'eglot-server-programs
-             '(python-mode . ("pyright-langserver" "--stdio")))
-(add-to-list 'eglot-server-programs
-             '(python-ts-mode . ("pyright-langserver" "--stdio")))
+(use-package lsp-pyright)
 
 (setf (alist-get 'python-mode apheleia-mode-alist) '(ruff-isort ruff))
 (setf (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff-isort ruff))
-
-
-(use-package pet)
 
 (defun py-insert-pdb-trace ()
   "Insert instructions for the python debugger."
@@ -31,23 +24,10 @@
 (when (fboundp 'exec-path-from-shell-copy-env)
   (exec-path-from-shell-copy-env "PYTHONPATH"))
 
-;; maybe related to this https://github.com/wyuenho/emacs-pet/issues/50
-(defun python-eglot-refresh ()
-  "Force a config reload. I find this is necessary for python projects after\
- an Emacs restart somewhat similar to shutdown eglot but faster and no prompt."
-  (interactive)
-  (let ((server (eglot-current-server)))
-    (when (member '(python-mode . "python") (eglot--languages server))
-      (message "Signaling config change to Python server: %s"
-               (eglot-project-nickname server))
-      (eglot-signal-didChangeConfiguration server))))
-
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
-  ;; pet-mode magically detect venv in projects and injects it in pyright
-  (pet-eglot-setup)
-  (eglot-ensure)
+  (lsp-deferred)
   (setq-local my-indentation-offset python-indent-offset)
   (setq-local forward-sexp-function nil)
   (setq-local electric-layout-rules

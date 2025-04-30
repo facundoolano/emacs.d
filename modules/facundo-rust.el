@@ -1,23 +1,22 @@
 (require 'facundo-programming)
+(require 'flycheck)
 
 (use-package rustic
   :mode ("\\.rs\\'" . rustic-mode)
-  :defer t
   :hook ((rustic-mode . subword-mode)
          (rustic-compilation-mode . visual-line-mode))
   :bind (:map rustic-mode-map
               ("s-r" . rustic-compile)
               ("s-R" . rustic-cargo-release)
+              ("M-h" . lsp-inlay-hints-mode)
               ("s-f" . rustic-cargo-fmt))
   :custom
-  (rustic-lsp-client 'eglot)
+  (lsp-inlay-hint-enable t)
   (rustic-compile-command "cargo clippy")
   (compilation-read-command nil)
   (rustic-compile-backtrace t))
 
-(setq-default eglot-workspace-configuration
-              (cons '(rust-analyzer . (:checkOnSave (:command "clippy")))
-                    eglot-workspace-configuration))
+(push 'rustic-clippy flycheck-checkers)
 
 (defun rustic-cargo-release ()
   "Run 'cargo build' for the current project."

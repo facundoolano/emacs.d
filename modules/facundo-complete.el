@@ -25,39 +25,40 @@
 ;;; Code:
 
 (use-package orderless
-  :ensure t
+  ;; fixes weird lsp-mode override of orderless behavior
+  ;; https://magnus.therning.org/2024-05-04-orderless-completion-in-lsp-mode.html
+  ;; https://github.com/minad/corfu/issues/41
+  :hook (lsp-completion-mode . (lambda ()
+                                 (setq-local completion-category-defaults
+                                             (assoc-delete-all 'lsp-capf completion-category-defaults))))
   :custom
-  (completion-styles '(orderless basic))
+  (completion-styles '(orderless))
   (orderless-smart-case t)
-  (orderless-matching-styles '(orderless-literal orderless-literal-prefix orderless-prefixes))
-  (completion-category-overrides '((eglot (styles orderless))
-                                   (eglot-capf (styles orderless)))))
+  (orderless-matching-styles '(orderless-prefixes)))
 
-(use-package corfu
+
+(use-package company
+  ;; only for programming. alternatively consider disabling auto complete
+  ;; which is the annoying part in text editing
+  :hook (prog-mode-hook . company-mode)
+  ;; (company-mode . company-tng-mode)
   :custom
-  ;; (corfu-quit-no-match t) ;; commented to allow some typos
-  (corfu-cycle t)
-  (corfu-preselect 'prompt) ;; better not preselect when auto is t
-  (corfu-auto t)
-  (corfu-echo-delay 0)
-  (corfu-auto-delay 0.5) ;; wait a bit so there's more chance to tab complete if I'm typing fast
-
-  ;; Use TAB for cycling, default is `corfu-complete'.
-  :bind
-  (:map corfu-map
-        ("TAB" . corfu-next)
-        ([tab] . corfu-next)
-        ("S-TAB" . corfu-previous)
-        ([backtab] . corfu-previous))
-
-  :init
-  ;; (global-corfu-mode)
-  (corfu-history-mode)
-  (corfu-echo-mode))
-
-;; only for programming. alternatively consider disabling auto complete
-;; which is the annoying part in text editing
-(add-hook 'prog-mode-hook #'corfu-mode)
+  (company-tooltip-align-annotations t)
+  (company-minimum-prefix-length 2)
+  (company-tooltip-limit 10)
+  (company-tooltip-flip-when-above t)
+  (company-backends '(company-capf company-files))
+  (company-frontends '(
+                       ;; company-tng-frontend
+                       company-pseudo-tooltip-unless-just-one-frontend
+                       company-preview-if-just-one-frontend
+                       ;; company-preview-if-just-one-frontend
+                       company-echo-metadata-frontend))
+  
+  
+  (company-idle-delay 0.5)
+  :bind (:map company-active-map
+              ("C-w" . backward-kill-word)))
 
 
 (setq my-indentation-offset 2)
@@ -79,7 +80,7 @@ the position and the mode."
     ;; otherwise tries to indent
     (if (or (looking-at "\\_>")
             (member (char-before) '(?. ?: ?> ?/)))
-        (completion-at-point)
+        (company-complete)
       (indent-according-to-mode))))
 
 (defun my-unindent ()

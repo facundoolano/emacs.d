@@ -14,16 +14,14 @@
 
 (use-package gleam-ts-mode
   :mode "\\.gleam\\'"
-  :hook (gleam-ts-mode . eglot-ensure)
+  :hook (gleam-ts-mode . lsp-deferred)
   :config
-  (add-to-list 'eglot-server-programs
-               '(gleam-ts-mode . ("gleam" "lsp")))
   (when (and (fboundp 'treesit-language-available-p)
              (not (treesit-language-available-p 'gleam)))
     (gleam-ts-install-grammar)))
 
 (use-package go-mode
-  :hook ((go-mode . eglot-ensure)
+  :hook ((go-mode . lsp-deferred)
          (go-mode . subword-mode)
          (go-mode . (lambda () (setq tab-width 4)))))
 
