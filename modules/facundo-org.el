@@ -8,7 +8,6 @@
 
 ;;; Code:
 
-
 (use-package org)
 (use-package ox-gfm)
 (use-package org-journal)
