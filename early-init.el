@@ -1,5 +1,7 @@
 ;; taken from https://emacsredux.com/blog/2025/03/28/speed-up-emacs-startup-by-tweaking-the-gc-settings/
 
+;; (setq use-package-compute-statistics t)
+
 (setq large-file-warning-threshold 100000000)
 
 ;; Temporarily increase GC threshold during startup
