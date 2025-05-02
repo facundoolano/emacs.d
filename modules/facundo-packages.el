@@ -5,7 +5,6 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t) ;; Auto-install packages
-(setq use-package-always-defer t) ;; wait to load
 
 (use-package elmacro)
 (use-package persistent-scratch)
