@@ -14,18 +14,20 @@ to the prompt. Similar to setting the `g` flag in the gptel menu."
   (gptel-send))
 
 (use-package gptel
+  :init
+  (gptel-make-anthropic "Claude"
+    :key gptel-api-key ;; get it from ~/.authinfo file
+    :stream t)
+  :config
+  (customize-set-variable 'gptel-backend (gptel-get-backend "Claude"))
   :custom 
   (gptel-log-level 'info)
   (gptel-default-mode 'org-mode)
-  (gptel-backend (gptel-get-backend "Claude"))
   (gptel-model 'claude-3-7-sonnet-20250219)
   :bind
   (("C-c g" . facundo/gptel-buffer)
    :map gptel-mode-map ("C-c RET" . facundo/gptel-send))
-  :hook (gptel-post-response-functions . gptel-end-of-response)
-  :config
-  (gptel-make-anthropic "Claude"
-    :key gptel-api-key ;; get it from ~/.authinfo file
-    :stream t))
+  :hook (gptel-post-response-functions . gptel-end-of-response))
+
 
 (provide 'facundo-gpt)
