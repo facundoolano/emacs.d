@@ -25,6 +25,7 @@
   (org-M-RET-may-split-line '((default . t) (item . nil)))
   :hook
   (org-mode . (lambda ()
+                (require 'org-tempo)
                 (set-face-background 'org-block "white"))))
 
 (use-package ox-gfm
