@@ -14,7 +14,9 @@
 (use-package expand-region)
 (use-package goto-chg)
 (use-package move-text)
+
 (use-package multiple-cursors)
+
 
 (defun reload-init-file()
   "Reload init.el file. Useful for updating config without restarting Emacs."
@@ -331,6 +333,8 @@ i.e. windows tiled side-by-side."
 
 (add-to-list 'mc/unsupported-minor-modes 'smartparens-mode)
 (add-to-list 'mc/unsupported-minor-modes 'electric-pair-mode)
+
+(global-set-key [C-return] 'mc/edit-beginnings-of-lines)
 
 (provide 'facundo-editor)
 
