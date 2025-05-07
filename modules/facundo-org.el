@@ -100,6 +100,7 @@
 ;; :hook
 ;; (org-babel-after-execute . org-redisplay-inline-images)
 
+(use-package verb)
 
 (provide 'facundo-org)
 
