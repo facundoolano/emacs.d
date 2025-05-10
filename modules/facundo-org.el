@@ -14,7 +14,8 @@
               ("M-p" . org-metaup)
               ("M-n" . org-metadown)
               ("M-<up>" . move-text-up)
-              ("M-<down>" . move-text-down))
+              ("M-<down>" . move-text-down)
+              ("C-<return>" . nil))
   :custom
   (org-log-done t)
   (org-edit-src-content-indentation nil)
