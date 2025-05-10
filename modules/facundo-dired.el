@@ -24,9 +24,8 @@
 
 ;;; Code:
 
-(use-package all-the-icons-dired :defer nil)
+(use-package all-the-icons-dired)
 (use-package dired-sidebar
-  :defer nil
   :after all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode)
   :bind (("<f8>" . dired-sidebar-toggle-sidebar)

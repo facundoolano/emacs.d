@@ -8,7 +8,6 @@
 
 
 (use-package ivy
-  :defer nil
   :custom
   (ivy-use-virtual-buffers t)
   (ivy-count-format "(%d/%d) ")
@@ -27,15 +26,13 @@
               ("n" . next-error)
               ("p" . previous-error)))
 
-(use-package prescient :defer nil)
+(use-package prescient)
 
 (use-package ivy-prescient
-  :defer nil
   :config
   (ivy-prescient-mode 1))
 
 (use-package anzu
-  :defer nil
   :config
   (global-anzu-mode +1))
 
@@ -82,7 +79,6 @@ Assumes the symbol is a function and tries with a variable describe-function fai
        (describe-variable current-symbol)))))
 
 (use-package counsel
-  :defer nil
   :bind (("M-x" . counsel-M-x)
          ("M-y" . counsel-yank-pop)
          ("C-x C-f" . counsel-find-file)
