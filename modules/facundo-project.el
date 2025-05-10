@@ -25,12 +25,14 @@
 
 (setq shell-file-name "/bin/zsh")
 
+;; FIXME this should not kill buffers when there are more frames for the same project
 (defun kill-project-frame ()
   "Delete current frame and kill all project buffers."
   (interactive)
   (if (> (length (frame-list)) 1)
       (progn
-        (mapc 'kill-buffer (project-buffers (project-current)))
+        (when (project-current)
+          (mapc 'kill-buffer (project-buffers (project-current))))
         (delete-frame))
     (message "Attempted to kill the solely visible frame.")))
 
