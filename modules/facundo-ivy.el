@@ -6,39 +6,40 @@
 
 ;;; Code:
 
-(use-package ivy)
-(use-package counsel)
+
+(use-package ivy
+  :custom
+  (ivy-use-virtual-buffers t)
+  (ivy-count-format "(%d/%d) ")
+  (ivy-initial-inputs-alist nil)
+  (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+  (ivy-wrap t)
+  (ivy-extra-directories '("./"))
+  :bind
+  ("C-x b" . ivy-switch-buffer)
+  :config
+  (ivy-mode 1)
+  :bind (:map ivy-occur-mode-map
+              ("n" . next-error)
+              ("p" . previous-error)
+              :map ivy-occur-grep-mode-map
+              ("n" . next-error)
+              ("p" . previous-error)))
+
 (use-package prescient)
-(use-package ivy-prescient)
-(use-package anzu)
-(use-package ivy-xref)
 
-(ivy-mode 1)
-(ivy-prescient-mode 1)
-(global-anzu-mode +1)
+(use-package ivy-prescient
+  :config
+  (ivy-prescient-mode 1))
 
-;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.
-(setq ivy-use-virtual-buffers t)
+(use-package anzu
+  :config
+  (global-anzu-mode +1))
 
-;; show result counts
-(setq ivy-count-format "(%d/%d) ")
-
-;; no regexp by default
-(setq ivy-initial-inputs-alist nil)
-
-;; configure regexp engine.
-(setq ivy-re-builders-alist
-      ;; allow input not in order
-      '((t   . ivy--regex-ignore-order)))
-
-;; wrap around search
-(setq ivy-wrap t)
-
-;; include ./ otherwise selecting the completed directory is weird
-(setq ivy-extra-directories '("./"))
-
-(setq xref-show-definitions-function #'ivy-xref-show-defs)
-(setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
+(use-package ivy-xref
+  :custom
+  (xref-show-definitions-function #'ivy-xref-show-defs)
+  (xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 ;; this could maybe be migrated to use swiper instead of isearch
 (defun mark-and-search ()
@@ -77,25 +78,19 @@ Assumes the symbol is a function and tries with a variable describe-function fai
       ('error
        (describe-variable current-symbol)))))
 
-(define-key counsel-describe-map (kbd "TAB") 'counsel-describe-function-or-variable)
-(define-key ivy-occur-mode-map (kbd "n") 'next-error)
-(define-key ivy-occur-mode-map (kbd "p") 'previous-error)
-(define-key ivy-occur-grep-mode-map (kbd "n") 'next-error)
-(define-key ivy-occur-grep-mode-map (kbd "p") 'previous-error)
-
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "M-y") 'counsel-yank-pop)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "C-x b") 'ivy-switch-buffer)
-;; (global-set-key (kbd "C-s") 'swiper)
-(global-set-key (kbd "C-h f") 'counsel-describe-function)
-(global-set-key (kbd "C-h v") 'counsel-describe-variable)
-(global-set-key (kbd "s-r") 'counsel-recentf)
-(global-set-key (kbd "C-c f") 'counsel-recentf)
-
-(global-set-key (kbd "C-S-s") 'mark-and-search)
-(global-set-key (kbd "C-S-r") 'mark-and-search-backward)
-(global-set-key (kbd "C-M-s") 'mark-and-grep)
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+         ("M-y" . counsel-yank-pop)
+         ("C-x C-f" . counsel-find-file)
+         ("C-h f" . counsel-describe-function)
+         ("C-h v" . counsel-describe-variable)
+         ("s-r" . counsel-recentf)
+         ("C-c f" . counsel-recentf)
+         ("C-S-s" . mark-and-search)
+         ("C-S-r" . mark-and-search-backward)
+         ("C-M-s" . mark-and-grep)
+         :map counsel-describe-map
+         ("TAB" . counsel-describe-function-or-variable)))
 
 (provide 'facundo-ivy)
 
