@@ -26,8 +26,10 @@
   "Setup the blog mode."
   (if (string= "es" (org-kw-language))
       (progn (ispell-change-dictionary "spanish")
-             (set-input-method "spanish-prefix")))
-  (setq-local org-footnote-section nil)
+             (set-input-method "spanish-prefix")
+             (setq-local org-footnote-section "Notas"))
+    (setq-local org-footnote-section "Notes"))
+  
   (flyspell-mode 1)
   (writeroom-mode 1)
   (hl-line-mode -1)
