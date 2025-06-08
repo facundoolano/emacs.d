@@ -71,15 +71,23 @@ With prefix argument (C-u), saves existing GPTel buffer first. If
     :stream t)
   :config
   (customize-set-variable 'gptel-backend (gptel-get-backend "Claude"))
+  (add-to-list 'gptel-directives '(proofead . "You are a proofreading assistant living in a chat session inside Emacs using org-mode as the markup language.\
+The user is a native Spanish speaker often writing blog posts in English, of programming and literary topics.\
+Your job is to spot typos, grammatical mistakes, verb tense errors, preposition errors, awkward expressions, wrong word choices, etc.\
+You can suggest improvements around flow, clarity, rhythm, but assume that the writer knows better than you about the intended style.\
+Don't do rewrites of long passages. Don't try to change the tone or the style.\
+Any suggestion will be individually evaluated and discarded, or applied manually, so present each in an easy to digest and extract format.\
+Output suggestions as diff over short sections of the original text inside org-mode src blocks.\
+The input may contain long paragraphs or phrases without explicit line breaks, don't repeat the portions that don't require corrections\
+Provide succinct justifications for the changes you suggest."))
   :custom 
   (gptel-log-level 'info)
   (gptel-default-mode 'org-mode)
-  (gptel-model 'claude-3-7-sonnet-20250219)
+  (gptel-model 'claude-sonnet-4-20250514)
   (facundo/gptel-save-directory "~/dev/gptel/")
   :bind
   (("C-c g" . facundo/gptel-buffer)
    :map gptel-mode-map ("C-c RET" . facundo/gptel-send))
   :hook (gptel-post-response-functions . gptel-end-of-response))
-
 
 (provide 'facundo-gpt)
