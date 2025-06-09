@@ -101,7 +101,8 @@
 ;; :hook
 ;; (org-babel-after-execute . org-redisplay-inline-images)
 
-(use-package verb)
+(use-package verb
+  :custom (verb-suppress-load-unsecure-prelude-warning t))
 
 (provide 'facundo-org)
 
