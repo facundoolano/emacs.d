@@ -41,6 +41,7 @@
   :custom
   (org-journal-carryover-items "TODO=\"TODO\"|TODO=\"STARTED\"")
   (org-journal-file-header "#+TODO: TODO STARTED | CANCELLED DONE\n\n")
+  (org-journal-dir "~/dev/facundoolano/journal")
   :config
   (defun org-journal-open-or-create-current ()
     "Switch to the current journal file buffer without creating a new entry."
