@@ -26,12 +26,6 @@
               ("n" . next-error)
               ("p" . previous-error)))
 
-(use-package prescient)
-
-(use-package ivy-prescient
-  :config
-  (ivy-prescient-mode 1))
-
 (use-package anzu
   :config
   (global-anzu-mode +1))
@@ -91,6 +85,15 @@ Assumes the symbol is a function and tries with a variable describe-function fai
          ("C-M-s" . mark-and-grep)
          :map counsel-describe-map
          ("TAB" . counsel-describe-function-or-variable)))
+
+(use-package prescient
+  :config
+  (prescient-persist-mode 1))
+
+(use-package ivy-prescient
+  :after (prescient ivy counsel)  ; Ensure counsel is loaded first
+  :config
+  (ivy-prescient-mode 1))
 
 (provide 'facundo-ivy)
 
