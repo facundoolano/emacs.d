@@ -86,8 +86,9 @@
   (interactive)
   (cond
    ;; If in a list, insert new list item
-   ((markdown-cur-list-item-bounds)
-    (markdown-insert-list-item))
+   ((markdown-list-item-at-point-p)
+    (end-of-line)
+    (call-interactively 'markdown-insert-list-item))
    ;; If on a heading, insert new heading at same level
    ((markdown-on-heading-p)
     (end-of-line)
