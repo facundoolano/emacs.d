@@ -81,9 +81,36 @@
 (setq plantuml-default-exec-mode 'executable)
 (setq plantuml-indent-level 2)
 
-;; unset to prevent messing with move text commands
-(define-key markdown-mode-map (kbd "M-p") nil)
-(define-key markdown-mode-map (kbd "M-n") nil)
+(defun markdown-meta-return ()
+  "Insert new list item or heading depending on context, like org-meta-return."
+  (interactive)
+  (cond
+   ;; If in a list, insert new list item
+   ((markdown-cur-list-item-bounds)
+    (markdown-insert-list-item))
+   ;; If on a heading, insert new heading at same level
+   ((markdown-on-heading-p)
+    (end-of-line)
+    (markdown-enter-key)
+    (markdown-insert-header-dwim))
+   ;; Otherwise, just insert a newline
+   (t
+    (markdown-enter-key))))
+
+(use-package markdown-mode
+  :bind (:map markdown-mode-map
+              ("<M-right>" . markdown-demote)
+              ("<M-left>" . markdown-promote)
+              ("M-p" . markdown-move-up)
+              ("M-n" . markdown-move-down)
+              ("<M-up>" . move-text-up)
+              ("<M-down>" . move-text-down)
+              ("M-<return>" . markdown-meta-return))
+  :custom
+  (markdown-asymmetric-header t)
+  (markdown-disable-tooltip-prompt t))
+
+
 
 (provide 'facundo-text)
 
