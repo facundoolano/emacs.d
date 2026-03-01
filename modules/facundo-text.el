@@ -91,12 +91,23 @@
     (call-interactively 'markdown-insert-list-item))
    ;; If on a heading, insert new heading at same level
    ((markdown-on-heading-p)
-    (end-of-line)
-    (markdown-enter-key)
-    (markdown-insert-header-dwim))
+    (markdown-insert-header-respect-content))
    ;; Otherwise, just insert a newline
    (t
     (markdown-enter-key))))
+
+(defun markdown-insert-header-respect-content ()
+  "Insert heading after current section's content by inserting above and swapping."
+  (interactive)
+  (if (markdown-on-heading-p)
+      (progn
+        (beginning-of-line)
+        (open-line 1)
+        (markdown-insert-header-dwim)
+        (markdown-move-down)
+        (end-of-line))
+    
+    (markdown-insert-header-dwim)))
 
 (use-package markdown-mode
   :bind (:map markdown-mode-map
