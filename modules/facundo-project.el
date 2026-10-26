@@ -114,6 +114,18 @@
         (delete-window)
       (message "Not in a project buffer"))))
 
+(defun my/copy-local-file-path ()
+  "Copy the current buffer's file path relative to its project root."
+  (interactive)
+  (unless buffer-file-name
+    (user-error "Current buffer is not visiting a file"))
+  (let ((project (project-current nil (file-name-directory buffer-file-name))))
+    (unless project
+      (user-error "Current file is not in a project"))
+    (let ((path (file-relative-name buffer-file-name (project-root project))))
+      (kill-new path)
+      (message "Copied: %s" path))))
+
 (defun project-find-file-other-window ()
   "Open FILENAME from a project in another window."
   ;; from https://github.com/midsbie/emacs-init
