@@ -25,6 +25,7 @@
 ;;; Code:
 
 (use-package all-the-icons-dired)
+(use-package dired-subtree)
 (use-package dired-sidebar
   :after all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode)
